@@ -1,0 +1,10 @@
+.books-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  list-style-type: none;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, calc(50% - 6px));
+  }
+}
