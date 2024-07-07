@@ -2,16 +2,25 @@ import { Component } from 'react';
 import SearchIcon from '../../assets/search-sm.svg';
 import './SearchBar.scss';
 
-interface SearchBarProps {
+export interface SearchBarProps {
   searchString: string;
+  updateSearchString: (str: string) => void;
 }
 
-class SearchBar extends Component<SearchBarProps> {
+export interface SearchBarState {
+  query: string;
+}
+
+class SearchBar extends Component<SearchBarProps, SearchBarState> {
   constructor(props: SearchBarProps) {
     super(props);
+    this.state = {
+      query: this.props.searchString,
+    };
   }
 
   render() {
+    const { query } = this.state;
     return (
       <div className="search">
         <input
@@ -20,9 +29,19 @@ class SearchBar extends Component<SearchBarProps> {
           name="search"
           id="search"
           placeholder="author name"
-          value={this.props.searchString}
+          value={query}
+          onChange={(e) => {
+            this.setState({ query: e.target.value });
+          }}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') this.props.updateSearchString(query);
+          }}
         />
-        <button className="search__button" type="button">
+        <button
+          className="search__button"
+          type="button"
+          onClick={() => this.props.updateSearchString(query)}
+        >
           <img src={SearchIcon} alt="" width={20} />
         </button>
       </div>

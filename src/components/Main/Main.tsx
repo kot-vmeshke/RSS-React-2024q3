@@ -1,11 +1,14 @@
 import { Component } from 'react';
 import './Main.scss';
-import { BooksList } from '../BooksList/BooksList';
+import { Book, BooksList } from '../BooksList/BooksList';
 
 interface MainState {
   error: boolean;
 }
-interface MainProps {}
+export interface MainProps {
+  isLoaded: boolean;
+  booksList: Book[];
+}
 
 class Main extends Component<MainProps, MainState> {
   constructor(props: MainProps) {
@@ -33,7 +36,10 @@ class Main extends Component<MainProps, MainState> {
           >
             Create Error
           </button>
-          <BooksList />
+          <BooksList
+            isLoaded={this.props.isLoaded}
+            booksList={this.props.booksList}
+          />
         </div>
       </main>
     );
