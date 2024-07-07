@@ -1,7 +1,38 @@
-import { Component } from 'react';
+import { ChangeEvent, Component } from 'react';
+import SearchIcon from '../../assets/search-sm.svg';
 import './SearchBar.scss';
+import { SearchContext } from '../../context/SearchContext';
 
-class SearchBar extends Component {
+interface SearchBarProps {}
+
+interface SearchBarState {
+  searchString: string;
+}
+
+class SearchBar extends Component<SearchBarProps, SearchBarState> {
+  static contextType = SearchContext;
+  declare context: React.ContextType<typeof SearchContext>;
+
+  // constructor(props: SearchBarProps) {
+  //   super(props);
+  //   this.state = {
+  //     searchString: '',
+  //   };
+  // }
+
+  // componentDidMount(): void {
+  //   this.state = {
+  //     searchString: this.context.searchString,
+  //   };
+  // }
+
+  handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const searchStringUpdated: string = e.target.value;
+    this.context.updateString(searchStringUpdated);
+    localStorage.setItem('books-seacrh', searchStringUpdated);
+    console.log(e.target.value);
+  }
+
   render() {
     return (
       <div className="search">
@@ -11,23 +42,11 @@ class SearchBar extends Component {
           name="search"
           id="search"
           placeholder="author name"
+          value={this.context.searchString}
+          onChange={(e) => this.handleChange(e)}
         />
         <button className="search__button" type="button">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M17.5 17.5L12.5001 12.5M14.1667 8.33333C14.1667 11.555 11.555 14.1667 8.33333 14.1667C5.11167 14.1667 2.5 11.555 2.5 8.33333C2.5 5.11167 5.11167 2.5 8.33333 2.5C11.555 2.5 14.1667 5.11167 14.1667 8.33333Z"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <img src={SearchIcon} alt="" width={20} />
         </button>
       </div>
     );
