@@ -1,12 +1,12 @@
 .header {
   background: var(--color-bg-dark);
+  padding: 20px 0;
 
   &__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 20px 0;
   }
 
   &__title {
