@@ -8,7 +8,7 @@ class Header extends Component {
     return (
       <header className="header">
         <div className="container header__container">
-          <h1 className="header__title">Search books by author</h1>
+          <h1 className="header__title">Search books</h1>
           <SearchBar />
         </div>
       </header>
