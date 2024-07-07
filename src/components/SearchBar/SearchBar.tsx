@@ -13,24 +13,10 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
   static contextType = SearchContext;
   declare context: React.ContextType<typeof SearchContext>;
 
-  // constructor(props: SearchBarProps) {
-  //   super(props);
-  //   this.state = {
-  //     searchString: '',
-  //   };
-  // }
-
-  // componentDidMount(): void {
-  //   this.state = {
-  //     searchString: this.context.searchString,
-  //   };
-  // }
-
   handleChange(e: ChangeEvent<HTMLInputElement>) {
     const searchStringUpdated: string = e.target.value;
     this.context.updateString(searchStringUpdated);
     localStorage.setItem('books-seacrh', searchStringUpdated);
-    console.log(e.target.value);
   }
 
   render() {

@@ -2,14 +2,15 @@ import { Component } from 'react';
 import './App.scss';
 import { SearchPage } from './pages';
 import { SearchProvider } from './context/SearchContext';
-
-//const queryString: string = localStorage.getItem('books-seacrh') || 'a';
+import { ErrorBoundary } from './components';
 
 class App extends Component {
   render() {
     return (
       <SearchProvider>
-        <SearchPage />
+        <ErrorBoundary>
+          <SearchPage />
+        </ErrorBoundary>
       </SearchProvider>
     );
   }
