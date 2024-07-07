@@ -3,7 +3,6 @@ import { Component } from 'react';
 import './BooksList.scss';
 import { BookCard } from '../BookCard/BookCard';
 import { Loader } from '../Loader/Loader';
-import { SearchContext } from '../../context/SearchContext';
 
 export interface Person {
   birth_year: number | null;
@@ -26,47 +25,18 @@ export interface Book {
   formats: Format;
   download_count: number;
 }
-interface BooksListProps {}
-interface BooksListState {
+interface BooksListProps {
   booksList: Book[];
   isLoaded: boolean;
 }
 
-class BooksList extends Component<BooksListProps, BooksListState> {
-  static contextType = SearchContext;
-  declare context: React.ContextType<typeof SearchContext>;
-
+class BooksList extends Component<BooksListProps> {
   constructor(props: BooksListProps) {
     super(props);
-    this.state = {
-      booksList: [],
-      isLoaded: false,
-    };
-  }
-
-  componentDidMount(): void {
-    const queryString = this.context.searchString.length
-      ? this.context.searchString
-      : '';
-    fetch(`http://gutendex.com/books?search=${queryString}`)
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({
-          booksList: [...data.results],
-        });
-      })
-      .catch((e) => {
-        console.error(e);
-      })
-      .finally(() =>
-        this.setState({
-          isLoaded: true,
-        })
-      );
   }
 
   render() {
-    const { booksList, isLoaded } = this.state;
+    const { booksList, isLoaded } = this.props;
     return (
       <>
         {isLoaded ? (
