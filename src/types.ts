@@ -2,11 +2,9 @@ export interface SearchBarProps {
   searchString: string;
   updateSearchString: (str: string) => void;
 }
-
 export interface SearchBarState {
   query: string;
 }
-
 
 export interface MainState {
   error: boolean;
