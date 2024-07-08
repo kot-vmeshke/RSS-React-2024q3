@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import './BookCard.scss';
-import { Book } from '../BooksList/BooksList';
+import { Book } from '../../types';
 
 const BookCard: FC<Book> = ({ authors, title, subjects }) => {
   return (

@@ -1,14 +1,7 @@
 import { Component } from 'react';
 import './Main.scss';
-import { Book, BooksList } from '../BooksList/BooksList';
-
-interface MainState {
-  error: boolean;
-}
-export interface MainProps {
-  isLoaded: boolean;
-  booksList: Book[];
-}
+import { BooksList } from '../BooksList/BooksList';
+import { MainProps, MainState } from '../../types';
 
 class Main extends Component<MainProps, MainState> {
   constructor(props: MainProps) {

@@ -1,15 +1,7 @@
 import { Component } from 'react';
 import SearchIcon from '../../assets/search-sm.svg';
 import './SearchBar.scss';
-
-export interface SearchBarProps {
-  searchString: string;
-  updateSearchString: (str: string) => void;
-}
-
-export interface SearchBarState {
-  query: string;
-}
+import { SearchBarProps, SearchBarState } from '../../types';
 
 class SearchBar extends Component<SearchBarProps, SearchBarState> {
   constructor(props: SearchBarProps) {

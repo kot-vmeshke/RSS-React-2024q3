@@ -1,7 +1,8 @@
 import { Component } from 'react';
 
 import './Header.scss';
-import { SearchBar, SearchBarProps } from '../SearchBar/SearchBar';
+import { SearchBar } from '../SearchBar/SearchBar';
+import { SearchBarProps } from '../../types';
 
 class Header extends Component<SearchBarProps> {
   constructor(props: SearchBarProps) {
