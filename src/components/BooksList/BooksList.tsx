@@ -44,7 +44,7 @@ class BooksList extends Component<BooksListProps> {
             {booksList.length ? (
               booksList.map((book) => <BookCard {...book} key={book.id} />)
             ) : (
-              <span className="books-list__nothing">Nothing was found</span>
+              <Loader />
             )}
           </ul>
         ) : (

@@ -15,7 +15,7 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
   constructor(props: SearchBarProps) {
     super(props);
     this.state = {
-      query: this.props.searchString,
+      query: localStorage.getItem('books-search') || '',
     };
   }
 
