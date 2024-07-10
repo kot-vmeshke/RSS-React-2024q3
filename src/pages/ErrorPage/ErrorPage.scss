@@ -1,0 +1,16 @@
+.page_error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1 {
+    font-size: 72px;
+    font-weight: 100;
+    color: var(--color-text);
+  }
+
+  .main-button {
+    margin-top: 40px;
+  }
+}
