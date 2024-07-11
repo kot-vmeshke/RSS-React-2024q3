@@ -12,7 +12,7 @@ const BooksList: FC<BooksListProps> = ({ booksList, isLoaded }) => {
           {booksList.length ? (
             booksList.map((book) => <BookCard {...book} key={book.id} />)
           ) : (
-            <Loader />
+            <div className="books-list__nothing">Nothing was found</div>
           )}
         </ul>
       ) : (

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -95,22 +95,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import './BooksList.scss';
@@ -119,23 +119,23 @@ import { Loader } from '../Loader/Loader';
 import { BooksListProps } from '../../types';
 import { FC } from 'react';
 &nbsp;
-const BooksList: FC&lt;BooksListProps&gt; = <span class="fstat-no" title="function not covered" >({ booksList, isLoaded }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;&gt;</span>
-<span class="cstat-no" title="statement not covered" >      {isLoaded ? (</span>
-<span class="cstat-no" title="statement not covered" >        &lt;ul className="books-list"&gt;</span>
-<span class="cstat-no" title="statement not covered" >          {booksList.length ? (</span>
-<span class="cstat-no" title="statement not covered" >            booksList.map((book) =&gt; &lt;BookCard {...book} key={book.id} /&gt;)</span>
+const BooksList: FC&lt;BooksListProps&gt; = ({ booksList, isLoaded }) =&gt; {
+  return (
+    &lt;&gt;
+      {isLoaded ? (
+        &lt;ul className="books-list"&gt;
+          {booksList.length ? (
+            booksList.map((book) =&gt; &lt;BookCard {...book} key={book.id} /&gt;)
           ) : (
-<span class="cstat-no" title="statement not covered" >            &lt;Loader /&gt;</span>
+            &lt;div className="books-list__nothing"&gt;Nothing was found&lt;/div&gt;
           )}
-<span class="cstat-no" title="statement not covered" >        &lt;/ul&gt;</span>
+        &lt;/ul&gt;
       ) : (
-<span class="cstat-no" title="statement not covered" >        &lt;Loader /&gt;</span>
+        &lt;Loader /&gt;
       )}
-<span class="cstat-no" title="statement not covered" >    &lt;/&gt;</span>
+    &lt;/&gt;
   );
-<span class="cstat-no" title="statement not covered" >};</span>
+};
 &nbsp;
 export { BooksList };
 &nbsp;</pre></td></tr></table></pre>
@@ -145,7 +145,7 @@ export { BooksList };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-10T21:37:28.006Z
+                at 2024-07-11T21:12:45.227Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
