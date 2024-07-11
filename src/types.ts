@@ -23,17 +23,17 @@ export interface Format {
   [key: string]: string;
 }
 export interface Book {
-  id: number;
+  id?: number;
   title: string;
   authors: Person[];
-  translators: Person[];
+  translators?: Person[];
   subjects: string[];
-  bookshelves: string[];
-  languages: string[];
-  copyright: boolean | null;
-  media_type: string;
-  formats: Format;
-  download_count: number;
+  bookshelves?: string[];
+  languages?: string[];
+  copyright?: boolean | null;
+  media_type?: string;
+  formats?: Format;
+  download_count?: number;
 }
 export interface BooksListProps {
   booksList: Book[];
