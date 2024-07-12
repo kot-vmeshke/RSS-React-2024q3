@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1720814900574" clover="3.2.0">
-  <project timestamp="1720814900574" name="All files">
-    <metrics statements="327" coveredstatements="136" conditionals="21" coveredconditionals="15" methods="19" coveredmethods="7" elements="367" coveredelements="158" complexity="0" loc="327" ncloc="327" packages="15" files="16" classes="16"/>
+<coverage generated="1720818531223" clover="3.2.0">
+  <project timestamp="1720818531223" name="All files">
+    <metrics statements="344" coveredstatements="136" conditionals="21" coveredconditionals="15" methods="19" coveredmethods="7" elements="384" coveredelements="158" complexity="0" loc="344" ncloc="344" packages="15" files="16" classes="16"/>
     <package name="src">
       <metrics statements="33" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="App.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/App.tsx">
@@ -102,9 +102,9 @@
       </file>
     </package>
     <package name="src.components.DetailsBookCard">
-      <metrics statements="73" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="90" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="DetailsBookCard.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/components/DetailsBookCard/DetailsBookCard.tsx">
-        <metrics statements="73" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="90" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -164,20 +164,37 @@
         <line num="63" count="0" type="stmt"/>
         <line num="64" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
         <line num="70" count="0" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
         <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
         <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
         <line num="80" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
         <line num="82" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
         <line num="84" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
         <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.components.ErrorBoundary">

@@ -1,6 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-export const useLocalStorage = (): [string, Dispatch<SetStateAction<string>>] => {
+export const useLocalStorage = (): [
+  string,
+  Dispatch<SetStateAction<string>>,
+] => {
   const [searchString, setSearchString] = useState<string>(
     localStorage.getItem('books-search') || ''
   );

@@ -12,6 +12,7 @@ export interface MainState {
 export interface MainProps {
   isLoaded: boolean;
   booksList: Book[];
+  paginationData: PaginationProps;
 }
 
 export interface Person {
@@ -38,4 +39,11 @@ export interface Book {
 export interface BooksListProps {
   booksList: Book[];
   isLoaded: boolean;
+}
+
+export interface PaginationProps {
+  next: string | null;
+  previous: string | null;
+  pageNumber: number;
+  updatePageNumber: (page: number) => void;
 }

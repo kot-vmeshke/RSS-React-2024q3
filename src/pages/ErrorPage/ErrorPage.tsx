@@ -10,6 +10,6 @@ const ErrorPage = () => {
       </a>
     </div>
   );
-}
+};
 
-export {ErrorPage}
+export { ErrorPage };

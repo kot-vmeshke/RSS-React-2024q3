@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.58% </span>
+                <span class="strong">7.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/73</span>
+                <span class='fraction'>7/90</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.58% </span>
+                <span class="strong">7.77% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/73</span>
+                <span class='fraction'>7/90</span>
             </div>
         
             
@@ -151,7 +151,22 @@
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -216,8 +231,26 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -226,10 +259,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -241,7 +271,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Link, useParams } from 'react-router-dom';
 import './DetailsBookCard.scss';
-import downloadIcon from '../../assets/download-04.svg';
+import readIcon from '../../assets/share-03.svg';
 import defaultCover from '../../assets/no-cover.jpg';
 import { Book } from '../../types';
 import { FC, useEffect, useState } from 'react';
@@ -294,30 +324,45 @@ const DetailsBookCard: FC = <span class="fstat-no" title="function not covered" 
 <span class="cstat-no" title="statement not covered" >          /&gt;</span>
 <span class="cstat-no" title="statement not covered" >        &lt;/svg&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/Link&gt;</span>
-<span class="cstat-no" title="statement not covered" >      {isLoaded ? (</span>
+<span class="cstat-no" title="statement not covered" >      {isLoaded &amp;&amp; book ? (</span>
 <span class="cstat-no" title="statement not covered" >        &lt;&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;div className="details__cover"&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;img src={defaultCover} alt="" width={216} height={150} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;img</span>
+<span class="cstat-no" title="statement not covered" >              src={book.formats!['image/jpeg'] || defaultCover}</span>
+<span class="cstat-no" title="statement not covered" >              alt=""</span>
+<span class="cstat-no" title="statement not covered" >              width={216}</span>
+<span class="cstat-no" title="statement not covered" >              height={150}</span>
+<span class="cstat-no" title="statement not covered" >            /&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h3 className="details__name"&gt;{book!.title}&lt;/h3&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;p className="details__author"&gt;Jefferson, Thomas (1743-1826)&lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;h3 className="details__name"&gt;{book.title}&lt;/h3&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;p className="details__author"&gt;</span>
+<span class="cstat-no" title="statement not covered" >            {book.authors</span>
+<span class="cstat-no" title="statement not covered" >              .map(</span>
+<span class="cstat-no" title="statement not covered" >                (author) =&gt;</span>
+<span class="cstat-no" title="statement not covered" >                  `${author.name}, (${author.birth_year || 'no data'} - ${author.death_year || 'no data'})`</span>
+<span class="cstat-no" title="statement not covered" >              )</span>
+<span class="cstat-no" title="statement not covered" >              .join(',')}</span>
+<span class="cstat-no" title="statement not covered" >          &lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;div className="details__wrap"&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;p className="details__type"&gt;Subjects:&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;p className="details__text"&gt;</span>
-              United States -- History -- Revolution, 1775-1783 -- Sources,
-              United States. Declaration of Independence
-<span class="cstat-no" title="statement not covered" >            &lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;p className="details__text"&gt;{book.subjects.join(', ')}&lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;div className="details__wrap"&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;p className="details__type"&gt;Bookshelves:&lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;p className="details__text"&gt;</span>
-              American Revolutionary War, Politics, United States Law
+<span class="cstat-no" title="statement not covered" >              {book.bookshelves?.length ? book.bookshelves.join(', ') : '-'}</span>
 <span class="cstat-no" title="statement not covered" >            &lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;a href="" className="details__download"&gt;</span>
-            Download PDF
-<span class="cstat-no" title="statement not covered" >            &lt;img src={downloadIcon} alt="" width={24} height={24} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/a&gt;</span>
+<span class="cstat-no" title="statement not covered" >          {book.formats!['text/html'] &amp;&amp; (</span>
+<span class="cstat-no" title="statement not covered" >            &lt;a</span>
+<span class="cstat-no" title="statement not covered" >              href={book.formats!['text/html']}</span>
+<span class="cstat-no" title="statement not covered" >              className="details__download"</span>
+<span class="cstat-no" title="statement not covered" >              target="_blank"</span>
+<span class="cstat-no" title="statement not covered" >            &gt;</span>
+              Read
+<span class="cstat-no" title="statement not covered" >              &lt;img src={readIcon} alt="" width={12} height={12} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/a&gt;</span>
+          )}
 <span class="cstat-no" title="statement not covered" >        &lt;/&gt;</span>
       ) : (
 <span class="cstat-no" title="statement not covered" >        &lt;Loader /&gt;</span>
@@ -334,7 +379,7 @@ export { DetailsBookCard };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-12T20:08:20.493Z
+                at 2024-07-12T21:08:51.129Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

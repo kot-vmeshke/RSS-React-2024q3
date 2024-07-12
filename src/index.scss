@@ -12,7 +12,8 @@
   box-sizing: border-box;
   font-family: var(--font-family);
 }
-a, a:is(.hover) {
+a,
+a:is(.hover) {
   text-decoration: none;
   color: inherit;
 }
