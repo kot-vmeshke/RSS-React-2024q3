@@ -11,10 +11,6 @@ const Pagination = () => {
       <button className="pagination__number pagination__number_active">
         1
       </button>
-      <button className="pagination__number">2</button>
-      <button className="pagination__number">3</button>
-      <button className="pagination__number">4</button>
-      <button className="pagination__number">5</button>
       <button className="pagination__arrow">
         <img src={arrowNext} alt="" />
       </button>
