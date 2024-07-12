@@ -3,6 +3,7 @@ import { describe, it, expect } from 'vitest';
 import '@testing-library/jest-dom';
 import { BooksList } from '../src/components';
 import { Book } from '../src/types';
+import { MemoryRouter } from 'react-router-dom';
 
 const books: Book[] = [
   {
@@ -206,7 +207,11 @@ const books: Book[] = [
 
 describe('BooksList', () => {
   it('Component renders the specified number of cards', () => {
-    render(<BooksList booksList={books} isLoaded={true} />);
+    render(
+      <MemoryRouter>
+        <BooksList booksList={books} isLoaded={true} />
+      </MemoryRouter>
+    );
 
     const bookCards = screen.getAllByTestId('book');
     expect(bookCards).toHaveLength(books.length);

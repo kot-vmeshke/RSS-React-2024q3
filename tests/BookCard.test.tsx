@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import { BookCard } from '../src/components';
 import { describe, expect, it } from 'vitest';
 import { Book } from '../src/types';
+import { MemoryRouter } from 'react-router-dom';
 
 const book: Book = {
   id: 1513,
@@ -47,7 +48,11 @@ const book: Book = {
 
 describe('BookCard', () => {
   it('Card component renders the relevant card data', () => {
-    render(<BookCard {...book} />);
+    render(
+      <MemoryRouter>
+        <BookCard {...book} />
+      </MemoryRouter>
+    );
     const bookTitle = screen.getByText(/Romeo and Juliet/i);
     expect(bookTitle).toBeInTheDocument();
   });

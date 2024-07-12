@@ -9,9 +9,7 @@ const Main: FC<MainProps> = ({ isLoaded, booksList }) => {
   return (
     <main className="main">
       <div className="container main__container" data-testid="main-container">
-        <div
-          className={`main__left ${window.location.href.includes('book') ? 'main__left_thin' : ''}`}
-        >
+        <div className="main__left">
           <BooksList isLoaded={isLoaded} booksList={booksList} />
           {isLoaded && <Pagination />}
         </div>

@@ -1,17 +1,16 @@
 import { FC, useEffect, useState } from 'react';
 import { Header, Main } from '../../components';
 import { Book } from '../../types';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const SearchPage: FC = () => {
-  const [searchString, setSeacrhStaring] = useState<string>(
-    localStorage.getItem('books-search') || ''
-  );
+  const [searchString] = useLocalStorage();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [booksList, setBooksList] = useState<Book[]>([]);
+  const [newSearchString, setNewSearchString] = useState<string>('');
 
   const updateSearchString = (str: string) => {
-    setSeacrhStaring(str);
-    localStorage.setItem('books-search', str);
+    setNewSearchString(str);
   };
 
   const fetchBooks = async (str: string) => {
@@ -32,15 +31,18 @@ const SearchPage: FC = () => {
   };
 
   useEffect(() => {
-    fetchBooks(searchString);
-  }, [searchString]);
+    setNewSearchString(searchString);
+  // eslint-disable-next-line react-compiler/react-compiler
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    fetchBooks(newSearchString);
+  }, [newSearchString]);
 
   return (
     <div className="page">
-      <Header
-        searchString={searchString}
-        updateSearchString={updateSearchString}
-      />
+      <Header updateSearchString={updateSearchString} />
       <Main isLoaded={isLoaded} booksList={booksList} />
     </div>
   );

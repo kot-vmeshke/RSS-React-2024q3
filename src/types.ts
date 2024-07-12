@@ -1,5 +1,5 @@
 export interface SearchBarProps {
-  searchString: string;
+  searchString?: string;
   updateSearchString: (str: string) => void;
 }
 export interface SearchBarState {

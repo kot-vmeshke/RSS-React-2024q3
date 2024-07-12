@@ -8,7 +8,7 @@ const BooksList: FC<BooksListProps> = ({ booksList, isLoaded }) => {
   return (
     <>
       {isLoaded ? (
-        <ul className={`books-list ${window.location.href.includes('book') ? 'books-list_thin' : ''}`}>
+        <ul className="books-list">
           {booksList.length ? (
             booksList.map((book) => <BookCard {...book} key={book.id} />)
           ) : (
