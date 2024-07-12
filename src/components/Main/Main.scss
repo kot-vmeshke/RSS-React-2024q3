@@ -5,5 +5,15 @@
   &__container {
     position: relative;
     min-height: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 6px));
+    gap: 12px;
+  }
+
+  &__left {
+    grid-column: 1 / 2;
+    &_thin {
+      grid-column: 1 / 2;
+    }
   }
 }

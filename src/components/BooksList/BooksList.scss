@@ -14,5 +14,9 @@
 
   @media (min-width: 1024px) {
     grid-template-columns: repeat(2, calc(50% - 6px));
+
+    &_thin {
+      grid-template-columns: 1fr;
+    }
   }
 }

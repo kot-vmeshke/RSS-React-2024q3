@@ -1,6 +1,6 @@
 import './App.scss';
 import { ErrorPage, SearchPage } from './pages';
-import { ErrorBoundary } from './components';
+import { DetailsBookCard, ErrorBoundary } from './components';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -8,6 +8,12 @@ const router = createBrowserRouter([
     path: '/',
     element: <SearchPage />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'book/:bookId',
+        element: <DetailsBookCard />,
+      },
+    ],
   },
 ]);
 
