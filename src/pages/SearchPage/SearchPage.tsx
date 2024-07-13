@@ -60,7 +60,7 @@ const SearchPage: FC = () => {
   }, [newSearchString, paginationData.pageNumber, fetchBooks]);
 
   return (
-    <div className="page">
+    <div className="page" data-testid="page-container">
       <Header updateSearchString={updateSearchString} />
       <Main
         isLoaded={isLoaded}
