@@ -33,7 +33,7 @@ const SearchPage: FC = () => {
       setIsLoaded(false);
       try {
         const res = await fetch(
-          `http://gutendex.com/books?search=${str}&page=${page}`
+          `https://gutendex.com/books?search=${str}&page=${page}`
         );
         if (res.ok) {
           const data = await res.json();

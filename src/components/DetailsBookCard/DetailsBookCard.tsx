@@ -14,7 +14,7 @@ const DetailsBookCard: FC = () => {
   const fetchBook = async (id: string) => {
     setIsLoaded(false);
     try {
-      const res = await fetch(`http://gutendex.com/books/${id}`);
+      const res = await fetch(`https://gutendex.com/books/${id}`);
       if (res.ok) {
         const data = await res.json();
         setBook(data);
