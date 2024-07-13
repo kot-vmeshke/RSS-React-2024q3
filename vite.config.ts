@@ -9,8 +9,9 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './tests/setup.ts',
+    reporters: 'verbose',
     coverage: {
-      provider: 'v8'
+      provider: 'v8',
     },
   },
 });
