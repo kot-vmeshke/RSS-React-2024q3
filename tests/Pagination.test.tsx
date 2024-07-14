@@ -9,6 +9,7 @@ const paginationProps: PaginationProps = {
   previous: null,
   pageNumber: 1,
   updatePageNumber: vi.fn(),
+  allPages: 1,
 };
 describe('Pagination', () => {
   it('Component updates URL query parameter when page changes', () => {
@@ -32,7 +33,7 @@ describe('Pagination', () => {
   it('Component renders valid page number', () => {
     render(<Pagination {...paginationProps} />);
 
-    expect(screen.getByTestId('page-number').textContent).toBe(paginationProps.pageNumber.toString());
+    expect(screen.getByTestId('page-number').textContent).toBe(`${paginationProps.pageNumber} of ${paginationProps.allPages}`);
   });
 });
 
