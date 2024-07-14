@@ -36,7 +36,7 @@ const DetailsBookCard: FC = () => {
 
   return (
     <div className="details" data-testid="details">
-      <Link to="/" className="details__close">
+      <Link to="/" className="details__close" data-testid="close-btn">
         <svg
           width="24"
           height="24"
