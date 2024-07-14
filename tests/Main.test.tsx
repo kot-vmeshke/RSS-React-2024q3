@@ -18,6 +18,7 @@ describe('Main', () => {
           previous: null,
           pageNumber: 1,
           updatePageNumber: updatePageNumber,
+          allPages: 1,
         }}
       />
     );
