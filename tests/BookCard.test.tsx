@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { BookCard } from '../src/components';
-import { describe, expect, it } from 'vitest';
+import { BookCard, DetailsBookCard } from '../src/components';
+import { describe, expect, it, vi } from 'vitest';
 import { Book } from '../src/types';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 const book: Book = {
   id: 1513,
@@ -46,6 +46,14 @@ const book: Book = {
   download_count: 77782,
 };
 
+vi.mock('react-router-dom', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...(actual as object),
+    useParams: vi.fn().mockReturnValue({ bookId: 1 }),
+  };
+});
+
 describe('BookCard', () => {
   it('Card component renders the relevant card data', () => {
     render(
@@ -55,5 +63,46 @@ describe('BookCard', () => {
     );
     const bookTitle = screen.getByText(/Romeo and Juliet/i);
     expect(bookTitle).toBeInTheDocument();
+  });
+
+  it('Clicking on a card opens a detailed card component', async () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/" element={<BookCard {...book} />} />
+          <Route path="/book/:id" element={<DetailsBookCard />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    fireEvent.click(screen.getByTestId('book'));
+
+    const detailsElement = await waitFor(() => screen.getByTestId('details'));
+    expect(detailsElement).toBeInTheDocument();
+  });
+
+  it('Clicking triggers an additional API call to fetch detailed information', async () => {
+    const mockResponse = {
+      ok: true,
+      json: () => Promise.resolve(book),
+    };
+
+    const fetchMock = vi
+      .spyOn(window, 'fetch')
+      .mockResolvedValue(mockResponse as unknown as Response);
+
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/" element={<BookCard {...book} />} />
+          <Route path="/book/:id" element={<DetailsBookCard />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    fireEvent.click(screen.getByTestId('book'));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith('https://gutendex.com/books/1');
+    });
   });
 });
