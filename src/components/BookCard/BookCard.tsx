@@ -2,12 +2,19 @@ import { FC } from 'react';
 
 import './BookCard.scss';
 import { Book } from '../../types';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
+
+  const [searchParams ] = useSearchParams();
+
   return (
     <li className="book-wrap">
-      <Link className="book" to={`book/${id}`} data-testid="book">
+      <Link
+        className="book"
+        to={`book/${id}?${searchParams.toString()}`}
+        data-testid="book"
+      >
         <span className="book__author">
           {authors.map((author) => author.name).join(', ')}
         </span>

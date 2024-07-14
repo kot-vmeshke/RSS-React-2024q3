@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import './DetailsBookCard.scss';
 import readIcon from '../../assets/share-03.svg';
 import defaultCover from '../../assets/no-cover.jpg';
@@ -10,6 +10,8 @@ const DetailsBookCard: FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [book, setBook] = useState<Book>();
   const { bookId } = useParams();
+
+  const [searchParams] = useSearchParams();
 
   const fetchBook = async (id: string) => {
     setIsLoaded(false);
@@ -36,7 +38,11 @@ const DetailsBookCard: FC = () => {
 
   return (
     <div className="details" data-testid="details">
-      <Link to="/" className="details__close" data-testid="close-btn">
+      <Link
+        to={`/?${searchParams.toString()}`}
+        className="details__close"
+        data-testid="close-btn"
+      >
         <svg
           width="24"
           height="24"

@@ -39,7 +39,7 @@ const SearchPage: FC = () => {
         if (res.ok) {
           const data = await res.json();
           console.log(data);
-          const allPages = Math.round(data.count / 32) + 1;
+          const allPages = Math.round(data.count / 32);
           setBooksList(data.results);
           setPaginationData((prev) => ({
             ...prev,
