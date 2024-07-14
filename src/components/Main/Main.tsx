@@ -1,49 +1,24 @@
-import { Component } from 'react';
+import { FC } from 'react';
 import './Main.scss';
-import { Book, BooksList } from '../BooksList/BooksList';
+import { BooksList } from '../BooksList/BooksList';
+import { MainProps } from '../../types';
+import { Pagination } from '../Pagination/Pagination';
+import { Outlet } from 'react-router-dom';
 
-interface MainState {
-  error: boolean;
-}
-export interface MainProps {
-  isLoaded: boolean;
-  booksList: Book[];
-}
-
-class Main extends Component<MainProps, MainState> {
-  constructor(props: MainProps) {
-    super(props);
-    this.state = {
-      error: false,
-    };
-  }
-
-  componentDidUpdate(): void {
-    if (this.state.error) {
-      throw new Error('You clicked the button to create a test bug');
-    }
-  }
-
-  render() {
-    return (
-      <main className="main">
-        <div className="container main__container">
-          <button
-            className="main-button"
-            onClick={() => {
-              this.setState({ error: true });
-            }}
-          >
-            Create Error
-          </button>
-          <BooksList
-            isLoaded={this.props.isLoaded}
-            booksList={this.props.booksList}
-          />
+const Main: FC<MainProps> = ({ isLoaded, booksList, paginationData }) => {
+  return (
+    <main className="main">
+      <div className="container main__container" data-testid="main-container">
+        <div className="main__left">
+          <BooksList isLoaded={isLoaded} booksList={booksList} />
+          {isLoaded && <Pagination {...paginationData} />}
         </div>
-      </main>
-    );
-  }
-}
+        <div className="main__right">
+          <Outlet />
+        </div>
+      </div>
+    </main>
+  );
+};
 
 export { Main };

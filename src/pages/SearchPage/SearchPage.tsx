@@ -1,75 +1,78 @@
-import { Component } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Header, Main } from '../../components';
-import { Book } from '../../components/BooksList/BooksList';
+import { Book } from '../../types';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useSearchParams } from 'react-router-dom';
 
-interface SearchPageProps {}
-interface SearchPageState {
-  searchString: string;
-  isLoaded: boolean;
-  booksList: Book[];
-}
+const SearchPage: FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchString] = useLocalStorage();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [booksList, setBooksList] = useState<Book[]>([]);
+  const [newSearchString, setNewSearchString] = useState<string>(
+    searchString || ''
+  );
+  const [paginationData, setPaginationData] = useState({
+    next: null,
+    previous: null,
+    pageNumber: +(searchParams?.get('page') ?? 1),
+    allPages: 1,
+  });
 
-class SearchPage extends Component<SearchPageProps, SearchPageState> {
-  constructor(props: SearchPageProps) {
-    super(props);
-    this.state = {
-      searchString: localStorage.getItem('books-search') || '',
-      isLoaded: false,
-      booksList: [],
-    };
-    this.updateSearchString = this.updateSearchString.bind(this);
-  }
+  const updateSearchString = (str: string) => {
+    setNewSearchString(str);
+  };
 
-  updateSearchString(str: string) {
-    this.setState({
-      searchString: str,
-    });
-    localStorage.setItem('books-search', str);
-  }
+  const updatePageNumber = (page: number) => {
+    setPaginationData({ ...paginationData, pageNumber: page });
+    searchParams.set('page', `${page}`);
+    setSearchParams(searchParams);
+  };
 
-  async fetchBooks(str: string) {
-    this.setState({ isLoaded: false });
-    try {
-      const res = await fetch(`http://gutendex.com/books?search=${str}`);
-      if (res.ok) {
-        const data = await res.json();
-        this.setState({ booksList: data.results });
-      } else {
-        throw new Error('Failed to fetch');
+  const fetchBooks = useCallback(
+    async (str: string, page: number = 1) => {
+      setIsLoaded(false);
+      try {
+        const res = await fetch(
+          `https://gutendex.com/books?search=${str}&page=${page}`
+        );
+        if (res.ok) {
+          const data = await res.json();
+          console.log(data);
+          const allPages = Math.round(data.count / 32);
+          setBooksList(data.results);
+          setPaginationData((prev) => ({
+            ...prev,
+            next: data.next,
+            previous: data.previous,
+            allPages
+          }));
+        } else {
+          throw new Error('Failed to fetch');
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoaded(true);
       }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      this.setState({ isLoaded: true });
-    }
-  }
+    },
+    [setBooksList, setPaginationData]
+  );
 
-  componentDidMount(): void {
-    this.fetchBooks(this.state.searchString);
-  }
+  useEffect(() => {
+    fetchBooks(newSearchString, paginationData.pageNumber);
+  }, [newSearchString, paginationData.pageNumber, fetchBooks]);
 
-  componentDidUpdate(prevState: Readonly<SearchPageState>): void {
-    if (this.state.searchString !== prevState.searchString) {
-      console.log(
-        `http://gutendex.com/books?search=${this.state.searchString}`
-      );
-      // this.fetchBooks(this.state.searchString);
-      //? infinity loop
-    }
-  }
-
-  render() {
-    const { searchString, isLoaded, booksList } = this.state;
-    return (
-      <div className="page">
-        <Header
-          searchString={searchString}
-          updateSearchString={this.updateSearchString}
-        />
-        <Main isLoaded={isLoaded} booksList={booksList} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="page" data-testid="page-container">
+      <Header updateSearchString={updateSearchString} />
+      <Main
+        isLoaded={isLoaded}
+        booksList={booksList}
+        paginationData={{ ...paginationData, updatePageNumber }}
+      />
+    </div>
+  );
+};
 
 export { SearchPage };

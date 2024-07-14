@@ -1,16 +1,28 @@
-import { Component } from 'react';
 import './App.scss';
-import { SearchPage } from './pages';
-import { ErrorBoundary } from './components';
+import { ErrorPage, SearchPage } from './pages';
+import { DetailsBookCard, ErrorBoundary } from './components';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <ErrorBoundary>
-        <SearchPage />
-      </ErrorBoundary>
-    );
-  }
-}
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <SearchPage />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'book/:bookId',
+        element: <DetailsBookCard />,
+      },
+    ],
+  },
+]);
+
+const App = () => {
+  return (
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  );
+};
 
 export default App;

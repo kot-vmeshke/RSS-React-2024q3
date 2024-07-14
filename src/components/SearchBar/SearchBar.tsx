@@ -1,52 +1,37 @@
-import { Component } from 'react';
+import { FC, FormEvent, useRef } from 'react';
 import SearchIcon from '../../assets/search-sm.svg';
 import './SearchBar.scss';
+import { SearchBarProps } from '../../types';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
-export interface SearchBarProps {
-  searchString: string;
-  updateSearchString: (str: string) => void;
-}
+const SearchBar: FC<SearchBarProps> = ({ updateSearchString }) => {
+  const [query, setQuery] = useLocalStorage();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-export interface SearchBarState {
-  query: string;
-}
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (inputRef.current) {
+      setQuery(inputRef.current.value);
+      updateSearchString(inputRef.current.value);
+    }
+  };
 
-class SearchBar extends Component<SearchBarProps, SearchBarState> {
-  constructor(props: SearchBarProps) {
-    super(props);
-    this.state = {
-      query: localStorage.getItem('books-search') || '',
-    };
-  }
-
-  render() {
-    const { query } = this.state;
-    return (
-      <div className="search">
-        <input
-          className="search__input"
-          type="text"
-          name="search"
-          id="search"
-          placeholder="author name"
-          value={query}
-          onChange={(e) => {
-            this.setState({ query: e.target.value });
-          }}
-          onKeyUp={(e) => {
-            if (e.key === 'Enter') this.props.updateSearchString(query);
-          }}
-        />
-        <button
-          className="search__button"
-          type="button"
-          onClick={() => this.props.updateSearchString(query)}
-        >
-          <img src={SearchIcon} alt="" width={20} />
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <form className="search" onSubmit={handleSubmit}>
+      <input
+        className="search__input"
+        type="text"
+        name="search"
+        id="search"
+        placeholder="author name"
+        defaultValue={query}
+        ref={inputRef}
+      />
+      <button className="search__button" type="submit">
+        <img src={SearchIcon} alt="" width={20} />
+      </button>
+    </form>
+  );
+};
 
 export { SearchBar };

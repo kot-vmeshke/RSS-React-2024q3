@@ -1,21 +1,28 @@
-import { Component } from 'react';
+import { FC } from 'react';
 
 import './BookCard.scss';
-import { Book } from '../BooksList/BooksList';
+import { Book } from '../../types';
+import { Link, useSearchParams } from 'react-router-dom';
 
-class BookCard extends Component<Book> {
-  render() {
-    const { authors, title, subjects } = this.props;
-    return (
-      <li className="book">
+const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
+
+  const [searchParams ] = useSearchParams();
+
+  return (
+    <li className="book-wrap">
+      <Link
+        className="book"
+        to={`book/${id}?${searchParams.toString()}`}
+        data-testid="book"
+      >
         <span className="book__author">
           {authors.map((author) => author.name).join(', ')}
         </span>
         <span className="book__name">{title}</span>
         <span className="book__subjects">Subjects: {subjects.join(', ')}.</span>
-      </li>
-    );
-  }
-}
+      </Link>
+    </li>
+  );
+};
 
 export { BookCard };
