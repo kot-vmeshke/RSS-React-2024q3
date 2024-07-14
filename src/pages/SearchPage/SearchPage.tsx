@@ -16,6 +16,7 @@ const SearchPage: FC = () => {
     next: null,
     previous: null,
     pageNumber: +(searchParams?.get('page') ?? 1),
+    allPages: 1,
   });
 
   const updateSearchString = (str: string) => {
@@ -37,11 +38,14 @@ const SearchPage: FC = () => {
         );
         if (res.ok) {
           const data = await res.json();
+          console.log(data);
+          const allPages = Math.round(data.count / 32) + 1;
           setBooksList(data.results);
           setPaginationData((prev) => ({
             ...prev,
             next: data.next,
             previous: data.previous,
+            allPages
           }));
         } else {
           throw new Error('Failed to fetch');

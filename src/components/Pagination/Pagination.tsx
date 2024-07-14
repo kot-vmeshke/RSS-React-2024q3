@@ -9,6 +9,7 @@ const Pagination: FC<PaginationProps> = ({
   previous,
   pageNumber,
   updatePageNumber,
+  allPages
 }) => {
   return (
     <div className="pagination" data-testid="pagination">
@@ -23,7 +24,7 @@ const Pagination: FC<PaginationProps> = ({
         className="pagination__number pagination__number_active"
         data-testid="page-number"
       >
-        {pageNumber}
+        {pageNumber} of {allPages}
       </div>
       <button
         className={`pagination__arrow ${next ? '' : 'pagination__arrow_disabled'}`}

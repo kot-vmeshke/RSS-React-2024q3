@@ -46,4 +46,5 @@ export interface PaginationProps {
   previous: string | null;
   pageNumber: number;
   updatePageNumber: (page: number) => void;
+  allPages: number;
 }
