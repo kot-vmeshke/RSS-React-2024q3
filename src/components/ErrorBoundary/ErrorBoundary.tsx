@@ -35,6 +35,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           <button
             onClick={() => window.location.reload()}
             className="main-button"
+            data-testid="refresh-button"
           >
             Refresh
           </button>
