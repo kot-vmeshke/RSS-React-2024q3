@@ -7,6 +7,7 @@ import { ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
 import { Loader } from './Loader/Loader';
 import { Pagination } from './Pagination/Pagination';
 import { DetailsBookCard } from './DetailsBookCard/DetailsBookCard';
+import { ThemeSwitch } from './ThemeSwitch/ThemeSwitch';
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   Loader,
   Pagination,
   DetailsBookCard,
+  ThemeSwitch,
 };

@@ -3,7 +3,7 @@ import './ErrorPage.scss';
 import { ThemeContext } from '../../context/ThemeContext';
 
 const ErrorPage = () => {
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
 
   return (
     <div className={`page page_error ${theme}`}>

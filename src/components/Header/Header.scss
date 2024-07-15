@@ -6,10 +6,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 32px;
   }
 
   &__title {
+    margin-right: auto;
     font-weight: 300;
     font-size: 24px;
     color: var(--color-text);

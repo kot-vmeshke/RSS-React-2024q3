@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeContext';
 
 const SearchPage: FC = () => {
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchString] = useLocalStorage();
@@ -41,7 +41,6 @@ const SearchPage: FC = () => {
         );
         if (res.ok) {
           const data = await res.json();
-          console.log(data);
           const allPages = Math.round(data.count / 32);
           setBooksList(data.results);
           setPaginationData((prev) => ({
