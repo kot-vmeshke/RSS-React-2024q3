@@ -20,7 +20,7 @@ const ThemeSwitch: FC = () => {
         value="dark"
         onChange={(e) => handleChange(e)}
       />
-      <label htmlFor="dark">
+      <label htmlFor="dark" data-testid="dark-button">
         <svg
           width="18"
           height="18"
@@ -52,7 +52,7 @@ const ThemeSwitch: FC = () => {
         value="light"
         onChange={(e) => handleChange(e)}
       />
-      <label htmlFor="light">
+      <label htmlFor="light" data-testid="light-button">
         <svg
           width="20"
           height="20"
