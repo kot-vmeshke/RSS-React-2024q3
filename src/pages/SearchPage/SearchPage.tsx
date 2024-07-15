@@ -1,10 +1,13 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { Header, Main } from '../../components';
 import { Book } from '../../types';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useSearchParams } from 'react-router-dom';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const SearchPage: FC = () => {
+  const theme = useContext(ThemeContext);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchString] = useLocalStorage();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -45,7 +48,7 @@ const SearchPage: FC = () => {
             ...prev,
             next: data.next,
             previous: data.previous,
-            allPages
+            allPages,
           }));
         } else {
           throw new Error('Failed to fetch');
@@ -64,7 +67,7 @@ const SearchPage: FC = () => {
   }, [newSearchString, paginationData.pageNumber, fetchBooks]);
 
   return (
-    <div className="page" data-testid="page-container">
+    <div className={`page ${theme}`} data-testid="page-container">
       <Header updateSearchString={updateSearchString} />
       <Main
         isLoaded={isLoaded}

@@ -2,6 +2,7 @@ import './App.scss';
 import { ErrorPage, SearchPage } from './pages';
 import { DetailsBookCard, ErrorBoundary } from './components';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ThemeContext } from './context/ThemeContext';
 
 const router = createBrowserRouter([
   {
@@ -19,9 +20,11 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <ErrorBoundary>
-      <RouterProvider router={router} />
-    </ErrorBoundary>
+    <ThemeContext.Provider value={'dark'}>
+      <ErrorBoundary>
+        <RouterProvider router={router} />
+      </ErrorBoundary>
+    </ThemeContext.Provider>
   );
 };
 

@@ -52,7 +52,7 @@ const DetailsBookCard: FC = () => {
         >
           <path
             d="M17 7L7 17M7 7L17 17"
-            stroke="black"
+            stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
