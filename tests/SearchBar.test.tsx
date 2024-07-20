@@ -1,7 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { SearchBar } from '../src/components';
 import { describe, expect, it } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { SearchBar } from '../src/components';
 
 describe('SearchBar', () => {
   it('Clicking the Search button saves the entered value to the local storage', () => {

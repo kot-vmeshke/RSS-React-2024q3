@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { SearchPage } from '../src/pages';
 import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { SearchPage } from '../src/pages';
 
 describe('SearchPage', () => {
   it('SearchPage is rendering', () => {

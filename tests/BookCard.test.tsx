@@ -1,9 +1,9 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BookCard, DetailsBookCard } from '../src/components';
-import { describe, expect, it, vi } from 'vitest';
-import { Book } from '../src/types';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Book } from '../src/types';
 
 const book: Book = {
   id: 1513,

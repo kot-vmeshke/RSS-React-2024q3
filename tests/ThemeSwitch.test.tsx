@@ -1,8 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+
 import '@testing-library/jest-dom';
-import { ThemeSwitch } from '../src/components';
 import { describe, expect, it } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import App from '../src/App';
+import { ThemeSwitch } from '../src/components';
+
+
 
 describe('ThemeSwitch', () => {
   it('The theme name is saved in the localStorage', () => {

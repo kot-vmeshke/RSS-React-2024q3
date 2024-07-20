@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
 import '@testing-library/jest-dom';
-import { BooksList } from '../src/components';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import { Book } from '../src/types';
+import { BooksList } from '../src/components';
 import { MemoryRouter } from 'react-router-dom';
 
 const books: Book[] = [

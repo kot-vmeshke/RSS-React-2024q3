@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, createContext } from 'react';
 
 interface ContextType {
   theme: string;
@@ -8,6 +8,6 @@ interface ContextType {
 const defaultContext = {
   theme: 'light',
   setTheme: () => {},
-}
+};
 
 export const ThemeContext = createContext<ContextType>(defaultContext);

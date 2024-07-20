@@ -1,12 +1,12 @@
 import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { Header, Main } from '../../components';
 import { Book } from '../../types';
+import { ThemeContext } from '../../context/ThemeContext';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useSearchParams } from 'react-router-dom';
-import { ThemeContext } from '../../context/ThemeContext';
 
 const SearchPage: FC = () => {
-  const {theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchString] = useLocalStorage();

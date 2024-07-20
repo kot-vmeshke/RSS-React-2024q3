@@ -1,7 +1,7 @@
 import './App.scss';
-import { ErrorPage, SearchPage } from './pages';
 import { DetailsBookCard, ErrorBoundary } from './components';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ErrorPage, SearchPage } from './pages';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeContext } from './context/ThemeContext';
 import { useState } from 'react';
 
@@ -20,7 +20,9 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  const [theme, setTheme] = useState(localStorage.getItem('book-theme') || 'light');
+  const [theme, setTheme] = useState(
+    localStorage.getItem('book-theme') || 'light'
+  );
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <ErrorBoundary>

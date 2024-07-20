@@ -1,7 +1,7 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { describe, it, expect } from 'vitest';
 import { BookCard, DetailsBookCard } from '../src/components';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { describe, expect, it } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
 
 const book: Book = {

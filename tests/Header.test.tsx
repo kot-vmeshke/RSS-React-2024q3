@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Header } from '../src/components';
 import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { Header } from '../src/components';
 
 describe('Header', () => {
   it('Header is rendering', () => {

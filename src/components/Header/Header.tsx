@@ -1,6 +1,5 @@
-import { FC } from 'react';
-
 import './Header.scss';
+import { FC } from 'react';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchBarProps } from '../../types';
 import { ThemeSwitch } from '../ThemeSwitch/ThemeSwitch';
@@ -14,7 +13,7 @@ const Header: FC<SearchBarProps> = ({ searchString, updateSearchString }) => {
           searchString={searchString}
           updateSearchString={updateSearchString}
         />
-        <ThemeSwitch/>
+        <ThemeSwitch />
       </div>
     </header>
   );

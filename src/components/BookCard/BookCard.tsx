@@ -1,12 +1,10 @@
+import './BookCard.scss';
+import { Link, useSearchParams } from 'react-router-dom';
+import { Book } from '../../types';
 import { FC } from 'react';
 
-import './BookCard.scss';
-import { Book } from '../../types';
-import { Link, useSearchParams } from 'react-router-dom';
-
 const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
-
-  const [searchParams ] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   return (
     <li className="book-wrap">

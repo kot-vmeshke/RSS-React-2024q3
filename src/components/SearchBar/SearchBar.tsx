@@ -1,7 +1,7 @@
-import { FC, FormEvent, useRef } from 'react';
-import SearchIcon from '../../assets/search-sm.svg';
 import './SearchBar.scss';
+import { FC, FormEvent, useRef } from 'react';
 import { SearchBarProps } from '../../types';
+import SearchIcon from '../../assets/search-sm.svg';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const SearchBar: FC<SearchBarProps> = ({ updateSearchString }) => {

@@ -1,9 +1,9 @@
-import { ChangeEvent, FC, useContext } from 'react';
 import './ThemeSwitch.scss';
+import { ChangeEvent, FC, useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 
 const ThemeSwitch: FC = () => {
-  const {theme, setTheme} = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTheme(e.target.value);

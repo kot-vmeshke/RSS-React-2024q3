@@ -1,8 +1,8 @@
 import './BooksList.scss';
 import { BookCard } from '../BookCard/BookCard';
-import { Loader } from '../Loader/Loader';
 import { BooksListProps } from '../../types';
 import { FC } from 'react';
+import { Loader } from '../Loader/Loader';
 
 const BooksList: FC<BooksListProps> = ({ booksList, isLoaded }) => {
   return (

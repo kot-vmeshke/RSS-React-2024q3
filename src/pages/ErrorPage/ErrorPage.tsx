@@ -1,9 +1,9 @@
-import { useContext } from 'react';
 import './ErrorPage.scss';
 import { ThemeContext } from '../../context/ThemeContext';
+import { useContext } from 'react';
 
 const ErrorPage = () => {
-  const {theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <div className={`page page_error ${theme}`}>

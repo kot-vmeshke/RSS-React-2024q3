@@ -1,9 +1,9 @@
-import { FC } from 'react';
 import './Main.scss';
 import { BooksList } from '../BooksList/BooksList';
+import { FC } from 'react';
 import { MainProps } from '../../types';
-import { Pagination } from '../Pagination/Pagination';
 import { Outlet } from 'react-router-dom';
+import { Pagination } from '../Pagination/Pagination';
 
 const Main: FC<MainProps> = ({ isLoaded, booksList, paginationData }) => {
   return (

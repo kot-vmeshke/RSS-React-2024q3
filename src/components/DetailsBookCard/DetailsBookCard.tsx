@@ -1,10 +1,11 @@
-import { Link, useParams, useSearchParams } from 'react-router-dom';
 import './DetailsBookCard.scss';
-import readIcon from '../../assets/share-03.svg';
-import defaultCover from '../../assets/no-cover.jpg';
-import { Book } from '../../types';
 import { FC, useEffect, useState } from 'react';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Book } from '../../types';
 import { Loader } from '../Loader/Loader';
+import defaultCover from '../../assets/no-cover.jpg';
+import readIcon from '../../assets/share-03.svg';
+
 
 const DetailsBookCard: FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);

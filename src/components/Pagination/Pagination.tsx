@@ -1,15 +1,15 @@
 import './Pagination.scss';
-import arrowPrev from '../../assets/arrow-circle-broken-left.svg';
-import arrowNext from '../../assets/arrow-circle-broken-right.svg';
 import { FC } from 'react';
 import { PaginationProps } from '../../types';
+import arrowNext from '../../assets/arrow-circle-broken-right.svg';
+import arrowPrev from '../../assets/arrow-circle-broken-left.svg';
 
 const Pagination: FC<PaginationProps> = ({
   next,
   previous,
   pageNumber,
   updatePageNumber,
-  allPages
+  allPages,
 }) => {
   return (
     <div className="pagination" data-testid="pagination">

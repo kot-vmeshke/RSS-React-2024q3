@@ -1,7 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Pagination } from '../src/components';
 import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { Pagination } from '../src/components';
 import { PaginationProps } from '../src/types';
 
 const paginationProps: PaginationProps = {
