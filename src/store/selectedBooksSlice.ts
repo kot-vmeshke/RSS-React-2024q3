@@ -18,7 +18,10 @@ const selectedBooksSlice = createSlice({
   },
 });
 
-export const { addBookToSelected, removeBookFromSelected } =
-  selectedBooksSlice.actions;
+export const {
+  addBookToSelected,
+  removeBookFromSelected,
+  removeAllBooksFromSelected,
+} = selectedBooksSlice.actions;
 
 export default selectedBooksSlice.reducer;

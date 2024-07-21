@@ -1,0 +1,33 @@
+.fly {
+  position: fixed;
+  bottom: 48px;
+  right: 48px;
+  display: none;
+  padding: 24px;
+  border-radius: 16px;
+  color: var(--color-text);
+  background-color: var(--color-bg-dark);
+
+  &_visible {
+    display: block;
+  }
+
+  .main-button {
+    margin: 24px auto 0;
+    border: 1px solid var(--color-bg-light);
+    background-color: var(--color-bg-light);
+    flex-shrink: 0;
+
+    &_bordered {
+      border: 1px solid var(--color-bg-light);
+      background: transparent;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+}

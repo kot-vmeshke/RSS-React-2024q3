@@ -1,23 +1,11 @@
-import { BookCard } from './BookCard/BookCard';
-import { BooksList } from './BooksList/BooksList';
-import { DetailsBookCard } from './DetailsBookCard/DetailsBookCard';
-import { ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
-import { Header } from './Header/Header';
-import { Loader } from './Loader/Loader';
-import { Main } from './Main/Main';
-import { Pagination } from './Pagination/Pagination';
-import { SearchBar } from './SearchBar/SearchBar';
-import { ThemeSwitch } from './ThemeSwitch/ThemeSwitch';
-
-export {
-  Header,
-  SearchBar,
-  Main,
-  BooksList,
-  BookCard,
-  ErrorBoundary,
-  Loader,
-  Pagination,
-  DetailsBookCard,
-  ThemeSwitch,
-};
+export { BookCard } from './BookCard/BookCard';
+export { BooksList } from './BooksList/BooksList';
+export { DetailsBookCard } from './DetailsBookCard/DetailsBookCard';
+export { ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
+export { Header } from './Header/Header';
+export { Loader } from './Loader/Loader';
+export { Main } from './Main/Main';
+export { Pagination } from './Pagination/Pagination';
+export { SearchBar } from './SearchBar/SearchBar';
+export { ThemeSwitch } from './ThemeSwitch/ThemeSwitch';
+export { FlyingList } from './FlyingList/FlyingList';

@@ -1,5 +1,5 @@
 import { FC, useCallback, useContext, useEffect, useState } from 'react';
-import { Header, Main } from '../../components';
+import { FlyingList, Header, Main } from '../../components';
 import { Book } from '../../types';
 import { ThemeContext } from '../../context/ThemeContext';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -73,6 +73,7 @@ const SearchPage: FC = () => {
         booksList={booksList}
         paginationData={{ ...paginationData, updatePageNumber }}
       />
+      <FlyingList />
     </div>
   );
 };

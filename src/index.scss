@@ -47,11 +47,16 @@ a:is(.hover) {
   justify-content: center;
   margin: 0 auto 24px;
   padding: 6px 24px;
-  border: none;
+  border: 1px solid var(--color-bg-dark);
   border-radius: 32px;
   background: var(--color-bg-dark);
+  color: var(--color-text);
   flex-shrink: 0;
   cursor: pointer;
+
+  &_bordered {    
+    background: transparent;
+  }
 }
 input {
   &:autofill,
