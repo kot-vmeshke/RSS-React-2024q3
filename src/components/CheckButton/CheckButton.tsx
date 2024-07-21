@@ -1,20 +1,46 @@
 import './CheckButton.scss';
+import {
+  addBookToSelected,
+  removeBookFromSelected,
+} from '../../store/selectedBooksSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { FC } from 'react';
+import { RootState } from '../../store/store';
 
 interface CheckButtonProps {
-  isChecked: boolean;
-  handleChange: () => void;
+  bookId: number;
 }
 
-const CheckButton: FC<CheckButtonProps> = ({ isChecked, handleChange}) => {
+const CheckButton: FC<CheckButtonProps> = ({ bookId }) => {
+  const selectedBooks: number[] = useSelector(
+    (state: RootState) => state.selectedBooks
+  );
+  const isSelected: boolean = Boolean(
+    selectedBooks.find((item) => item === bookId)
+  );
+  const dispatch = useDispatch();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      dispatch(addBookToSelected(bookId));
+    } else {
+      dispatch(removeBookFromSelected(bookId));
+    }
+  };
+
   return (
     <div className="check-button-wrap">
-      <input type="checkbox" checked={isChecked} id="check" onChange={handleChange}/>
+      <input
+        type="checkbox"
+        checked={isSelected}
+        id={`check-${bookId}`}
+        onChange={handleChange}
+      />
       <label
-        htmlFor="check"
-        title={isChecked ? 'Remove from selected' : 'Add to selected'}
+        htmlFor={`check-${bookId}`}
+        title={isSelected ? 'Remove from selected' : 'Add to selected'}
       >
-        {isChecked ? (
+        {isSelected ? (
           <svg
             width="24"
             height="24"

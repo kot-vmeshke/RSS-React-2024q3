@@ -24,7 +24,7 @@ export interface Format {
   [key: string]: string;
 }
 export interface Book {
-  id?: number;
+  id: number;
   title: string;
   authors: Person[];
   translators?: Person[];
