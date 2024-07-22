@@ -6,7 +6,6 @@ import { Loader } from '../Loader/Loader';
 import defaultCover from '../../assets/no-cover.jpg';
 import readIcon from '../../assets/share-03.svg';
 
-
 const DetailsBookCard: FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [book, setBook] = useState<Book>();
