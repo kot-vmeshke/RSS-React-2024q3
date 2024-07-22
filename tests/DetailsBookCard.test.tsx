@@ -3,6 +3,8 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
+import { Provider } from 'react-redux';
+import { store } from '../src/store/store';
 
 const book: Book = {
   id: 1,
@@ -49,9 +51,11 @@ vi.mock('react-router-dom', async (importOriginal) => {
 describe('DetailsBookCard', () => {
   it('A loading indicator is displayed while fetching data', () => {
     render(
-      <MemoryRouter>
-        <DetailsBookCard />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <DetailsBookCard />
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();
@@ -59,9 +63,11 @@ describe('DetailsBookCard', () => {
 
   it('Detailed card component correctly displays the detailed card data', async () => {
     render(
-      <MemoryRouter>
-        <DetailsBookCard />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <DetailsBookCard />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => {
@@ -73,12 +79,14 @@ describe('DetailsBookCard', () => {
 
   it('Clicking the close button hides the component', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route path="/" element={<BookCard {...book} />} />
-          <Route path="/book/:id" element={<DetailsBookCard />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<BookCard {...book} />} />
+            <Route path="/book/:id" element={<DetailsBookCard />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     fireEvent.click(screen.getByTestId('book'));

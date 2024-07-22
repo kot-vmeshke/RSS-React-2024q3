@@ -1,11 +1,10 @@
-
 import '@testing-library/jest-dom';
 import { describe, expect, it } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from '../src/App';
+import { Provider } from 'react-redux';
 import { ThemeSwitch } from '../src/components';
-
-
+import { store } from '../src/store/store';
 
 describe('ThemeSwitch', () => {
   it('The theme name is saved in the localStorage', () => {
@@ -19,7 +18,11 @@ describe('ThemeSwitch', () => {
   });
 
   it('Theme is changing', () => {
-    render(<App />);
+    render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
 
     fireEvent.click(screen.getByTestId('dark-button'));
     const isThemeDark = screen

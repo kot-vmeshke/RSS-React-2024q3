@@ -4,6 +4,8 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
+import { Provider } from 'react-redux';
+import { store } from '../src/store/store';
 
 const book: Book = {
   id: 1513,
@@ -58,7 +60,9 @@ describe('BookCard', () => {
   it('Card component renders the relevant card data', () => {
     render(
       <MemoryRouter>
-        <BookCard {...book} />
+        <Provider store={store}>
+          <BookCard {...book} />
+        </Provider>
       </MemoryRouter>
     );
     const bookTitle = screen.getByText(/Romeo and Juliet/i);
@@ -67,12 +71,14 @@ describe('BookCard', () => {
 
   it('Clicking on a card opens a detailed card component', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route path="/" element={<BookCard {...book} />} />
-          <Route path="/book/:id" element={<DetailsBookCard />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<BookCard {...book} />} />
+            <Route path="/book/:id" element={<DetailsBookCard />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     fireEvent.click(screen.getByTestId('book'));
@@ -92,12 +98,14 @@ describe('BookCard', () => {
       .mockResolvedValue(mockResponse as unknown as Response);
 
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route path="/" element={<BookCard {...book} />} />
-          <Route path="/book/:id" element={<DetailsBookCard />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<BookCard {...book} />} />
+            <Route path="/book/:id" element={<DetailsBookCard />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
     fireEvent.click(screen.getByTestId('book'));
 

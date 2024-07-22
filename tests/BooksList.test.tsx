@@ -4,6 +4,8 @@ import { render, screen } from '@testing-library/react';
 import { Book } from '../src/types';
 import { BooksList } from '../src/components';
 import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../src/store/store';
 
 const books: Book[] = [
   {
@@ -208,9 +210,11 @@ const books: Book[] = [
 describe('BooksList', () => {
   it('Component renders the specified number of cards', () => {
     render(
-      <MemoryRouter>
-        <BooksList booksList={books} isLoaded={true} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <BooksList booksList={books} isLoaded={true} />
+        </MemoryRouter>
+      </Provider>
     );
 
     const bookCards = screen.getAllByTestId('book');
@@ -229,6 +233,4 @@ describe('BooksList', () => {
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
-
 });
-
