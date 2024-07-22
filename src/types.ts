@@ -10,9 +10,9 @@ export interface MainState {
   error: boolean;
 }
 export interface MainProps {
-  isLoaded: boolean;
-  booksList: Book[];
-  paginationData: PaginationProps;
+  isLoaded?: boolean;
+  booksList?: Book[];
+  paginationData?: PaginationProps;
 }
 
 export interface Person {
@@ -37,14 +37,14 @@ export interface Book {
   download_count?: number;
 }
 export interface BooksListProps {
-  booksList: Book[];
-  isLoaded: boolean;
+  booksList?: Book[];
+  isLoading?: boolean;
 }
 
 export interface PaginationProps {
-  next: string | null;
-  previous: string | null;
-  pageNumber: number;
-  updatePageNumber: (page: number) => void;
-  allPages: number;
+  next?: string | null;
+  previous?: string | null;
+  pageNumber?: number;
+  updatePageNumber?: (page: number) => void;
+  allPages?: number;
 }

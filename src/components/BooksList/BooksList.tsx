@@ -1,16 +1,28 @@
 import './BooksList.scss';
+import { Book, BooksListProps } from '../../types';
 import { BookCard } from '../BookCard/BookCard';
-import { BooksListProps } from '../../types';
 import { FC } from 'react';
 import { Loader } from '../Loader/Loader';
+import { apiSlice } from '../../store/apiSlice';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useSearchParams } from 'react-router-dom';
 
-const BooksList: FC<BooksListProps> = ({ booksList, isLoaded }) => {
+const BooksList: FC<BooksListProps> = () => {
+  const [searchParams] = useSearchParams();
+  const [searchString] = useLocalStorage();
+  const { data, isFetching } = apiSlice.useGetBooksQuery({
+    str: searchString,
+    page: searchParams.get('page') || '1',
+  });
+
   return (
     <>
-      {isLoaded ? (
+      {!isFetching ? (
         <ul className="books-list">
-          {booksList.length ? (
-            booksList.map((book) => <BookCard {...book} key={book.id} />)
+          {data.results.length ? (
+            data.results.map((book: Book) => (
+              <BookCard {...book} key={book.id} />
+            ))
           ) : (
             <div className="books-list__nothing">Nothing was found</div>
           )}
