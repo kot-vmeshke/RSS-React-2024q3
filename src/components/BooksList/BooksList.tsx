@@ -1,8 +1,8 @@
 import './BooksList.scss';
 import { Book, BooksListProps } from '../../types';
-import { BookCard } from '../BookCard/BookCard';
+import { BookCard } from '../BookCard';
 import { FC } from 'react';
-import { Loader } from '../Loader/Loader';
+import { Loader } from '../Loader';
 import { apiSlice } from '../../store/apiSlice';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useSearchParams } from 'react-router-dom';

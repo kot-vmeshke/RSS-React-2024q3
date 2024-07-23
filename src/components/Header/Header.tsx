@@ -1,8 +1,8 @@
 import './Header.scss';
 import { FC } from 'react';
-import { SearchBar } from '../SearchBar/SearchBar';
+import { SearchBar } from '../SearchBar';
 import { SearchBarProps } from '../../types';
-import { ThemeSwitch } from '../ThemeSwitch/ThemeSwitch';
+import { ThemeSwitch } from '../ThemeSwitch';
 
 const Header: FC<SearchBarProps> = ({ searchString, updateSearchString }) => {
   return (

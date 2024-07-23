@@ -4,25 +4,38 @@ import {
   removeBookFromSelected,
 } from '../../store/selectedBooksSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { Book } from '../../types';
 import { FC } from 'react';
 import { RootState } from '../../store/store';
+import { apiSlice } from '../../store/apiSlice';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useSearchParams } from 'react-router-dom';
 
 interface CheckButtonProps {
   bookId: number;
 }
 
 const CheckButton: FC<CheckButtonProps> = ({ bookId }) => {
-  const selectedBooks: number[] = useSelector(
+  const selectedBooks: Book[] = useSelector(
     (state: RootState) => state.selectedBooks
   );
+  const [searchParams] = useSearchParams();
+  const [searchString] = useLocalStorage();
+  const { data } = apiSlice.useGetBooksQuery({
+    str: searchString,
+    page: searchParams.get('page') || '1',
+  });
+
   const isSelected: boolean = Boolean(
-    selectedBooks.find((item) => item === bookId)
+    selectedBooks.find((item) => item.id === bookId)
   );
   const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      dispatch(addBookToSelected(bookId));
+      dispatch(
+        addBookToSelected(data.results.find((item: Book) => item.id === bookId))
+      );
     } else {
       dispatch(removeBookFromSelected(bookId));
     }

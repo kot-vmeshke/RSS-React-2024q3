@@ -10,14 +10,15 @@ import { useSearchParams } from 'react-router-dom';
 const Pagination: FC<PaginationProps> = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchString] = useLocalStorage();
-  const updatePageNumber = (page: number) => {
-    searchParams.set('page', `${page}`);
-    setSearchParams(searchParams);
-  };
   const { data, isFetching } = apiSlice.useGetBooksQuery({
     str: searchString,
     page: searchParams.get('page') || '1',
   });
+
+  const updatePageNumber = (page: number) => {
+    searchParams.set('page', `${page}`);
+    setSearchParams(searchParams);
+  };
 
   return (
     <>

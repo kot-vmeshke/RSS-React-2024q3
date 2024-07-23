@@ -1,7 +1,7 @@
 import './BookCard.scss';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Book } from '../../types';
-import { CheckButton } from '../CheckButton/CheckButton';
+import { CheckButton } from '../CheckButton';
 import { FC } from 'react';
 
 const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
