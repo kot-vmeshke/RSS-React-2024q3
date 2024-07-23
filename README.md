@@ -1,4 +1,4 @@
-# Book Search
+# Search books
 
 Training project for the React Course at [RS-School](https://rs.school/). 
 
