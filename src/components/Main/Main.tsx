@@ -5,7 +5,6 @@ import { Outlet } from 'react-router-dom';
 import { Pagination } from '../Pagination';
 
 const Main: FC = () => {
-
   return (
     <main className="main">
       <div className="container main__container" data-testid="main-container">

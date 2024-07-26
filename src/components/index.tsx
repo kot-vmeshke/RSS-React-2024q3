@@ -9,3 +9,4 @@ export { Pagination } from './Pagination';
 export { SearchBar } from './SearchBar';
 export { ThemeSwitch } from './ThemeSwitch';
 export { FlyingList } from './FlyingList';
+export { CheckButton } from './CheckButton';

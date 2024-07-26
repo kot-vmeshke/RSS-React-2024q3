@@ -58,6 +58,7 @@ const FlyingList: FC = () => {
         <button
           className="main-button main-button_bordered"
           onClick={handleDeselectAllClick}
+          data-testid="unselect-all"
         >
           Unselect {selectedBooks.length > 1 ? 'All' : ''}
         </button>

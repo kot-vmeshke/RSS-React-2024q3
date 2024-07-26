@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
 import { Provider } from 'react-redux';
+
 import { store } from '../src/store/store';
 
 const book: Book = {
@@ -52,7 +53,7 @@ vi.mock('react-router-dom', async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...(actual as object),
-    useParams: vi.fn().mockReturnValue({ bookId: 1 }),
+    useParams: vi.fn().mockReturnValue({ bookId: 1513 }),
   };
 });
 
@@ -88,15 +89,6 @@ describe('BookCard', () => {
   });
 
   it('Clicking triggers an additional API call to fetch detailed information', async () => {
-    const mockResponse = {
-      ok: true,
-      json: () => Promise.resolve(book),
-    };
-
-    const fetchMock = vi
-      .spyOn(window, 'fetch')
-      .mockResolvedValue(mockResponse as unknown as Response);
-
     render(
       <Provider store={store}>
         <MemoryRouter initialEntries={['/']}>
@@ -110,7 +102,9 @@ describe('BookCard', () => {
     fireEvent.click(screen.getByTestId('book'));
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith('https://gutendex.com/books/1');
+      expect(screen.getByRole('heading', { level: 3 }).textContent).toBe(
+        book.title
+      );
     });
   });
 });

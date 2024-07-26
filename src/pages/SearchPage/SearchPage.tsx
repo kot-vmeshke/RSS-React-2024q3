@@ -7,9 +7,7 @@ const SearchPage: FC = () => {
   const { theme } = useContext(ThemeContext);
 
   const [searchString] = useLocalStorage();
-  const [, setNewSearchString] = useState<string>(
-    searchString || ''
-  );
+  const [, setNewSearchString] = useState<string>(searchString || '');
 
   const updateSearchString = (str: string) => {
     setNewSearchString(str);
