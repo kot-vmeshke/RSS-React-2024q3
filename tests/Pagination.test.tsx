@@ -1,14 +1,14 @@
 import '@testing-library/jest-dom';
 import { HttpResponse, http } from 'msw';
-import { MemoryRouter, useSearchParams } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
 import { Pagination } from '../src/components';
-import { Provider } from 'react-redux';
 import { apiSlice } from '../src/store/apiSlice';
+import { renderWithProviderAndRouter } from '../src/utils';
 import { setupServer } from 'msw/node';
 import { store } from '../src/store/store';
+import { useSearchParams } from 'react-router-dom';
 
 const books: Book[] = [
   {
@@ -131,13 +131,7 @@ afterAll(() => server.close());
 
 describe('Pagination', () => {
   it('Component updates URL query parameter when page changes', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Pagination />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<Pagination />);
 
     const currentPage = 1;
 
@@ -151,13 +145,7 @@ describe('Pagination', () => {
   });
 
   it("If previous page does't exist, then the previous button is disabled", async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Pagination />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<Pagination />);
 
     await waitFor(() => {
       expect(screen.getByTestId('prev')).toHaveClass(
@@ -170,13 +158,7 @@ describe('Pagination', () => {
     const [searchParams] = useSearchParams();
     const page = searchParams.get('page');
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Pagination />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<Pagination />);
 
     await waitFor(() => {
       expect(screen.getByTestId('page-number')).toBeInTheDocument();

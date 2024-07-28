@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom';
-import { Provider, useSelector } from 'react-redux';
 import { RootState, store } from '../src/store/store';
 import { describe, expect, it } from 'vitest';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
 import { CheckButton } from '../src/components';
-import { MemoryRouter } from 'react-router-dom';
 import { apiSlice } from '../src/store/apiSlice';
 import { removeBookFromSelected } from '../src/store/selectedBooksSlice';
+import { renderWithProviderAndRouter } from '../src/utils';
+import { useSelector } from 'react-redux';
 
 const bookId = 1513;
 const books: Book[] = [
@@ -123,13 +123,7 @@ describe('CheckButton', () => {
       .fn()
       .mockReturnValue({ data: { results: books } });
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <CheckButton bookId={bookId} />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<CheckButton bookId={bookId} />);
 
     waitFor(() => {
       const checkbox = screen.getByTestId('checkbox') as HTMLInputElement;
@@ -155,13 +149,7 @@ describe('CheckButton', () => {
   });
 
   it('If book selected, component shows checked icon', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <CheckButton bookId={bookId} />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<CheckButton bookId={bookId} />);
 
     waitFor(() => {
       expect(screen.getByTestId('checked-icon')).toBeFalsy();

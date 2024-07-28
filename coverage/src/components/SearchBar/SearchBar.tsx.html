@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>30/30</span>
+                <span class='fraction'>41/41</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/30</span>
+                <span class='fraction'>41/41</span>
             </div>
         
             
@@ -100,17 +100,41 @@
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -139,19 +163,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import './SearchBar.scss';
 import { FC, FormEvent, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import { SearchBarProps } from '../../types';
 import SearchIcon from '../../assets/search-sm.svg';
+import { updateSearchString } from '../../store/searchSlice';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useSearchParams } from 'react-router-dom';
 &nbsp;
-const SearchBar: FC&lt;SearchBarProps&gt; = ({ updateSearchString }) =&gt; {
-  const [query, setQuery] = useLocalStorage();
+const SearchBar: FC&lt;SearchBarProps&gt; = () =&gt; {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setQuery] = useLocalStorage();
+  const searchString = useSelector(
+    (state: RootState) =&gt; state.search.searchString
+  );
   const inputRef = useRef&lt;HTMLInputElement&gt;(null);
+  const dispatch = useDispatch();
 &nbsp;
   const handleSubmit = (e: FormEvent) =&gt; {
     e.preventDefault();
     if (inputRef.current) {
-      setQuery(inputRef.current.value);
-      updateSearchString(inputRef.current.value);
+      const queryString = inputRef.current.value;
+      setQuery(queryString);
+      dispatch(updateSearchString(queryString));
+      searchParams.set('search', `${queryString}`);
+      setSearchParams(searchParams);
     }
   };
 &nbsp;
@@ -163,7 +199,7 @@ const SearchBar: FC&lt;SearchBarProps&gt; = ({ updateSearchString }) =&gt; {
         name="search"
         id="search"
         placeholder="author name"
-        defaultValue={query}
+        defaultValue={searchString}
         ref={inputRef}
       /&gt;
       &lt;button className="search__button" type="submit"&gt;
@@ -181,7 +217,7 @@ export { SearchBar };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-26T22:48:53.377Z
+                at 2024-07-28T14:45:05.171Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

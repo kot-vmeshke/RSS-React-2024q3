@@ -1,12 +1,11 @@
 import '@testing-library/jest-dom';
 import { HttpResponse, http } from 'msw';
 import { describe, expect, it } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
 import { BooksList } from '../src/components';
-import { MemoryRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { apiSlice } from '../src/store/apiSlice';
+import { renderWithProviderAndRouter } from '../src/utils';
 import { setupServer } from 'msw/node';
 import { store } from '../src/store/store';
 
@@ -116,15 +115,8 @@ afterEach(() => {
 afterAll(() => server.close());
 
 describe('BooksList', () => {
-
   it('Renders Loader when isLoaded is false', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <BooksList />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<BooksList />);
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
@@ -136,13 +128,7 @@ describe('BooksList', () => {
       })
     );
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <BooksList />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<BooksList />);
 
     await waitFor(() => {
       const bookCards = screen.getAllByTestId('book');
@@ -151,13 +137,7 @@ describe('BooksList', () => {
   });
 
   it('Appropriate message is displayed if no cards are present', async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <BooksList />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<BooksList />);
 
     await waitFor(() => {
       const altText = screen.getByText(/Nothing was found/i);

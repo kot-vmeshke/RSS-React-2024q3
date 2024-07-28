@@ -1,11 +1,14 @@
 import '@testing-library/jest-dom';
 import { BookCard, DetailsBookCard } from '../src/components';
+import { HttpResponse, http } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
 import { Provider } from 'react-redux';
-
+import { apiSlice } from '../src/store/apiSlice';
+import { renderWithProviderAndRouter } from '../src/utils';
+import { setupServer } from 'msw/node';
 import { store } from '../src/store/store';
 
 const book: Book = {
@@ -49,6 +52,8 @@ const book: Book = {
   download_count: 77782,
 };
 
+const dispatch = store.dispatch;
+
 vi.mock('react-router-dom', async (importOriginal) => {
   const actual = await importOriginal();
   return {
@@ -57,17 +62,28 @@ vi.mock('react-router-dom', async (importOriginal) => {
   };
 });
 
+const server = setupServer(
+  http.get('https://gutendex.com/books', () => {
+    return HttpResponse.json({ ...book });
+  })
+);
+beforeAll(() => server.listen());
+beforeEach(() => {
+  dispatch(apiSlice.util.resetApiState());
+});
+afterEach(() => {
+  server.resetHandlers();
+});
+afterAll(() => server.close());
+
 describe('BookCard', () => {
   it('Card component renders the relevant card data', () => {
-    render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <BookCard {...book} />
-        </Provider>
-      </MemoryRouter>
-    );
-    const bookTitle = screen.getByText(/Romeo and Juliet/i);
-    expect(bookTitle).toBeInTheDocument();
+    renderWithProviderAndRouter(<BookCard {...book} />);
+
+    waitFor(() => {
+      const bookTitle = screen.getByText(/Romeo and Juliet/i);
+      expect(bookTitle).toBeInTheDocument();
+    });
   });
 
   it('Clicking on a card opens a detailed card component', async () => {

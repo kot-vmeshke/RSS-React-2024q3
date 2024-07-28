@@ -66,7 +66,7 @@ describe('SelectedBooksSlice', () => {
     expect(state.length).toBe(0);
   });
 
-  it('All books removed', () => {
+  it('All books was removed', () => {
     const fullState = [book];
 
     const state = selectedBooksReduser(fullState, removeAllBooksFromSelected());

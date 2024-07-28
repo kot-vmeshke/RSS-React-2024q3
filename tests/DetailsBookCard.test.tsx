@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
 import { Provider } from 'react-redux';
+import { renderWithProviderAndRouter } from '../src/utils';
 import { store } from '../src/store/store';
 
 const book: Book = {
@@ -50,25 +51,13 @@ vi.mock('react-router-dom', async (importOriginal) => {
 
 describe('DetailsBookCard', () => {
   it('A loading indicator is displayed while fetching data', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <DetailsBookCard />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<DetailsBookCard />);
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 
   it('Detailed card component correctly displays the detailed card data', async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <DetailsBookCard />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<DetailsBookCard />);
 
     await waitFor(() => {
       expect(screen.getByRole('heading', { level: 3 }).textContent).toBe(

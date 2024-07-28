@@ -1,11 +1,10 @@
 import '@testing-library/jest-dom';
 import { describe, expect, it } from 'vitest';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { Book } from '../src/types';
 import { FlyingList } from '../src/components';
-import { MemoryRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { removeAllBooksFromSelected } from '../src/store/selectedBooksSlice';
+import { renderWithProviderAndRouter } from '../src/utils';
 import { store } from '../src/store/store';
 
 const book: Book = {
@@ -102,13 +101,7 @@ describe('FliyngList', () => {
   global.URL.createObjectURL = vi.fn();
 
   it('Remove all saved books on click "Unselect All"', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <FlyingList />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<FlyingList />);
 
     waitFor(() => {
       fireEvent.click(screen.getByTestId('unselect-all'));
@@ -117,13 +110,7 @@ describe('FliyngList', () => {
   });
 
   it('Unselect button has right text', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <FlyingList />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<FlyingList />);
 
     waitFor(() => {
       expect(
@@ -135,13 +122,7 @@ describe('FliyngList', () => {
   it('getCSV to be called if selected books exist', () => {
     const getCSV = vi.fn();
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <FlyingList />
-        </MemoryRouter>
-      </Provider>
-    );
+    renderWithProviderAndRouter(<FlyingList />);
 
     waitFor(() => {
       expect(getCSV).toBeCalledWith(book);
