@@ -3,13 +3,16 @@ import { Book, BooksListProps } from '../../types';
 import { BookCard } from '../BookCard';
 import { FC } from 'react';
 import { Loader } from '../Loader';
+import { RootState } from '../../store/store';
 import { apiSlice } from '../../store/apiSlice';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const BooksList: FC<BooksListProps> = () => {
   const [searchParams] = useSearchParams();
-  const [searchString] = useLocalStorage();
+  const searchString = useSelector(
+    (state: RootState) => state.search.searchString
+  );
   const { data, isFetching } = apiSlice.useGetBooksQuery({
     str: searchString,
     page: searchParams.get('page') || '1',

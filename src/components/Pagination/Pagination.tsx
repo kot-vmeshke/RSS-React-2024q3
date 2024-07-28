@@ -1,15 +1,18 @@
 import './Pagination.scss';
 import { FC } from 'react';
 import { PaginationProps } from '../../types';
+import { RootState } from '../../store/store';
 import { apiSlice } from '../../store/apiSlice';
 import arrowNext from '../../assets/arrow-circle-broken-right.svg';
 import arrowPrev from '../../assets/arrow-circle-broken-left.svg';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Pagination: FC<PaginationProps> = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchString] = useLocalStorage();
+  const searchString = useSelector(
+    (state: RootState) => state.search.searchString
+  );
   const { data, isFetching } = apiSlice.useGetBooksQuery({
     str: searchString,
     page: searchParams.get('page') || '1',
