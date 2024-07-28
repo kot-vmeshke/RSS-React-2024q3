@@ -1,9 +1,15 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BookCard, DetailsBookCard } from '../src/components';
-import { describe, expect, it, vi } from 'vitest';
-import { Book } from '../src/types';
+import { HttpResponse, http } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Book } from '../src/types';
+import { Provider } from 'react-redux';
+import { apiSlice } from '../src/store/apiSlice';
+import { renderWithProviderAndRouter } from '../src/utils';
+import { setupServer } from 'msw/node';
+import { store } from '../src/store/store';
 
 const book: Book = {
   id: 1513,
@@ -46,33 +52,50 @@ const book: Book = {
   download_count: 77782,
 };
 
+const dispatch = store.dispatch;
+
 vi.mock('react-router-dom', async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...(actual as object),
-    useParams: vi.fn().mockReturnValue({ bookId: 1 }),
+    useParams: vi.fn().mockReturnValue({ bookId: 1513 }),
   };
 });
 
+const server = setupServer(
+  http.get('https://gutendex.com/books', () => {
+    return HttpResponse.json({ ...book });
+  })
+);
+beforeAll(() => server.listen());
+beforeEach(() => {
+  dispatch(apiSlice.util.resetApiState());
+});
+afterEach(() => {
+  server.resetHandlers();
+});
+afterAll(() => server.close());
+
 describe('BookCard', () => {
   it('Card component renders the relevant card data', () => {
-    render(
-      <MemoryRouter>
-        <BookCard {...book} />
-      </MemoryRouter>
-    );
-    const bookTitle = screen.getByText(/Romeo and Juliet/i);
-    expect(bookTitle).toBeInTheDocument();
+    renderWithProviderAndRouter(<BookCard {...book} />);
+
+    waitFor(() => {
+      const bookTitle = screen.getByText(/Romeo and Juliet/i);
+      expect(bookTitle).toBeInTheDocument();
+    });
   });
 
   it('Clicking on a card opens a detailed card component', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route path="/" element={<BookCard {...book} />} />
-          <Route path="/book/:id" element={<DetailsBookCard />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<BookCard {...book} />} />
+            <Route path="/book/:id" element={<DetailsBookCard />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     fireEvent.click(screen.getByTestId('book'));
@@ -82,27 +105,22 @@ describe('BookCard', () => {
   });
 
   it('Clicking triggers an additional API call to fetch detailed information', async () => {
-    const mockResponse = {
-      ok: true,
-      json: () => Promise.resolve(book),
-    };
-
-    const fetchMock = vi
-      .spyOn(window, 'fetch')
-      .mockResolvedValue(mockResponse as unknown as Response);
-
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route path="/" element={<BookCard {...book} />} />
-          <Route path="/book/:id" element={<DetailsBookCard />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<BookCard {...book} />} />
+            <Route path="/book/:id" element={<DetailsBookCard />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
     fireEvent.click(screen.getByTestId('book'));
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith('https://gutendex.com/books/1');
+      expect(screen.getByRole('heading', { level: 3 }).textContent).toBe(
+        book.title
+      );
     });
   });
 });

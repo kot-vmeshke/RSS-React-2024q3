@@ -1,11 +1,12 @@
-import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { SearchBar } from '../src/components';
 import { describe, expect, it } from 'vitest';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { SearchBar } from '../src/components';
+import { renderWithProviderAndRouter } from '../src/utils';
 
 describe('SearchBar', () => {
   it('Clicking the Search button saves the entered value to the local storage', () => {
-    render(<SearchBar updateSearchString={() => {}} />);
+    renderWithProviderAndRouter(<SearchBar />);
 
     const input = screen.getByRole('textbox');
     const testValue = 'test value';
@@ -17,13 +18,15 @@ describe('SearchBar', () => {
   });
 
   it('Component retrieves the value from the local storage upon mounting', () => {
-    const testValue = 'mount test value';
+    const testValue = 'test value';
     localStorage.setItem('books-search', testValue);
 
-    render(<SearchBar updateSearchString={() => {}} />);
+    renderWithProviderAndRouter(<SearchBar />);
 
     const input = screen.getByRole('textbox') as HTMLInputElement;
 
-    expect(input.value).toBe(testValue);
+    waitFor(() => {
+      expect(input.value).toBe(testValue);
+    });
   });
 });

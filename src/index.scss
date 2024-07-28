@@ -1,9 +1,20 @@
-:root {
+.light {
   --font-family: 'Inter', sans-serif;
   --color-bg-dark: #d9d9d9;
   --color-bg-medium: #ebebeb;
   --color-bg-light: #ffffff;
   --color-text: #000000;
+}
+.dark {
+  --font-family: 'Inter', sans-serif;
+  --color-bg-dark: #5c5c5c;
+  --color-bg-medium: #4d4c4c;
+  --color-bg-light: #1f1f1f;
+  --color-text: #ffffff;
+
+  img {
+    filter: invert(100%);
+  }
 }
 
 * {
@@ -22,6 +33,7 @@ a:is(.hover) {
   display: flex;
   flex-direction: column;
   height: 100svh;
+  background: var(--color-bg-light);
 }
 .container {
   width: 100%;
@@ -35,11 +47,16 @@ a:is(.hover) {
   justify-content: center;
   margin: 0 auto 24px;
   padding: 6px 24px;
-  border: none;
+  border: 1px solid var(--color-bg-dark);
   border-radius: 32px;
   background: var(--color-bg-dark);
+  color: var(--color-text);
   flex-shrink: 0;
   cursor: pointer;
+
+  &_bordered {
+    background: transparent;
+  }
 }
 input {
   &:autofill,
