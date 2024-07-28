@@ -1,9 +1,12 @@
 import './FlyingList.scss';
 import { Book, Person } from '../../types';
 import { FC, useEffect, useState } from 'react';
+import {
+  removeAllBooksFromSelected,
+  removeBookFromSelected,
+} from '../../store/selectedBooksSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { removeAllBooksFromSelected } from '../../store/selectedBooksSlice';
 
 const FlyingList: FC = () => {
   const [url, setUrl] = useState<string>('');
@@ -35,7 +38,6 @@ const FlyingList: FC = () => {
       temp.push(data);
     });
 
-    console.log(temp);
     temp.forEach((item: string[]) => {
       csv += item.join(';') + '\n';
     });
@@ -53,7 +55,17 @@ const FlyingList: FC = () => {
 
   return (
     <div className={`fly ${selectedBooks.length ? 'fly_visible' : ''}`}>
-      Selected {selectedBooks.length} items
+      {selectedBooks.length} items selected:
+      <ul>
+        {selectedBooks.map((item: Book) => (
+          <li key={item.id}>
+            {item.title}
+            <button onClick={() => dispatch(removeBookFromSelected(item.id))}>
+              Unselect
+            </button>
+          </li>
+        ))}
+      </ul>
       <div className="fly__controls">
         <button
           className="main-button main-button_bordered"
