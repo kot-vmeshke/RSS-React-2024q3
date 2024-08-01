@@ -1,10 +1,10 @@
-import type { AppStore, RootState } from './store/store';
+import type { AppStore, RootState } from '../old/store/store';
 import React, { PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
-import { setupStore } from './store/store';
+import { setupStore } from '../old/store/store';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<RootState>;
