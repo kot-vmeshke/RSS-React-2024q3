@@ -9,11 +9,12 @@ You can see the application [deployed here](https://book-search-rss-react-2024q3
 ## Technologies
 This project uses: 
 * Typescript
-* Vite
+* Next
 * React
 * Redux
 * Vitest, React Testing Libarary
 * ESLint, Prettier
+* Tailwind CSS
 
 ## Installation
 After cloning the repository, to install dependencies use
@@ -25,4 +26,4 @@ To run the project, use
 ```
 npm run dev
 ```
-The project will be served on port [5173](http://localhost:5173/).
+The project will be served on port [5173](http://localhost:3000/).

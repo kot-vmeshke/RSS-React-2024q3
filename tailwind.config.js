@@ -9,6 +9,15 @@ export default {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      'color-text': '#000000',
+      'color-bg-dark': '#d9d9d9',
+      'color-bg-medium': '#ebebeb',
+      'color-bg-light': '#ffffff',
+    },
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+    },
     extend: {},
   },
   plugins: [],

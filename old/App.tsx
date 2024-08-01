@@ -2,6 +2,7 @@ import { DetailsBookCard, ErrorBoundary } from './components';
 import { ErrorPage, SearchPage } from './pages';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import React from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import { store } from './store/store';
 import { useState } from 'react';
