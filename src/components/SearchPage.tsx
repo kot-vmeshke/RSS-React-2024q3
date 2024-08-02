@@ -1,16 +1,17 @@
-import { FC } from 'react';
-//import { FlyingList, Header, Main } from '../old/components';
-//import { ThemeContext } from '../../old/context/ThemeContext';
+import { FC, useContext } from 'react';
+import { FlyingList } from './FlyingList';
+import { Header } from './Header';
+import { Main } from './Main';
+import { ThemeContext } from '../context/ThemeContext';
 
 const SearchPage: FC = () => {
-  //const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
-    <div className={`page`} data-testid="page-container">
-      {/* <Header />
-      <Main />
+    <div className={`page ${theme}`} data-testid="page-container">
+      <Header />
+      {/* <Main />
       <FlyingList /> */}
-      Hello, Next!
     </div>
   );
 };

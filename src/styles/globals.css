@@ -4,9 +4,12 @@
 
 @layer components {
   .page {
-    @apply flex h-screen flex-col bg-color-bg-light;
+    @apply flex h-screen flex-col bg-color-bg-light dark:bg-dark-color-bg-light;
   }
   .main-button {
-    @apply flex items-center justify-center m-[0_auto_24px] p-[6px_24px] border-[1px_solid_color-bg-dark] rounded-[32px] bg-color-bg-dark text-color-text cursor-pointer shrink-0;
+    @apply flex items-center justify-center m-[0_auto_24px] p-[6px_24px] border-[1px_solid_color-bg-dark] rounded-[32px] bg-color-bg-dark dark:bg-dark-color-bg-dark text-color-text dark:text-dark-color-text cursor-pointer shrink-0;
+  }
+  .container {
+    @apply w-full m-[0_auto] p-[0_12px] max-w-[1024px];
   }
 }

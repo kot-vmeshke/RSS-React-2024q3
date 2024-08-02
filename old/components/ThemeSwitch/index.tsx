@@ -1,1 +1,1 @@
-export { ThemeSwitch } from './ThemeSwitch';
+export { ThemeSwitch } from '../../../src/components/ThemeSwitch';

@@ -4,9 +4,9 @@ import { FC, useEffect, useState } from 'react';
 import {
   removeAllBooksFromSelected,
   removeBookFromSelected,
-} from '../../store/selectedBooksSlice';
+} from '../../old/store/selectedBooksSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { RootState } from '../../old/store/store';
 
 const FlyingList: FC = () => {
   const [url, setUrl] = useState<string>('');

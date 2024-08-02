@@ -1,8 +1,8 @@
 // import './Main.scss';
-import { BooksList } from '../BooksList';
+import { BooksList } from '../../old/components/BooksList';
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Pagination } from '../Pagination';
+import { Pagination } from '../../old/components/Pagination';
 
 const Main: FC = () => {
   return (

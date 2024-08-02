@@ -14,6 +14,10 @@ export default {
       'color-bg-dark': '#d9d9d9',
       'color-bg-medium': '#ebebeb',
       'color-bg-light': '#ffffff',
+      'dark-color-text': '#ffffff',
+      'dark-color-bg-dark': '#5c5c5c',
+      'dark-color-bg-medium': '#4d4c4c',
+      'dark-color-bg-light': '#1f1f1f',
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
@@ -21,4 +25,5 @@ export default {
     extend: {},
   },
   plugins: [],
+  darkMode: 'selector',
 };

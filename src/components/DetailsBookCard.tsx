@@ -1,9 +1,9 @@
 // import './DetailsBookCard.scss';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { FC } from 'react';
-import { Loader } from '../Loader/Loader';
+import { Loader } from './Loader';
 import { Person } from '../../../types';
-import { apiSlice } from '../../store/apiSlice';
+import { apiSlice } from '../../old/store/apiSlice';
 import defaultCover from '../../assets/no-cover.jpg';
 import readIcon from '../../assets/share-03.svg';
 
