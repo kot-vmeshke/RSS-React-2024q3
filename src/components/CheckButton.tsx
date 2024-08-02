@@ -8,7 +8,7 @@ import { Book } from '../../../types';
 import { FC } from 'react';
 import { RootState } from '../../store/store';
 import { apiSlice } from '../../store/apiSlice';
-import { useLocalStorage } from '../../old/hooks/useLocalStorage';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useSearchParams } from 'react-router-dom';
 
 interface CheckButtonProps {

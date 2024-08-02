@@ -4,8 +4,6 @@ export default {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-
-    // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -18,6 +16,7 @@ export default {
       'dark-color-bg-dark': '#5c5c5c',
       'dark-color-bg-medium': '#4d4c4c',
       'dark-color-bg-light': '#1f1f1f',
+      transparent: 'transparent',
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],

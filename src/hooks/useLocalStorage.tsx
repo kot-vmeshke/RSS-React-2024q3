@@ -4,9 +4,13 @@ export const useLocalStorage = (): [
   string,
   Dispatch<SetStateAction<string>>,
 ] => {
-  const [searchString, setSearchString] = useState<string>(
-    localStorage.getItem('books-search') || ''
-  );
+  const [searchString, setSearchString] = useState<string>('');
+
+  useEffect(() => {
+    const value = localStorage.getItem('books-search') || '';
+    setSearchString(value);
+  }, []);
+
 
   useEffect(() => {
     localStorage.setItem('books-search', searchString);

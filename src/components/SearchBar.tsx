@@ -1,15 +1,13 @@
-// import './SearchBar.scss';
 import { FC, FormEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { SearchBarProps } from '../../../types';
-import SearchIcon from '../../assets/search-sm.svg';
-import { updateSearchString } from '../../store/searchSlice';
-import { useLocalStorage } from '../../old/hooks/useLocalStorage';
-import { useSearchParams } from 'react-router-dom';
+import Image from 'next/image';
+import { RootState } from '../store/store';
+import { SearchBarProps } from '../types';
+import SearchIcon from '../assets/search-sm.svg';
+import { updateSearchString } from '../store/searchSlice';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const SearchBar: FC<SearchBarProps> = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [, setQuery] = useLocalStorage();
   const searchString = useSelector(
     (state: RootState) => state.search.searchString
@@ -23,15 +21,16 @@ const SearchBar: FC<SearchBarProps> = () => {
       const queryString = inputRef.current.value;
       setQuery(queryString);
       dispatch(updateSearchString(queryString));
-      searchParams.set('search', `${queryString}`);
-      setSearchParams(searchParams);
     }
   };
 
   return (
-    <form className="search" onSubmit={handleSubmit}>
+    <form
+      className="flex w-full max-w-[494px] p-[4px] pl-[16px] rounded-[40px] bg-color-bg-light dark:bg-dark-color-bg-light has-[:focus-visible]:outline-color-text has-[:focus-visible]:outline has-[:focus-visible]:outline-[1px] dark:has-[:focus-visible]:outline-dark-color-text"
+      onSubmit={handleSubmit}
+    >
       <input
-        className="search__input"
+        className="w-full border-none text-color-text dark:text-dark-color-text font-light text-[14px] focus-visible:outline-none placeholder:opacity-40 dark:placeholder:opacity-60 bg-transparent autofill:bg-transparent autofill:text-[#000000_!important] dark:autofill:text-[#ffffff_!important]  autofill:shadow-[0_0_0px_1000px_#ffffff_inset_!important] dark:autofill:shadow-[0_0_0px_1000px_#1f1f1f_inset_!important]"
         type="text"
         name="search"
         id="search"
@@ -39,8 +38,11 @@ const SearchBar: FC<SearchBarProps> = () => {
         defaultValue={searchString}
         ref={inputRef}
       />
-      <button className="search__button" type="submit">
-        <img src={SearchIcon} alt="" width={20} />
+      <button
+        className="flex items-center justify-center p-[6px] border-none rounded-[32px] bg-color-bg-dark dark:bg-dark-color-bg-dark flex-shrink-0 cursor-pointer"
+        type="submit"
+      >
+        <Image src={SearchIcon} alt="" width={20} />
       </button>
     </form>
   );

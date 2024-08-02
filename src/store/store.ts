@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { apiSlice } from './apiSlice';
+import { createWrapper } from 'next-redux-wrapper';
 import searchReduser from './searchSlice';
 import selectedBooksReduser from './selectedBooksSlice';
 
@@ -29,4 +30,19 @@ export const setupStore = (preloadedState?: Partial<RootState>) => {
 };
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppStore = ReturnType<typeof setupStore>;
+// export type AppStore = ReturnType<typeof setupStore>;
+
+const makeStore = () =>
+  configureStore({
+    reducer: {
+      search: searchReduser,
+    },
+    devTools: true,
+  });
+
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];
+
+export const wrapper = createWrapper<AppStore>(makeStore);
+
