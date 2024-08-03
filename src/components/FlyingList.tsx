@@ -1,18 +1,15 @@
-// import './FlyingList.scss';
-import { Book, Person } from '../../../types';
+import { Book, Person } from '../types';
 import { FC, useEffect, useState } from 'react';
 import {
   removeAllBooksFromSelected,
   removeBookFromSelected,
-} from '../../old/store/selectedBooksSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../old/store/store';
+} from '../store/selectedBooksSlice';
+import { useAppSelector } from '../store/store';
+import { useDispatch} from 'react-redux';
 
 const FlyingList: FC = () => {
   const [url, setUrl] = useState<string>('');
-  const selectedBooks: Book[] = useSelector(
-    (state: RootState) => state.selectedBooks
-  );
+  const selectedBooks: Book[] = useAppSelector((state) => state.selectedBooks);
   const dispatch = useDispatch();
 
   const handleDeselectAllClick = () => {
@@ -54,21 +51,29 @@ const FlyingList: FC = () => {
   }, [selectedBooks]);
 
   return (
-    <div className={`fly ${selectedBooks.length ? 'fly_visible' : ''}`}>
+    <div
+      className={`fixed bottom-[48px] right-[48px] w-[400px] p-[24px] rounded-[16px] font-medium text-[18px] text-color-text dark:text-dark-color-text bg-color-bg-dark dark:bg-dark-color-bg-dark ${selectedBooks.length ? 'block' : 'hidden'}`}
+    >
       {selectedBooks.length} items selected:
-      <ul>
+      <ul className="w-full h-auto max-h-[300px] m-[20px_0_0] font-normal text-[14px] overflow-y-auto mask scrollbar-none">
         {selectedBooks.map((item: Book) => (
-          <li key={item.id}>
+          <li
+            key={item.id}
+            className="flex items-center justify-start gap-[24px] w-full [&:not(:last-child)]:mb-[14px] last:mb-[40px]"
+          >
             {item.title}
-            <button onClick={() => dispatch(removeBookFromSelected(item.id))}>
+            <button
+              className="inline-block ml-auto shrink-0 px-[8px] py-[4px] rounded-[40px] border border-color-bg-light dark:border-dark-color-bg-light border-solid bg-transparent text-color-text dark:text-dark-color-text"
+              onClick={() => dispatch(removeBookFromSelected(item.id))}
+            >
               Unselect
             </button>
           </li>
         ))}
       </ul>
-      <div className="fly__controls">
+      <div className="flex items-center justify-center gap-[16px]">
         <button
-          className="main-button main-button_bordered"
+          className="main-button m-[24px_auto_0] border border-color-bg-light dark:border-dark-color-bg-light text-[14px] bg-transparent"
           onClick={handleDeselectAllClick}
           data-testid="unselect-all"
         >
@@ -77,7 +82,7 @@ const FlyingList: FC = () => {
         <a
           href={url}
           title="Download CSV"
-          className="main-button"
+          className="main-button m-[24px_auto_0] border border-color-bg-light dark:border-dark-color-bg-light text-[14px] bg-color-bg-light dark:bg-dark-color-bg-light"
           download={`${selectedBooks.length}_books.csv`}
         >
           Download

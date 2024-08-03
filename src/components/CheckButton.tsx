@@ -2,29 +2,19 @@
 import {
   addBookToSelected,
   removeBookFromSelected,
-} from '../../store/selectedBooksSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { Book } from '../../../types';
+} from '../store/selectedBooksSlice';
+import { Book } from '../types';
 import { FC } from 'react';
-import { RootState } from '../../store/store';
-import { apiSlice } from '../../store/apiSlice';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '../store/store';
+import { useDispatch } from 'react-redux';
 
 interface CheckButtonProps {
   bookId: number;
 }
 
 const CheckButton: FC<CheckButtonProps> = ({ bookId }) => {
-  const selectedBooks: Book[] = useSelector(
-    (state: RootState) => state.selectedBooks
-  );
-  const [searchParams] = useSearchParams();
-  const [searchString] = useLocalStorage();
-  const { data } = apiSlice.useGetBooksQuery({
-    str: searchString,
-    page: searchParams.get('page') || '1',
-  });
+  const selectedBooks: Book[] = useAppSelector((state) => state.selectedBooks);
+  const books = useAppSelector((state) => state.books);
 
   const isSelected: boolean = Boolean(
     selectedBooks.find((item) => item.id === bookId)
@@ -33,26 +23,29 @@ const CheckButton: FC<CheckButtonProps> = ({ bookId }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      dispatch(
-        addBookToSelected(data.results.find((item: Book) => item.id === bookId))
-      );
+      const book = books.find((item: Book) => item.id === bookId);
+      if (book) {
+        dispatch(addBookToSelected(book));
+      }
     } else {
       dispatch(removeBookFromSelected(bookId));
     }
   };
 
   return (
-    <div className="check-button-wrap">
+    <div className="absolute top-[16px] right-[16px] z-[100]">
       <input
         type="checkbox"
         checked={isSelected}
         id={`check-${bookId}`}
         onChange={handleChange}
         data-testid="checkbox"
+        className="hidden"
       />
       <label
         htmlFor={`check-${bookId}`}
         title={isSelected ? 'Remove from selected' : 'Add to selected'}
+        className="text-[12px] text-color-text dark:text-dark-color-text cursor-pointer"
       >
         {isSelected ? (
           <svg

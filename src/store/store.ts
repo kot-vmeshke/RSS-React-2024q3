@@ -3,13 +3,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import dataSlice from './dataSlice';
 import searchReduser from './searchSlice';
-//import selectedBooksReduser from './selectedBooksSlice';
+import selectedBooksReduser from './selectedBooksSlice';
 
 const makeStore = () =>
   configureStore({
     reducer: {
       search: searchReduser,
       books: dataSlice,
+      selectedBooks: selectedBooksReduser,
     },
     devTools: true,
   });
