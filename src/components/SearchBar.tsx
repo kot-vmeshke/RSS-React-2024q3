@@ -6,8 +6,10 @@ import { updateSearchString } from '../store/searchSlice';
 import { useAppSelector } from '../store/store';
 import { useDispatch } from 'react-redux';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useRouter } from 'next/router';
 
 const SearchBar: FC<SearchBarProps> = () => {
+  const router = useRouter();
   const [, setQuery] = useLocalStorage();
   const searchString = useAppSelector((state) => state.search.searchString);
 
@@ -20,6 +22,7 @@ const SearchBar: FC<SearchBarProps> = () => {
       const queryString = inputRef.current.value;
       setQuery(queryString);
       dispatch(updateSearchString(queryString));
+      router.push(`/?search=${queryString}`);
     }
   };
 

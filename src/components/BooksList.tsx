@@ -11,7 +11,7 @@ const BooksList: FC = () => {
       {books.length ? (
         books.map((book: Book) => <BookCard {...book} key={book.id} />)
       ) : (
-        <div className="col-span-1 text-center text-sm text-gray-600 opacity-70">
+        <div className="col-[1_/_-1] text-center text-[14px] text-color-text dark:text-dark-color-text opacity-70">
           Nothing was found
         </div>
       )}

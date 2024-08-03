@@ -12,7 +12,7 @@ const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
           {authors.map((author) => author.name).join(', ')}
         </span>
         <Link
-          href={`book/${id}`}
+          href={`/${id}`}
           className="mt-auto font-medium text-[20px] text-color-text dark:text-dark-color-text after:absolute after:inset-0 after:content-['']"
           data-testid="book"
         >

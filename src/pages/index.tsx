@@ -3,11 +3,17 @@ import { SearchPage } from '../components';
 import { setBooks } from '../store/dataSlice';
 import { useDispatch } from 'react-redux';
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context: {
+  query: { search: string; page: string };
+}) => {
+  const { search, page } = context.query;
   try {
-    const res = await fetch('https://gutendex.com/books', {
-      cache: 'no-cache',
-    });
+    const res = await fetch(
+      `https://gutendex.com/books?search=${search || ''}&page=${page || 1}`,
+      {
+        cache: 'no-cache',
+      }
+    );
     const data = await res.json();
     return { props: { data } };
   } catch (error) {
