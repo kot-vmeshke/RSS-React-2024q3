@@ -1,39 +1,23 @@
-// import './BooksList.scss';
-import { Book, BooksListProps } from '../types';
-import { BookCard } from './BookCard';
+import { Book } from '../types';
+//import { BookCard } from './BookCard';
 import { FC } from 'react';
-import { Loader } from './Loader';
-// import { RootState } from '../../store/store';
-// import { apiSlice } from '../../store/apiSlice';
-// import { useSearchParams } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
+import { useAppSelector } from '../store/store';
 
-const BooksList: FC<BooksListProps> = () => {
-  // const [searchParams] = useSearchParams();
-  // const searchString = useSelector(
-  //   (state: RootState) => state.search.searchString
-  // );
-  // const { data, isFetching } = apiSlice.useGetBooksQuery({
-  //   str: searchString,
-  //   page: searchParams.get('page') || '1',
-  // });
+
+const BooksList: FC = () => {
+  const books = useAppSelector((state) => state.books);
 
   return (
-    <>
-      {!isFetching ? (
-        <ul className="books-list">
-          {data.results.length ? (
-            data.results.map((book: Book) => (
-              <BookCard {...book} key={book.id} />
-            ))
-          ) : (
-            <div className="books-list__nothing">Nothing was found</div>
-          )}
-        </ul>
+    <ul className="books-list">
+      {books.length ? (
+        books.map((book: Book) => (
+          // <BookCard {...book} key={book.id} />
+          <span key={book.id}>{book.title}</span>
+        ))
       ) : (
-        <Loader />
+        <div className="books-list__nothing">Nothing was found</div>
       )}
-    </>
+    </ul>
   );
 };
 

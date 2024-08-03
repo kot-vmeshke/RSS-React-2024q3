@@ -1,8 +1,7 @@
-// import './Main.scss';
-import { BooksList } from '../../old/components/BooksList';
+
+import { BooksList } from './BooksList';
 import { FC } from 'react';
-import { Outlet } from 'react-router-dom';
-import { Pagination } from '../../old/components/Pagination';
+// import { Pagination } from './Pagination';
 
 const Main: FC = () => {
   return (
@@ -10,11 +9,9 @@ const Main: FC = () => {
       <div className="container main__container" data-testid="main-container">
         <div className="main__left">
           <BooksList />
-          <Pagination />
+          {/* <Pagination /> */}
         </div>
-        <div className="main__right">
-          <Outlet />
-        </div>
+        <div className="main__right">{/* <Outlet /> */}</div>
       </div>
     </main>
   );
