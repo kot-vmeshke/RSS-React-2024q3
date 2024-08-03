@@ -5,13 +5,16 @@ import { FC } from 'react';
 
 const Main: FC = () => {
   return (
-    <main className="main">
-      <div className="container main__container" data-testid="main-container">
-        <div className="main__left">
+    <main className="main p-[60px_0] flex-[1_1_100%]">
+      <div
+        className="container relative min-h-[100px] flex gap-[12px]"
+        data-testid="main-container"
+      >
+        <div className="w-full @container/main">
           <BooksList />
           {/* <Pagination /> */}
         </div>
-        <div className="main__right">{/* <Outlet /> */}</div>
+        <div className="main-right">{/* <Outlet /> */}</div>
       </div>
     </main>
   );

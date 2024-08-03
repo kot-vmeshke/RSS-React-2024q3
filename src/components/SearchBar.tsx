@@ -1,17 +1,16 @@
 import { FC, FormEvent, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
-import { RootState } from '../store/store';
 import { SearchBarProps } from '../types';
 import SearchIcon from '../assets/search-sm.svg';
 import { updateSearchString } from '../store/searchSlice';
+import { useAppSelector } from '../store/store';
+import { useDispatch } from 'react-redux';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const SearchBar: FC<SearchBarProps> = () => {
   const [, setQuery] = useLocalStorage();
-  const searchString = useSelector(
-    (state: RootState) => state.search.searchString
-  );
+  const searchString = useAppSelector((state) => state.search.searchString);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 

@@ -13,3 +13,24 @@
     @apply w-full m-[0_auto] p-[0_12px] max-w-[1024px];
   }
 }
+
+@layer utilities {
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .mask {
+    -webkit-mask-image: linear-gradient(black, black 85%, transparent);
+    mask-image: linear-gradient(black, black 85%, transparent);
+  }
+  .main-left {
+    container-type: inline-size;
+    container-name: main;
+  }
+  .main-right:has(.details) {
+    width: 100%;
+  }
+}
