@@ -1,6 +1,6 @@
 import type { InferGetServerSidePropsType } from 'next';
 import { SearchPage } from '../components';
-import { setBooks } from '../store/dataSlice';
+import { setData } from '../store/dataSlice';
 import { useDispatch } from 'react-redux';
 
 export const getServerSideProps = async (context: {
@@ -25,7 +25,7 @@ export default function Home({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const dispatch = useDispatch();
-  dispatch(setBooks(data.results));
+  dispatch(setData(data));
 
   return <SearchPage />;
 }

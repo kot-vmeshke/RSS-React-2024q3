@@ -1,8 +1,8 @@
 import { FC, FormEvent, useRef } from 'react';
+import { updatePage, updateSearchString } from '../store/searchSlice';
 import Image from 'next/image';
 import { SearchBarProps } from '../types';
 import SearchIcon from '../assets/search-sm.svg';
-import { updateSearchString } from '../store/searchSlice';
 import { useAppSelector } from '../store/store';
 import { useDispatch } from 'react-redux';
 import { useLocalStorage } from '../hooks/useLocalStorage';
@@ -22,7 +22,8 @@ const SearchBar: FC<SearchBarProps> = () => {
       const queryString = inputRef.current.value;
       setQuery(queryString);
       dispatch(updateSearchString(queryString));
-      router.push(`/?search=${queryString}`);
+      dispatch(updatePage('1'));
+      router.push({ query: { page: '1', search: queryString } });
     }
   };
 
@@ -37,7 +38,7 @@ const SearchBar: FC<SearchBarProps> = () => {
         name="search"
         id="search"
         placeholder="author name"
-        defaultValue={searchString}
+        defaultValue={router.query.search || searchString}
         ref={inputRef}
       />
       <button

@@ -1,7 +1,7 @@
 
 import { BooksList } from './BooksList';
 import { FC } from 'react';
-// import { Pagination } from './Pagination';
+import { Pagination } from './Pagination';
 
 const Main: FC = () => {
   return (
@@ -12,7 +12,7 @@ const Main: FC = () => {
       >
         <div className="w-full @container/main">
           <BooksList />
-          {/* <Pagination /> */}
+          <Pagination />
         </div>
         <div className="main-right">{/* <Outlet /> */}</div>
       </div>

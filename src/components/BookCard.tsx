@@ -6,7 +6,7 @@ import Link from 'next/link';
 const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
   return (
     <li>
-      <div className="relative flex flex-col items-start justify-start h-[100%] p-[16px] rounded-[16px] bg-color-bg-medium dark:bg-dark-color-bg-medium">
+      <div className="relative flex flex-col items-start justify-start h-[100%] p-[16px] rounded-[16px] bg-color-bg-medium dark:bg-dark-color-bg-medium self-top">
         <CheckButton bookId={id} />
         <span className="mb-[8px] pr-[40px] font-[300] text-[14px] text-color-text dark:text-dark-color-text">
           {authors.map((author) => author.name).join(', ')}

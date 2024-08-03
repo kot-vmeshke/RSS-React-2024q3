@@ -9,7 +9,7 @@ const makeStore = () =>
   configureStore({
     reducer: {
       search: searchReduser,
-      books: dataSlice,
+      data: dataSlice,
       selectedBooks: selectedBooksReduser,
     },
     devTools: true,

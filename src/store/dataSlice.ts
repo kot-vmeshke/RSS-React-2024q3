@@ -2,26 +2,35 @@ import { PayloadAction, UnknownAction, createSlice } from '@reduxjs/toolkit';
 import { Book } from '../types';
 import { HYDRATE } from 'next-redux-wrapper';
 
-const initialState: Book[] = [];
+interface Data {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Book[];
+}
+
+const initialState: Data = {
+  count: 0,
+  next: null,
+  previous: null,
+  results: []
+};
 
 const dataSlice = createSlice({
-  name: 'books',
+  name: 'data',
   initialState,
   reducers: {
-    setBooks(_state, action: PayloadAction<Book[]>) {
+    setData(_state, action: PayloadAction<Data>) {
       return action.payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(HYDRATE, (state, action: UnknownAction) => {
-      return {
-        ...state,
-        ...action.payload as Book[],
-      };
+    builder.addCase(HYDRATE, (_state, action: UnknownAction) => {
+      return action.payload as Data;
     });
   },
 });
 
-export const { setBooks } = dataSlice.actions;
+export const { setData } = dataSlice.actions;
 
 export default dataSlice.reducer;
