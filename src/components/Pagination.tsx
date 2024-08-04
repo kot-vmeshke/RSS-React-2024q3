@@ -23,6 +23,14 @@ const Pagination: FC<PaginationProps> = () => {
     router.events.on('routeChangeComplete', () => {
       setIsLoading(false);
     });
+    return () => {
+      router.events.off('routeChangeStart', () => {
+        setIsLoading(true);
+      });
+      router.events.off('routeChangeComplete', () => {
+        setIsLoading(false);
+      });
+    };
     // eslint-disable-next-line react-compiler/react-compiler
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

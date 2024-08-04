@@ -1,10 +1,10 @@
-import { FC, useContext } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 import { FlyingList } from './FlyingList';
 import { Header } from './Header';
 import { Main } from './Main';
 import { ThemeContext } from '../context/ThemeContext';
 
-const SearchPage: FC = () => {
+const SearchPage: FC<{children?: ReactNode}> = ({ children }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -12,6 +12,7 @@ const SearchPage: FC = () => {
       <Header />
       <Main />
       <FlyingList />
+      {children}
     </div>
   );
 };

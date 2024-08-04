@@ -26,7 +26,7 @@ export const ThemeContext = createContext<ContextType>(defaultContext);
 export const ThemeContextProvider: FC<ThemeContextProviderProps> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState('');
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     const value = localStorage.getItem('book-theme') || 'light';

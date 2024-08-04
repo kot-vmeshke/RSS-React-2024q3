@@ -1,4 +1,3 @@
-// import './CheckButton.scss';
 import {
   addBookToSelected,
   removeBookFromSelected,
