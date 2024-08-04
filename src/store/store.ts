@@ -5,7 +5,7 @@ import dataSlice from './dataSlice';
 import searchReduser from './searchSlice';
 import selectedBooksReduser from './selectedBooksSlice';
 
-const makeStore = () =>
+export const makeStore = () =>
   configureStore({
     reducer: {
       search: searchReduser,

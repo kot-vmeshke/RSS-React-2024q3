@@ -60,6 +60,7 @@ const FlyingList: FC = () => {
           <li
             key={item.id}
             className="flex items-center justify-start gap-[24px] w-full [&:not(:last-child)]:mb-[14px] last:mb-[40px]"
+            data-testid='selected-item'
           >
             {item.title}
             <button

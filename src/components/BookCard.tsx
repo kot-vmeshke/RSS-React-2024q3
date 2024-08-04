@@ -30,7 +30,7 @@ const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
         <Link
           href={`/${id}${queryString}`}
           className="mt-auto font-medium text-[20px] text-color-text dark:text-dark-color-text after:absolute after:inset-0 after:content-['']"
-          data-testid="book"
+          data-testid={`book`}
         >
           {title}
         </Link>

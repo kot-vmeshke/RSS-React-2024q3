@@ -26,6 +26,6 @@
     "./dist/types/**/*.ts",
     "./next-env.d.ts",
     "old/App.tsx"
-  ],
+, "tests/utils/mockStore.tsx"  ],
   "exclude": ["./node_modules", "./old"]
 }

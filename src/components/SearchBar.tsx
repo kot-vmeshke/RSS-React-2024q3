@@ -45,7 +45,7 @@ const SearchBar: FC<SearchBarProps> = () => {
         className="flex items-center justify-center p-[6px] border-none rounded-[32px] bg-color-bg-dark dark:bg-dark-color-bg-dark flex-shrink-0 cursor-pointer"
         type="submit"
       >
-        <Image src={SearchIcon} alt="" width={20} />
+        <Image src={SearchIcon} alt="" width={20} height={20}/>
       </button>
     </form>
   );

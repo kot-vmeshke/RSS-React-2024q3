@@ -48,11 +48,17 @@ const Pagination: FC<PaginationProps> = () => {
           data-testid="pagination"
         >
           <button
-            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.previous ? '' : 'pointer-events-none opacity-10'}`}
+            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.previous ? '' : 'pointer-events-none opacity-10 pagination__arrow_disabled'}`}
             onClick={() => updatePageNumber(+(page ?? 1) - 1)}
             data-testid="prev"
           >
-            <Image src={arrowPrev} alt="" className="dark:invert-[100%]" />
+            <Image
+              src={arrowPrev}
+              alt=""
+              className="dark:invert-[100%]"
+              width={32}
+              height={32}
+            />
           </button>
           <div
             className="flex items-center justify-center w-auto h-[32px] shrink-0 border-0 bg-color-bg-medium dark:bg-dark-color-bg-medium text-[18px] px-[16px] py-[8px] rounded-[32px] text-color-text dark:text-dark-color-text"
@@ -61,11 +67,17 @@ const Pagination: FC<PaginationProps> = () => {
             {page ?? 1} of {data.count > 32 ? Math.round(data.count / 32) : 1}
           </div>
           <button
-            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.next ? '' : 'pointer-events-none opacity-10'}`}
+            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.next ? '' : 'pointer-events-none opacity-10 pagination__arrow_disabled'}`}
             onClick={() => updatePageNumber(+(page ?? 1) + 1)}
             data-testid="next"
           >
-            <Image src={arrowNext} alt="" className="dark:invert-[100%]" />
+            <Image
+              src={arrowNext}
+              alt=""
+              className="dark:invert-[100%]"
+              width={32}
+              height={32}
+            />
           </button>
         </div>
       )}
