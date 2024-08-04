@@ -1,6 +1,5 @@
-
 import { BooksList } from './BooksList';
-import { FC } from 'react';
+import { FC} from 'react';
 import { Pagination } from './Pagination';
 
 const Main: FC = () => {
@@ -14,7 +13,7 @@ const Main: FC = () => {
           <BooksList />
           <Pagination />
         </div>
-        <div className="main-right">{/* <Outlet /> */}</div>
+        <div className="main-right"></div>
       </div>
     </main>
   );

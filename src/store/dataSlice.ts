@@ -2,7 +2,7 @@ import { PayloadAction, UnknownAction, createSlice } from '@reduxjs/toolkit';
 import { Book } from '../types';
 import { HYDRATE } from 'next-redux-wrapper';
 
-interface Data {
+export interface Data {
   count: number;
   next: string | null;
   previous: string | null;

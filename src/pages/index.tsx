@@ -1,11 +1,9 @@
-import type { InferGetServerSidePropsType } from 'next';
+import { Data, setData } from '../store/dataSlice';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { SearchPage } from '../components';
-import { setData } from '../store/dataSlice';
 import { useDispatch } from 'react-redux';
 
-export const getServerSideProps = async (context: {
-  query: { search: string; page: string };
-}) => {
+export const getServerSideProps = (async (context) => {
   const { search, page } = context.query;
   try {
     const res = await fetch(
@@ -14,12 +12,22 @@ export const getServerSideProps = async (context: {
         cache: 'no-cache',
       }
     );
-    const data = await res.json();
-    return { props: { data } };
+    const data: Data = await res.json();
+    return { props: { data: data } };
   } catch (error) {
     console.error(error);
+    return {
+      props: {
+        data: {
+          count: 0,
+          next: null,
+          previous: null,
+          results: [],
+        },
+      },
+    };
   }
-};
+}) satisfies GetServerSideProps<{ data: Data }>;
 
 export default function Home({
   data,

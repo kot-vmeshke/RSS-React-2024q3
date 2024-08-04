@@ -14,7 +14,7 @@ interface CheckButtonProps {
 
 const CheckButton: FC<CheckButtonProps> = ({ bookId }) => {
   const selectedBooks: Book[] = useAppSelector((state) => state.selectedBooks);
-  const books = useAppSelector((state) => state.books);
+  const { results: books } = useAppSelector((state) => state.data);
 
   const isSelected: boolean = Boolean(
     selectedBooks.find((item) => item.id === bookId)

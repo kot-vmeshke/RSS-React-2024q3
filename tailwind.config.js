@@ -23,7 +23,16 @@ export default {
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        loading: {
+          to: { backgroundSize: '100% 1px' },
+        },
+      },
+      animation: {
+        loading: 'loading 2s linear infinite',
+      },
+    },
   },
   plugins: [containerQueries],
   darkMode: 'selector',

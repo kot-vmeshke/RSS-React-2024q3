@@ -1,18 +1,12 @@
+import { DetailsProps } from '../pages/[slug]';
 import { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Person } from '../types';
 import defaultCover from '../assets/no-cover.jpg';
 import readIcon from '../assets/share-03.svg';
-import { useAppSelector } from '../store/store';
-import { useRouter } from 'next/router';
 
-const DetailsBookCard: FC = () => {
-  const router = useRouter();
-  const bookId = router.query.slug;
-
-  const books = useAppSelector((state) => state.books);
-  const book = books.find(item => item.id == Number(bookId));
+const DetailsBookCard: FC<DetailsProps> = ({book}) => {
 
   return (
     <div className="details" data-testid="details">
@@ -40,6 +34,7 @@ const DetailsBookCard: FC = () => {
             alt=""
             width={216}
             height={150}
+            priority={true}
           />
         </div>
         <h3 className="details__name">{book!.title}</h3>

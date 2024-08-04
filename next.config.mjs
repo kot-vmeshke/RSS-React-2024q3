@@ -2,7 +2,14 @@
 const nextConfig = {
   distDir: './dist',
   images: {
-    domains: ['www.gutenberg.org'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.gutenberg.org',
+        port: '',
+        pathname: '/**/**',
+      },
+    ],
   },
 };
 
