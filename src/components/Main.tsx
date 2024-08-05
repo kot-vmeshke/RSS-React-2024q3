@@ -1,8 +1,10 @@
+'use client';
+
 import { BooksList } from './BooksList';
 import { FC } from 'react';
 import { Pagination } from './Pagination';
 
-const Main: FC = ( ) => {
+const Main: FC = () => {
   return (
     <main className="main p-[60px_0] flex-[1_1_100%]">
       <div

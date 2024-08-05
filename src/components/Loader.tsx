@@ -1,3 +1,5 @@
+'use client';
+
 const Loader = () => {
   return (
     <div className="abcolute inset-0 flex items-center justify-center text-color-text dark:text-dark-color-text">

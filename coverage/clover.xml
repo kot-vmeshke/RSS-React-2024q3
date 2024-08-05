@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1722814769919" clover="3.2.0">
-  <project timestamp="1722814769920" name="All files">
+<coverage generated="1722846873247" clover="3.2.0">
+  <project timestamp="1722846873247" name="All files">
     <metrics statements="881" coveredstatements="753" conditionals="103" coveredconditionals="82" methods="48" coveredmethods="40" elements="1032" coveredelements="875" complexity="0" loc="881" ncloc="881" packages="6" files="28" classes="28"/>
     <package name="RSS-React-2024q3">
       <metrics statements="61" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>

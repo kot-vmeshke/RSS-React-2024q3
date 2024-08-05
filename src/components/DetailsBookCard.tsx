@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useEffect, useState } from 'react';
 import { DetailsProps } from '../pages/[slug]';
 import Image from 'next/image';
@@ -10,19 +12,19 @@ import { useRouter } from 'next/router';
 const DetailsBookCard: FC<DetailsProps> = ({ book }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [queryString, setQueryString] = useState('');
-  const router = useRouter();
-  const query = router.query;
+  // const router = useRouter();
+  // const query = router.query;
 
-  useEffect(() => {
-    if (Object.keys(query).filter((key) => key !== 'slug').length) {
-      const temp = [];
-      for (const key in query) {
-        if (key !== 'slug') temp.push(`${key}=${query[key]}`);
-      }
-      const string = temp.join('&');
-      setQueryString('?' + string);
-    }
-  }, [query]);
+  // useEffect(() => {
+  //   if (Object.keys(query).filter((key) => key !== 'slug').length) {
+  //     const temp = [];
+  //     for (const key in query) {
+  //       if (key !== 'slug') temp.push(`${key}=${query[key]}`);
+  //     }
+  //     const string = temp.join('&');
+  //     setQueryString('?' + string);
+  //   }
+  // }, [query]);
 
   return (
     <>

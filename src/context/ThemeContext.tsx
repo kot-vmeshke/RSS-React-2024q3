@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Dispatch,
   FC,
@@ -26,10 +28,15 @@ export const ThemeContext = createContext<ContextType>(defaultContext);
 export const ThemeContextProvider: FC<ThemeContextProviderProps> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('');
 
   useEffect(() => {
-    const value = localStorage.getItem('book-theme') || 'light';
+    console.log(document.cookie);
+    const cookieValue = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('book-theme='))
+      ?.split('=')[1];
+    const value = cookieValue || 'light';
     setTheme(value);
   }, []);
 

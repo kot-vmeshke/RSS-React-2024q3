@@ -1,3 +1,5 @@
+'use client';
+
 import { Book, Person } from '../types';
 import { FC, useEffect, useState } from 'react';
 import {
@@ -5,7 +7,7 @@ import {
   removeBookFromSelected,
 } from '../store/selectedBooksSlice';
 import { useAppSelector } from '../store/store';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const FlyingList: FC = () => {
   const [url, setUrl] = useState<string>('');
@@ -60,7 +62,7 @@ const FlyingList: FC = () => {
           <li
             key={item.id}
             className="flex items-center justify-start gap-[24px] w-full [&:not(:last-child)]:mb-[14px] last:mb-[40px]"
-            data-testid='selected-item'
+            data-testid="selected-item"
           >
             {item.title}
             <button

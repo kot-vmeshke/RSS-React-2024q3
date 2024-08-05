@@ -21,3 +21,5 @@ export type AppDispatch = AppStore['dispatch'];
 
 export const wrapper = createWrapper<AppStore>(makeStore);
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
+
+export const store = makeStore();

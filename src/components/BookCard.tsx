@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useEffect, useState } from 'react';
 import { Book } from '../types';
 import { CheckButton } from './CheckButton';
@@ -5,20 +7,20 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
-  const [queryString, setQueryString] = useState('');
-  const router = useRouter();
-  const query = router.query;
+  // const [queryString, setQueryString] = useState('');
+  // const router = useRouter();
+  // const query = router.query;
 
-  useEffect(() => {
-    if (Object.keys(query).length) {
-      const temp = [];
-      for (const key in query) {
-        temp.push(`${key}=${query[key]}`);
-      }
-      const string = temp.join('&');
-      setQueryString('?' + string);
-    }
-  }, [query]);
+  // useEffect(() => {
+  //   if (Object.keys(query).length) {
+  //     const temp = [];
+  //     for (const key in query) {
+  //       temp.push(`${key}=${query[key]}`);
+  //     }
+  //     const string = temp.join('&');
+  //     setQueryString('?' + string);
+  //   }
+  // }, [query]);
 
   return (
     <li>
@@ -28,7 +30,7 @@ const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
           {authors.map((author) => author.name).join(', ')}
         </span>
         <Link
-          href={`/${id}${queryString}`}
+          href={`/${id}`}
           className="mt-auto font-medium text-[20px] text-color-text dark:text-dark-color-text after:absolute after:inset-0 after:content-['']"
           data-testid={`book`}
         >

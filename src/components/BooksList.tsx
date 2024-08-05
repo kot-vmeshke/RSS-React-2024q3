@@ -1,34 +1,17 @@
+'use client';
+
 import { FC, useEffect, useState } from 'react';
 import { Book } from '../types';
 import { BookCard } from './BookCard';
 import { Loader } from './Loader';
 import { useAppSelector } from '../store/store';
-import { useRouter } from 'next/router';
 
 const BooksList: FC = () => {
   const { results: books } = useAppSelector((state) => state.data);
   const [isLoading, setIsLoading] = useState(true);
 
-  const router = useRouter();
-
   useEffect(() => {
     setIsLoading(false);
-    router.events.on('routeChangeStart', () => {
-      setIsLoading(true);
-    });
-    router.events.on('routeChangeComplete', () => {
-      setIsLoading(false);
-    });
-    return () => {
-      router.events.off('routeChangeStart', () => {
-        setIsLoading(true);
-      });
-      router.events.off('routeChangeComplete', () => {
-        setIsLoading(false);
-      });
-    };
-    // eslint-disable-next-line react-compiler/react-compiler
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

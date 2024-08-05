@@ -1,3 +1,5 @@
+'use client';
+
 import { ChangeEvent, FC, useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 
@@ -6,7 +8,7 @@ const ThemeSwitch: FC = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTheme(e.target.value);
-    localStorage.setItem('book-theme', e.target.value);
+    document.cookie = `book-theme=${e.target.value};`;
   };
 
   return (

@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, FormEvent, useRef } from 'react';
 import { updatePage, updateSearchString } from '../store/searchSlice';
 import Image from 'next/image';
@@ -6,10 +8,9 @@ import SearchIcon from '../assets/search-sm.svg';
 import { useAppSelector } from '../store/store';
 import { useDispatch } from 'react-redux';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { useRouter } from 'next/router';
 
 const SearchBar: FC<SearchBarProps> = () => {
-  const router = useRouter();
+
   const [, setQuery] = useLocalStorage();
   const searchString = useAppSelector((state) => state.search.searchString);
 
@@ -23,7 +24,6 @@ const SearchBar: FC<SearchBarProps> = () => {
       setQuery(queryString);
       dispatch(updateSearchString(queryString));
       dispatch(updatePage('1'));
-      router.push({ query: { page: '1', search: queryString } });
     }
   };
 
@@ -38,14 +38,14 @@ const SearchBar: FC<SearchBarProps> = () => {
         name="search"
         id="search"
         placeholder="author name"
-        defaultValue={router.query.search || searchString}
+        defaultValue={searchString}
         ref={inputRef}
       />
       <button
         className="flex items-center justify-center p-[6px] border-none rounded-[32px] bg-color-bg-dark dark:bg-dark-color-bg-dark flex-shrink-0 cursor-pointer"
         type="submit"
       >
-        <Image src={SearchIcon} alt="" width={20} height={20}/>
+        <Image src={SearchIcon} alt="" width={20} height={20} />
       </button>
     </form>
   );

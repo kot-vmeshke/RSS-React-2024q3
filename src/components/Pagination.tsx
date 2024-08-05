@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { PaginationProps } from '../types';
@@ -10,34 +12,38 @@ import { useRouter } from 'next/router';
 
 const Pagination: FC<PaginationProps> = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
+
   const { page } = useAppSelector((state) => state.search);
   const data = useAppSelector((state) => state.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(false);
-    router.events.on('routeChangeStart', () => {
-      setIsLoading(true);
-    });
-    router.events.on('routeChangeComplete', () => {
-      setIsLoading(false);
-    });
-    return () => {
-      router.events.off('routeChangeStart', () => {
-        setIsLoading(true);
-      });
-      router.events.off('routeChangeComplete', () => {
-        setIsLoading(false);
-      });
-    };
-    // eslint-disable-next-line react-compiler/react-compiler
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect(() => {
+  //   setIsLoading(false);
+  //   router.events.on('routeChangeStart', () => {
+  //     setIsLoading(true);
+  //   });
+  //   router.events.on('routeChangeComplete', () => {
+  //     setIsLoading(false);
+  //   });
+  //   return () => {
+  //     router.events.off('routeChangeStart', () => {
+  //       setIsLoading(true);
+  //     });
+  //     router.events.off('routeChangeComplete', () => {
+  //       setIsLoading(false);
+  //     });
+  //   };
+  //   // eslint-disable-next-line react-compiler/react-compiler
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const updatePageNumber = (page: number) => {
     dispatch(updatePage(`${page}`));
-    router.push({ query: { ...router.query, page: page } });
+    // router.push({ query: { ...router.query, page: page } });
   };
 
   return (
