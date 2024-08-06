@@ -8,7 +8,6 @@ const ThemeSwitch: FC = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTheme(e.target.value);
-    document.cookie = `book-theme=${e.target.value};`;
   };
 
   return (

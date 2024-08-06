@@ -8,8 +8,10 @@ import SearchIcon from '../assets/search-sm.svg';
 import { useAppSelector } from '../store/store';
 import { useDispatch } from 'react-redux';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useRouter } from 'next/navigation';
 
 const SearchBar: FC<SearchBarProps> = () => {
+  const router = useRouter();
 
   const [, setQuery] = useLocalStorage();
   const searchString = useAppSelector((state) => state.search.searchString);
@@ -24,6 +26,10 @@ const SearchBar: FC<SearchBarProps> = () => {
       setQuery(queryString);
       dispatch(updateSearchString(queryString));
       dispatch(updatePage('1'));
+      const url = new URL(window.location.href);
+      url.searchParams.set('page', '1');
+      url.searchParams.set('search', `${queryString}`);
+      router.replace(`${url}`);
     }
   };
 

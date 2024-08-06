@@ -6,7 +6,6 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
-  useEffect,
   useState,
 } from 'react';
 
@@ -28,17 +27,7 @@ export const ThemeContext = createContext<ContextType>(defaultContext);
 export const ThemeContextProvider: FC<ThemeContextProviderProps> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState('');
-
-  useEffect(() => {
-    console.log(document.cookie);
-    const cookieValue = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('book-theme='))
-      ?.split('=')[1];
-    const value = cookieValue || 'light';
-    setTheme(value);
-  }, []);
+  const [theme, setTheme] = useState('light');
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

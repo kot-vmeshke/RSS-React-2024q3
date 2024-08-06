@@ -22,8 +22,19 @@ const getData = async (search: string, page: string) => {
   }
 };
 
-export default async function Home() {
-  const data = await getData('', '1');
-
-  return <SearchPage data={data}/>;
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  const data = await getData(
+    searchParams.search || '',
+    searchParams.page || '1'
+  );
+  console.log(searchParams);
+  return (
+    <>
+      <SearchPage data={data} />
+    </>
+  );
 }

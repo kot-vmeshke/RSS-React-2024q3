@@ -1,7 +1,6 @@
-'use client';
+import { Book } from '../../types';
 import { DetailsBookCard } from '../../components';
 import { FC } from 'react';
-import { usePathname } from 'next/navigation';
 
 const getBook = async (id: string) => {
   const res = await fetch(`https://gutendex.com/books/${id}`);
@@ -10,9 +9,24 @@ const getBook = async (id: string) => {
   return data;
 };
 
-const Details: FC = async () => {
-  const pathname = usePathname();
-  const book = await getBook(pathname?.replace('/', '') ?? '');
+export async function generateStaticParams() {
+  const {results: books} = await fetch('https://gutendex.com/books').then((res) =>
+    res.json()
+  );
+
+  return books.map((book: Book) => ({
+    id: `${book.id}`,
+  }));
+}
+
+interface DetailsProps {
+  params: {
+    id: string;
+  };
+}
+
+const Details: FC<DetailsProps> = async ({ params: { id } }) => {
+  const book = await getBook(id);
 
   return <DetailsBookCard book={book} />;
 };

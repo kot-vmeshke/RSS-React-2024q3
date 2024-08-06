@@ -8,10 +8,11 @@ import arrowPrev from '../assets/arrow-circle-broken-left.svg';
 import { updatePage } from '../store/searchSlice';
 import { useAppSelector } from '../store/store';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const Pagination: FC<PaginationProps> = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   const { page } = useAppSelector((state) => state.search);
   const data = useAppSelector((state) => state.data);
@@ -21,29 +22,11 @@ const Pagination: FC<PaginationProps> = () => {
     setIsLoading(false);
   }, []);
 
-  // useEffect(() => {
-  //   setIsLoading(false);
-  //   router.events.on('routeChangeStart', () => {
-  //     setIsLoading(true);
-  //   });
-  //   router.events.on('routeChangeComplete', () => {
-  //     setIsLoading(false);
-  //   });
-  //   return () => {
-  //     router.events.off('routeChangeStart', () => {
-  //       setIsLoading(true);
-  //     });
-  //     router.events.off('routeChangeComplete', () => {
-  //       setIsLoading(false);
-  //     });
-  //   };
-  //   // eslint-disable-next-line react-compiler/react-compiler
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   const updatePageNumber = (page: number) => {
     dispatch(updatePage(`${page}`));
-    // router.push({ query: { ...router.query, page: page } });
+      const url = new URL(window.location.href);
+      url.searchParams.set('page', `${page}`);
+      router.replace(`${url}`);
   };
 
   return (
@@ -54,7 +37,7 @@ const Pagination: FC<PaginationProps> = () => {
           data-testid="pagination"
         >
           <button
-            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.previous ? '' : 'pointer-events-none opacity-10 pagination__arrow_disabled'}`}
+            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.previous ? '' : 'pointer-events-none opacity-10 pagination__arrow_disabled'} opacity-50 hover:opacity-100`}
             onClick={() => updatePageNumber(+(page ?? 1) - 1)}
             data-testid="prev"
           >
@@ -73,7 +56,7 @@ const Pagination: FC<PaginationProps> = () => {
             {page ?? 1} of {data.count > 32 ? Math.round(data.count / 32) : 1}
           </div>
           <button
-            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.next ? '' : 'pointer-events-none opacity-10 pagination__arrow_disabled'}`}
+            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.next ? '' : 'pointer-events-none opacity-10 pagination__arrow_disabled'} opacity-50 hover:opacity-100`}
             onClick={() => updatePageNumber(+(page ?? 1) + 1)}
             data-testid="next"
           >
