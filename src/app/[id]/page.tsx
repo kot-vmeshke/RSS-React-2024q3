@@ -2,7 +2,7 @@ import { Book } from '../../types';
 import { DetailsBookCard } from '../../components';
 import { FC } from 'react';
 
-const getBook = async (id: string) => {
+export const getBook = async (id: string) => {
   const res = await fetch(`https://gutendex.com/books/${id}`);
   const data = await res.json();
 
@@ -10,8 +10,8 @@ const getBook = async (id: string) => {
 };
 
 export async function generateStaticParams() {
-  const {results: books} = await fetch('https://gutendex.com/books').then((res) =>
-    res.json()
+  const { results: books } = await fetch('https://gutendex.com/books').then(
+    (res) => res.json()
   );
 
   return books.map((book: Book) => ({
@@ -28,7 +28,11 @@ interface DetailsProps {
 const Details: FC<DetailsProps> = async ({ params: { id } }) => {
   const book = await getBook(id);
 
-  return <DetailsBookCard book={book} />;
+  return (
+    <>
+      <DetailsBookCard book={book} />
+    </>
+  );
 };
 
 export default Details;

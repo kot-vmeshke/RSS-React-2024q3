@@ -1,26 +1,10 @@
 import '@testing-library/jest-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
 import { BooksList } from '../src/components';
 import React from 'react';
 import { books } from './utils/constants';
 import { renderWithProvider } from './utils/mockStore';
-
-vi.mock('next/router', async (importOriginal) => {
-  const actual = await importOriginal();
-  return {
-    ...(actual as object),
-    useRouter: vi.fn().mockReturnValue({
-      query: {},
-      push: vi.fn(),
-      replace: vi.fn(),
-      events: {
-        on: vi.fn(),
-        off: vi.fn(),
-      },
-    }),
-  };
-});
 
 describe('BooksList', () => {
   it('Component renders the specified number of cards', async () => {

@@ -1,7 +1,7 @@
 import { Data } from '../store/dataSlice';
 import { SearchPage } from '../components';
 
-const getData = async (search: string, page: string) => {
+export const getData = async (search: string, page: string) => {
   try {
     const res = await fetch(
       `https://gutendex.com/books?search=${search || ''}&page=${page || 1}`,
@@ -31,7 +31,6 @@ export default async function Home({
     searchParams.search || '',
     searchParams.page || '1'
   );
-  console.log(searchParams);
   return (
     <>
       <SearchPage data={data} />

@@ -2,15 +2,15 @@ import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import dataSlice from './dataSlice';
-import searchReduser from './searchSlice';
-import selectedBooksReduser from './selectedBooksSlice';
+import searchReducer from './searchSlice';
+import selectedBooksReducer from './selectedBooksSlice';
 
 export const makeStore = () =>
   configureStore({
     reducer: {
-      search: searchReduser,
+      search: searchReducer,
       data: dataSlice,
-      selectedBooks: selectedBooksReduser,
+      selectedBooks: selectedBooksReducer,
     },
     devTools: true,
   });

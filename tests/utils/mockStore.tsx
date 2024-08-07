@@ -5,13 +5,13 @@ import { Provider } from 'react-redux';
 import type { RenderOptions } from '@testing-library/react';
 import dataSlice from '../../src/store/dataSlice';
 import { render } from '@testing-library/react';
-import searchReduser from '../../src/store/searchSlice';
-import selectedBooksReduser from '../../src/store/selectedBooksSlice';
+import searchReducer from '../../src/store/searchSlice';
+import selectedBooksReducer from '../../src/store/selectedBooksSlice';
 
 const rootReducer = combineReducers({
-  search: searchReduser,
+  search: searchReducer,
   data: dataSlice,
-  selectedBooks: selectedBooksReduser,
+  selectedBooks: selectedBooksReducer,
 });
 
 export const setupStore = (preloadedState?: Partial<AppState>) => {

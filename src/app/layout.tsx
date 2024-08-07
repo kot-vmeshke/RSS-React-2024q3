@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import { Metadata } from 'next';
-import { ReduxProvider } from '../store/redux-provider';
+import { ReduxProvider } from '../store/ReduxProvider';
 import { ThemeContextProvider } from '../context/ThemeContext';
 
 export const metadata: Metadata = {

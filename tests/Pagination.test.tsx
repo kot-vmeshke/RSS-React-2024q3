@@ -5,25 +5,7 @@ import { Pagination } from '../src/components';
 import React from 'react';
 import { renderWithProvider } from './utils/mockStore';
 import { updatePage } from '../src/store/searchSlice';
-import { useRouter } from 'next/router';
-
-vi.mock('next/router', async (importOriginal) => {
-  const actual = await importOriginal();
-  return {
-    ...(actual as object),
-    useRouter: vi.fn().mockReturnValue({
-      query: {
-        page: '1',
-      },
-      push: vi.fn(),
-      replace: vi.fn(),
-      events: {
-        on: vi.fn(),
-        off: vi.fn(),
-      },
-    }),
-  };
-});
+import { useSearchParams } from 'next/navigation';
 
 describe('Pagination', () => {
 
@@ -38,8 +20,8 @@ describe('Pagination', () => {
   it('Component updates page number in store', () => {
     renderWithProvider(<Pagination />);
     const dispatch = vi.fn();
-    const router = useRouter();
-    const { page } = router.query;
+    const searchParams = useSearchParams();
+    const page = searchParams.get('page')
 
     fireEvent.click(screen.getByTestId('next'));
     waitFor(() => {
@@ -48,3 +30,4 @@ describe('Pagination', () => {
   });
 
 });
+

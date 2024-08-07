@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.52% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>69/73</span>
+                <span class='fraction'>62/62</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.53% </span>
+                <span class="strong">78.57% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/13</span>
+                <span class='fraction'>11/14</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.52% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>69/73</span>
+                <span class='fraction'>62/62</span>
             </div>
         
             
@@ -140,18 +140,9 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -164,31 +155,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -239,7 +217,9 @@
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FC, useEffect, useState } from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use client';
+&nbsp;
+import { FC, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { PaginationProps } from '../types';
 import arrowNext from '../assets/arrow-circle-broken-right.svg';
@@ -247,38 +227,25 @@ import arrowPrev from '../assets/arrow-circle-broken-left.svg';
 import { updatePage } from '../store/searchSlice';
 import { useAppSelector } from '../store/store';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 &nbsp;
 const Pagination: FC&lt;PaginationProps&gt; = () =&gt; {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+&nbsp;
   const { page } = useAppSelector((state) =&gt; state.search);
   const data = useAppSelector((state) =&gt; state.data);
   const dispatch = useDispatch();
 &nbsp;
   useEffect(() =&gt; {
     setIsLoading(false);
-    router.events.on('routeChangeStart', () =&gt; {
-<span class="cstat-no" title="statement not covered" >      setIsLoading(true);</span>
-    });
-    router.events.on('routeChangeComplete', () =&gt; {
-<span class="cstat-no" title="statement not covered" >      setIsLoading(false);</span>
-    });
-    return () =&gt; {
-      router.events.off('routeChangeStart', () =&gt; {
-<span class="cstat-no" title="statement not covered" >        setIsLoading(true);</span>
-      });
-      router.events.off('routeChangeComplete', () =&gt; {
-<span class="cstat-no" title="statement not covered" >        setIsLoading(false);</span>
-      });
-    };
-    // eslint-disable-next-line react-compiler/react-compiler
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 &nbsp;
   const updatePageNumber = (page: number) =&gt; {
     dispatch(updatePage(`${page}`));
-    router.push({ query: { ...router.query, page: page } });
+      const url = new URL(window.location.href);
+      url.searchParams.set('page', `${page}`);
+      router.replace(`${url}`);
   };
 &nbsp;
   return (
@@ -289,7 +256,7 @@ const Pagination: FC&lt;PaginationProps&gt; = () =&gt; {
           data-testid="pagination"
         &gt;
           &lt;button
-            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.<span class="branch-0 cbranch-no" title="branch not covered" >previous ? '' : '</span>pointer-events-none opacity-10 pagination__arrow_disabled'}`}
+            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.<span class="branch-0 cbranch-no" title="branch not covered" >previous ? '' : '</span>pointer-events-none opacity-10 pagination__arrow_disabled'} opacity-50 hover:opacity-100`}
             onClick={<span class="fstat-no" title="function not covered" >() =&gt; updatePageNumber(+(page ?? 1) - 1)}</span>
             data-testid="prev"
           &gt;
@@ -305,10 +272,10 @@ const Pagination: FC&lt;PaginationProps&gt; = () =&gt; {
             className="flex items-center justify-center w-auto h-[32px] shrink-0 border-0 bg-color-bg-medium dark:bg-dark-color-bg-medium text-[18px] px-[16px] py-[8px] rounded-[32px] text-color-text dark:text-dark-color-text"
             data-testid="page-number"
           &gt;
-            {<span class="branch-0 cbranch-no" title="branch not covered" >page ?? 1} </span>of {data.count &gt; <span class="branch-0 cbranch-no" title="branch not covered" >32 ? Math.round(data.count / 32) : 1</span>}
+            {<span class="branch-0 cbranch-no" title="branch not covered" >page ?? 1} </span>of {data.count &gt; 32 ? Math.round(data.count / 32) : 1}
           &lt;/div&gt;
           &lt;button
-            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.<span class="branch-0 cbranch-no" title="branch not covered" >next ? '' : '</span>pointer-events-none opacity-10 pagination__arrow_disabled'}`}
+            className={`flex items-center justify-center w-[32px] h-[32px] shrink-0 border-0 bg-color-bg-light dark:bg-dark-color-bg-light rounded-[32px] ${data.next ? '' : 'pointer-events-none opacity-10 pagination__arrow_disabled'} opacity-50 hover:opacity-100`}
             onClick={() =&gt; updatePageNumber(+(<span class="branch-0 cbranch-no" title="branch not covered" >page ?? 1) + 1</span>)}
             data-testid="next"
           &gt;
@@ -334,7 +301,7 @@ export { Pagination };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-05T08:34:33.189Z
+                at 2024-08-07T23:56:56.869Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
