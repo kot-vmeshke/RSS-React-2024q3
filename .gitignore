@@ -23,8 +23,12 @@ dist-ssr
 *.sln
 *.sw?
 
+#Next
 .next
 next-env.d.ts
 dist
 
+#Vitest
 coverage
+./coverage
+/coverage
