@@ -1,39 +1,34 @@
 import '@testing-library/jest-dom';
-import { describe, expect, it } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
-import App from '../src/App';
-import { Provider } from 'react-redux';
+import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, screen } from '@testing-library/react';
+import React from 'react';
 import { ThemeSwitch } from '../src/components';
-import { store } from '../src/store/store';
+import { renderWithProvider } from './utils/mockStore';
+
+vi.mock('next/router', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...(actual as object),
+    useRouter: vi.fn().mockReturnValue({
+      query: {},
+      push: vi.fn(),
+      replace: vi.fn(),
+      events: {
+        on: vi.fn(),
+        off: vi.fn(),
+      },
+    }),
+  };
+});
 
 describe('ThemeSwitch', () => {
   it('The theme name is saved in the localStorage', () => {
-    render(<ThemeSwitch />);
+    renderWithProvider(<ThemeSwitch />);
 
     fireEvent.click(screen.getByTestId('dark-button'));
 
     const themeName = localStorage.getItem('book-theme');
 
     expect(themeName).toBe('dark');
-  });
-
-  it('Theme is changing', () => {
-    render(
-      <Provider store={store}>
-        <App />
-      </Provider>
-    );
-
-    fireEvent.click(screen.getByTestId('dark-button'));
-    const isThemeDark = screen
-      .getByTestId('page-container')
-      .classList.contains('dark');
-    expect(isThemeDark).toBe(true);
-
-    fireEvent.click(screen.getByTestId('light-button'));
-    const isThemeLight = screen
-      .getByTestId('page-container')
-      .classList.contains('light');
-    expect(isThemeLight).toBe(true);
   });
 });

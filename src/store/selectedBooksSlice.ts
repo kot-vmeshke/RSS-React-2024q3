@@ -1,5 +1,6 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Book } from '../types';
+import { PayloadAction, UnknownAction, createSlice } from '@reduxjs/toolkit';
+import { Book } from '../../src/types';
+import { HYDRATE } from 'next-redux-wrapper';
 
 const initialState: Book[] = [];
 
@@ -16,6 +17,11 @@ const selectedBooksSlice = createSlice({
     removeAllBooksFromSelected() {
       return initialState;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(HYDRATE, (_state, action: UnknownAction) => {
+      return action.payload as Book[];
+    });
   },
 });
 

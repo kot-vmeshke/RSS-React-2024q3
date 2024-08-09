@@ -1,12 +1,13 @@
+export { SearchPage } from './SearchPage';
+export { ErrorPage } from './ErrorPage';
 export { BookCard } from './BookCard';
 export { BooksList } from './BooksList';
+export { CheckButton } from './CheckButton';
 export { DetailsBookCard } from './DetailsBookCard';
-export { ErrorBoundary } from './ErrorBoundary';
+export { FlyingList } from './FlyingList';
 export { Header } from './Header';
 export { Loader } from './Loader';
 export { Main } from './Main';
 export { Pagination } from './Pagination';
 export { SearchBar } from './SearchBar';
 export { ThemeSwitch } from './ThemeSwitch';
-export { FlyingList } from './FlyingList';
-export { CheckButton } from './CheckButton';
