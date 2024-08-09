@@ -30,3 +30,4 @@ dist
 #Vitest
 ./coverage
 coverage
+/coverage
