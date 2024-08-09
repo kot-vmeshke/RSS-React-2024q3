@@ -11,7 +11,6 @@ export const useLocalStorage = (): [
     setSearchString(value);
   }, []);
 
-
   useEffect(() => {
     localStorage.setItem('books-search', searchString);
     return () => {

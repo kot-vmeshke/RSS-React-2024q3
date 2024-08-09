@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1723075016953" clover="3.2.0">
-  <project timestamp="1723075016954" name="All files">
-    <metrics statements="875" coveredstatements="772" conditionals="100" coveredconditionals="80" methods="50" coveredmethods="43" elements="1025" coveredelements="895" complexity="0" loc="875" ncloc="875" packages="7" files="30" classes="30"/>
+<coverage generated="1723232177217" clover="3.2.0">
+  <project timestamp="1723232177218" name="All files">
+    <metrics statements="891" coveredstatements="772" conditionals="102" coveredconditionals="80" methods="52" coveredmethods="43" elements="1045" coveredelements="895" complexity="0" loc="891" ncloc="891" packages="7" files="32" classes="32"/>
     <package name="RSS-React-2024q3">
       <metrics statements="61" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="next.config.mjs" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/next.config.mjs">
@@ -76,7 +76,7 @@
       </file>
     </package>
     <package name="RSS-React-2024q3.src.app">
-      <metrics statements="60" coveredstatements="52" conditionals="7" coveredconditionals="4" methods="4" coveredmethods="4"/>
+      <metrics statements="68" coveredstatements="52" conditionals="8" coveredconditionals="4" methods="5" coveredmethods="4"/>
       <file name="error.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/app/error.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -107,6 +107,17 @@
         <line num="21" count="2" type="stmt"/>
         <line num="23" count="2" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
+      </file>
+      <file name="loading.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/app/loading.tsx">
+        <metrics statements="8" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
       </file>
       <file name="page.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/app/page.tsx">
         <metrics statements="35" coveredstatements="27" conditionals="5" coveredconditionals="2" methods="2" coveredmethods="2"/>
@@ -148,17 +159,25 @@
       </file>
     </package>
     <package name="RSS-React-2024q3.src.app.[id]">
-      <metrics statements="31" coveredstatements="23" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
+      <metrics statements="36" coveredstatements="20" conditionals="4" coveredconditionals="3" methods="5" coveredmethods="3"/>
       <file name="layout.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/app/[id]/layout.tsx">
-        <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
+      </file>
+      <file name="loading.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/app/[id]/loading.tsx">
+        <metrics statements="8" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
       </file>
       <file name="page.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/app/[id]/page.tsx">
         <metrics statements="23" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="2"/>
@@ -188,7 +207,7 @@
       </file>
     </package>
     <package name="RSS-React-2024q3.src.components">
-      <metrics statements="585" coveredstatements="566" conditionals="69" coveredconditionals="55" methods="25" coveredmethods="22"/>
+      <metrics statements="589" coveredstatements="570" conditionals="69" coveredconditionals="55" methods="25" coveredmethods="22"/>
       <file name="BookCard.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/components/BookCard.tsx">
         <metrics statements="35" coveredstatements="35" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -205,14 +224,14 @@
         <line num="17" count="35" type="stmt"/>
         <line num="18" count="35" type="stmt"/>
         <line num="19" count="35" type="stmt"/>
-        <line num="20" count="35" type="stmt"/>
-        <line num="21" count="70" type="stmt"/>
+        <line num="20" count="70" type="stmt"/>
+        <line num="22" count="70" type="stmt"/>
         <line num="23" count="70" type="stmt"/>
         <line num="24" count="70" type="stmt"/>
         <line num="25" count="70" type="stmt"/>
         <line num="26" count="70" type="stmt"/>
-        <line num="27" count="70" type="stmt"/>
-        <line num="28" count="70" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="70" type="cond" truecount="1" falsecount="0"/>
+        <line num="28" count="70" type="stmt"/>
         <line num="29" count="70" type="stmt"/>
         <line num="30" count="70" type="stmt"/>
         <line num="31" count="70" type="stmt"/>
@@ -513,7 +532,7 @@
         <line num="18" count="4" type="stmt"/>
       </file>
       <file name="LinkWithParams.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/components/LinkWithParams.tsx">
-        <metrics statements="35" coveredstatements="35" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <metrics statements="36" coveredstatements="36" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -533,13 +552,13 @@
         <line num="22" count="6" type="stmt"/>
         <line num="23" count="6" type="stmt"/>
         <line num="24" count="6" type="stmt"/>
-        <line num="26" count="6" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
         <line num="27" count="6" type="stmt"/>
         <line num="28" count="6" type="stmt"/>
         <line num="29" count="6" type="stmt"/>
         <line num="30" count="6" type="stmt"/>
         <line num="31" count="6" type="stmt"/>
-        <line num="33" count="6" type="stmt"/>
+        <line num="32" count="6" type="stmt"/>
         <line num="34" count="6" type="stmt"/>
         <line num="35" count="6" type="stmt"/>
         <line num="36" count="6" type="stmt"/>
@@ -548,7 +567,8 @@
         <line num="39" count="6" type="stmt"/>
         <line num="40" count="6" type="stmt"/>
         <line num="41" count="6" type="stmt"/>
-        <line num="43" count="6" type="stmt"/>
+        <line num="42" count="6" type="stmt"/>
+        <line num="44" count="6" type="stmt"/>
       </file>
       <file name="Loader.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/components/Loader.tsx">
         <metrics statements="14" coveredstatements="14" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -704,7 +724,7 @@
         <line num="58" count="7" type="stmt"/>
       </file>
       <file name="SearchPage.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/components/SearchPage.tsx">
-        <metrics statements="20" coveredstatements="20" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="23" coveredstatements="23" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -715,16 +735,19 @@
         <line num="9" count="1" type="stmt"/>
         <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
         <line num="14" count="3" type="stmt"/>
         <line num="15" count="3" type="stmt"/>
         <line num="17" count="3" type="stmt"/>
         <line num="18" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
         <line num="20" count="3" type="stmt"/>
         <line num="21" count="3" type="stmt"/>
         <line num="22" count="3" type="stmt"/>
         <line num="23" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
         <line num="25" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
       </file>
       <file name="ThemeSwitch.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/components/ThemeSwitch.tsx">
         <metrics statements="86" coveredstatements="86" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
@@ -854,18 +877,18 @@
         <line num="10" count="5" type="stmt"/>
         <line num="11" count="5" type="stmt"/>
         <line num="12" count="7" type="stmt"/>
-        <line num="15" count="7" type="cond" truecount="1" falsecount="0"/>
-        <line num="16" count="6" type="stmt"/>
-        <line num="17" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="16" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="6" type="stmt"/>
         <line num="18" count="6" type="stmt"/>
-        <line num="19" count="6" type="stmt"/>
-        <line num="20" count="7" type="stmt"/>
+        <line num="19" count="7" type="stmt"/>
+        <line num="21" count="7" type="stmt"/>
         <line num="22" count="7" type="stmt"/>
-        <line num="23" count="7" type="stmt"/>
       </file>
     </package>
     <package name="RSS-React-2024q3.src.store">
-      <metrics statements="106" coveredstatements="99" conditionals="12" coveredconditionals="12" methods="11" coveredmethods="11"/>
+      <metrics statements="105" coveredstatements="98" conditionals="12" coveredconditionals="12" methods="11" coveredmethods="11"/>
       <file name="ReduxProvider.tsx" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/store/ReduxProvider.tsx">
         <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -903,36 +926,35 @@
         <line num="36" count="1" type="stmt"/>
       </file>
       <file name="searchSlice.ts" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/store/searchSlice.ts">
-        <metrics statements="29" coveredstatements="24" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <metrics statements="28" coveredstatements="23" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
         <line num="23" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="24" count="2" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="28" count="13" type="stmt"/>
+        <line num="24" count="13" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="13" type="stmt"/>
-        <line num="35" count="13" type="stmt"/>
+        <line num="30" count="13" type="stmt"/>
+        <line num="31" count="13" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
       </file>
       <file name="selectedBooksSlice.ts" path="/mnt/AA1298D11298A3BB/web/react/RSS-React-2024/RSS-React-2024q3/src/store/selectedBooksSlice.ts">
         <metrics statements="29" coveredstatements="28" conditionals="5" coveredconditionals="5" methods="4" coveredmethods="4"/>

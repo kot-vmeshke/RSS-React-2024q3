@@ -1,8 +1,4 @@
-import {
-  PayloadAction,
-  UnknownAction,
-  createSlice,
-} from '@reduxjs/toolkit';
+import { PayloadAction, UnknownAction, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 
 export interface Search {
@@ -14,7 +10,7 @@ const searchSlice = createSlice({
   name: 'search',
   initialState: {
     searchString: '',
-    page: '1'
+    page: '1',
   },
   reducers: {
     updateSearchString(state, action: PayloadAction<string>) {

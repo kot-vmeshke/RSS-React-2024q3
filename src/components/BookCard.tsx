@@ -14,7 +14,6 @@ const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
   useEffect(() => {
     let str = '';
     for (const [key, value] of searchParams.entries()) {
-      console.log(`${key}, ${value}`);
       str += `${key}=${value}`;
     }
     setSearchString(str);
@@ -31,6 +30,7 @@ const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
           href={`/${id}?${searchString}`}
           className="mt-auto font-medium text-[20px] text-color-text dark:text-dark-color-text after:absolute after:inset-0 after:content-['']"
           data-testid={`book`}
+          scroll={false}
         >
           {title}
         </Link>

@@ -22,6 +22,7 @@ const LinkWithParams: FC<{ classes: string }> = ({ classes }) => {
       href={`/?${searchString}`}
       className={classes}
       data-testid="close-btn"
+      scroll={false}
     >
       <svg
         width="24"

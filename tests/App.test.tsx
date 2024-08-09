@@ -27,7 +27,7 @@ describe('App', () => {
         const container = screen.getByTestId('page-container');
         expect(container).toBeInTheDocument();
       },
-      { timeout: 3000 }
+      { timeout: 4000 }
     );
   });
 

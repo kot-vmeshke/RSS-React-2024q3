@@ -13,7 +13,7 @@ const initialState: Data = {
   count: 0,
   next: null,
   previous: null,
-  results: []
+  results: [],
 };
 
 const dataSlice = createSlice({

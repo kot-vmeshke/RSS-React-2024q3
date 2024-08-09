@@ -24,9 +24,9 @@ const Pagination: FC<PaginationProps> = () => {
 
   const updatePageNumber = (page: number) => {
     dispatch(updatePage(`${page}`));
-      const url = new URL(window.location.href);
-      url.searchParams.set('page', `${page}`);
-      router.replace(`${url}`);
+    const url = new URL(window.location.href);
+    url.searchParams.set('page', `${page}`);
+    router.replace(`${url}`);
   };
 
   return (
