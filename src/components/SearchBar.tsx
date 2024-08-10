@@ -1,7 +1,6 @@
-import './SearchBar.css';
 import { Form, useSubmit } from '@remix-run/react';
 import { FC, useRef } from 'react';
-import SearchIcon from '../../assets/search-sm.svg';
+import { SearchIcon } from '../assets';
 
 const SearchBar: FC<{ search: string | null }> = ({ search }) => {
   const inputRef = useRef<HTMLInputElement>(null);

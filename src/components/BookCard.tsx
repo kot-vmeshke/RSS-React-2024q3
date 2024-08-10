@@ -1,8 +1,7 @@
-import './BookCard.css';
 import { Link, useSearchParams } from '@remix-run/react';
 import { FC } from 'react';
-import { Book } from '../../types';
-// import { CheckButton } from '../CheckButton';
+import { CheckButton } from './CheckButton';
+import { Book } from '../types';
 
 const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
   const [searchParams] = useSearchParams();
@@ -14,7 +13,7 @@ const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
   return (
     <li className="book-wrap">
       <div className="book">
-        {/* <CheckButton bookId={id} /> */}
+        <CheckButton bookId={id} />
         <span className="book__author">{authorsNames}</span>
         <Link to={href} className="book__name" data-testid="book">
           {title}

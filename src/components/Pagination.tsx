@@ -1,9 +1,7 @@
-import './Pagination.css';
 import { useSearchParams } from '@remix-run/react';
 import { FC } from 'react';
-import { Data } from 'src/types';
-import arrowPrev from '../../assets/arrow-circle-broken-left.svg';
-import arrowNext from '../../assets/arrow-circle-broken-right.svg';
+import { arrowNext, arrowPrev } from '../assets';
+import { Data } from '../types';
 
 const Pagination: FC<{ data: Data }> = ({ data }) => {
   const [searchParams, setSearchParams] = useSearchParams();

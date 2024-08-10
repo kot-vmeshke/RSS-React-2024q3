@@ -1,7 +1,6 @@
-import './BooksList.css';
 import { FC } from 'react';
-import { Book, Data } from '../../types';
-import { BookCard } from '../BookCard';
+import { BookCard } from './BookCard';
+import { Book, Data } from '../types';
 
 const BooksList: FC<{ data: Data }> = ({ data }) => {
   const books = data.results;

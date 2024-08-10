@@ -1,7 +1,6 @@
-import './Header.css';
 import { FC } from 'react';
-import { SearchBar } from '../SearchBar';
-// import { ThemeSwitch } from '../ThemeSwitch';
+import { SearchBar } from './SearchBar';
+import { ThemeSwitch } from './ThemeSwitch';
 
 const Header: FC<{ search: string | null }> = ({ search }) => {
   return (
@@ -9,7 +8,7 @@ const Header: FC<{ search: string | null }> = ({ search }) => {
       <div className="container header__container">
         <h1 className="header__title">Search books</h1>
         <SearchBar search={search} />
-        {/* <ThemeSwitch /> */}
+        <ThemeSwitch />
       </div>
     </header>
   );

@@ -1,22 +1,12 @@
-import './FlyingList.css';
 import { FC, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  removeAllBooksFromSelected,
-  removeBookFromSelected,
-} from '../../store/selectedBooksSlice';
-import { RootState } from '../../store/store';
-import { Book, Person } from '../../types';
+import { Book, Person } from '../types';
 
 const FlyingList: FC = () => {
   const [url, setUrl] = useState<string>('');
-  const selectedBooks: Book[] = useSelector(
-    (state: RootState) => state.selectedBooks
-  );
-  const dispatch = useDispatch();
+  const selectedBooks: Book[] = [];
 
   const handleDeselectAllClick = () => {
-    dispatch(removeAllBooksFromSelected());
+    console.log('All deleted');
   };
 
   const getCSV = (arr: Book[]) => {
@@ -60,7 +50,11 @@ const FlyingList: FC = () => {
         {selectedBooks.map((item: Book) => (
           <li key={item.id}>
             {item.title}
-            <button onClick={() => dispatch(removeBookFromSelected(item.id))}>
+            <button
+              onClick={() => {
+                console.log('unselect');
+              }}
+            >
               Unselect
             </button>
           </li>

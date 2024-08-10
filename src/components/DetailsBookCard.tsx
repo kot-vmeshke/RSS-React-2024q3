@@ -1,10 +1,9 @@
-import './DetailsBookCard.css';
 import { Link, useSearchParams } from '@remix-run/react';
 import { FC } from 'react';
 
-import { defaultCover, readIcon } from '../../assets';
-import { Book, Person } from '../../types';
-import { CloseIcon } from '../icons';
+import { CloseIcon } from './icons';
+import { defaultCover, readIcon } from '../assets';
+import { Book, Person } from '../types';
 
 const DetailsBookCard: FC<{ data: Book }> = ({ data }) => {
   const [searchParams] = useSearchParams();

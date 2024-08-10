@@ -1,9 +1,5 @@
-import './ErrorPage.css';
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-
 const ErrorPage = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = 'light';
 
   return (
     <div className={`page page_error ${theme}`}>
