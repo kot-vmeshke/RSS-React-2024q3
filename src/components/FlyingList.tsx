@@ -1,14 +1,18 @@
 import { FC, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import {
+  removeAllBooksFromSelected,
+  removeBookFromSelected,
+} from '../store/selectedBooksSlice';
 import { Book, Person } from '../types';
 
 const FlyingList: FC = () => {
   const [url, setUrl] = useState<string>('');
-  // eslint-disable-next-line react-compiler/react-compiler
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const selectedBooks: Book[] = [];
+  const selectedBooks: Book[] = useAppSelector((state) => state.selectedBooks);
+  const dispatch = useAppDispatch();
 
   const handleDeselectAllClick = () => {
-    console.log('All deleted');
+    dispatch(removeAllBooksFromSelected());
   };
 
   const getCSV = (arr: Book[]) => {
@@ -54,7 +58,7 @@ const FlyingList: FC = () => {
             {item.title}
             <button
               onClick={() => {
-                console.log('unselect');
+                dispatch(removeBookFromSelected(item.id));
               }}
             >
               Unselect

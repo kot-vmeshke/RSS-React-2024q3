@@ -9,7 +9,6 @@ const ThemeSwitch: FC = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setTheme(e.target.value));
-    console.log(e.target.value);
     localStorage.setItem('book-theme', e.target.value);
   };
 

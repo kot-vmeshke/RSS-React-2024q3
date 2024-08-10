@@ -9,16 +9,15 @@ import {
   useLoaderData,
   useNavigation,
 } from '@remix-run/react';
-import React from 'react';
 
 import { Provider } from 'react-redux';
 import styles from './shared.css?url';
 import {
   BooksList,
-  // FlyingList,
+  FlyingList,
   Header,
   Loader,
-  Pagination
+  Pagination,
 } from '../src/components';
 import { useAppSelector } from '../src/hooks/redux';
 import { store } from '../src/store/store';
@@ -85,7 +84,7 @@ const Root = () => {
                   ) : (
                     <div className="main__left">
                       <BooksList data={data} />
-                      <Pagination data={data}/>
+                      <Pagination data={data} />
                     </div>
                   )}
                 </>
@@ -94,7 +93,7 @@ const Root = () => {
                 </div>
               </div>
             </main>
-            {/* <FlyingList /> */}
+            <FlyingList />
           </div>
         </div>
         <ScrollRestoration />

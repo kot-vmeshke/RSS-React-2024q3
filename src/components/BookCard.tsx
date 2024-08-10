@@ -3,7 +3,8 @@ import { FC } from 'react';
 import { CheckButton } from './CheckButton';
 import { Book } from '../types';
 
-const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
+const BookCard: FC<Book> = (props) => {
+  const { id, authors, title, subjects } = props;
   const [searchParams] = useSearchParams();
 
   const authorsNames = authors.map((author) => author.name).join(', ');
@@ -13,7 +14,7 @@ const BookCard: FC<Book> = ({ id, authors, title, subjects }) => {
   return (
     <li className="book-wrap">
       <div className="book">
-        <CheckButton bookId={id} />
+        <CheckButton book={props} />
         <span className="book__author">{authorsNames}</span>
         <Link to={href} className="book__name" data-testid="book">
           {title}
