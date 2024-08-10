@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, createContext } from 'react';
+import { createContext, Dispatch, SetStateAction } from 'react';
 
 interface ContextType {
   theme: string;

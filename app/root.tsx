@@ -7,11 +7,18 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useNavigation,
 } from '@remix-run/react';
 import React from 'react';
 
 import styles from './shared.css?url';
-import { BooksList, FlyingList, Header, Pagination } from '../src/components';
+import {
+  BooksList,
+  // FlyingList,
+  Header,
+  Loader,
+  Pagination
+} from '../src/components';
 import { Data } from '../src/types';
 
 export const links: LinksFunction = () => {
@@ -30,15 +37,20 @@ export const links: LinksFunction = () => {
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
-  const q = url.searchParams.get('q');
-  const res = await fetch('https://gutendex.com/books');
+  const search = url.searchParams.get('search');
+  const page = url.searchParams.get('page');
+  const res = await fetch(
+    `https://gutendex.com/books?search=${search || ''}&page=${page || 1}`
+  );
   const data: Data = await res.json();
-  return json({ data, q });
+  return json({ data, search });
 };
 
 const Root = () => {
   const theme = 'light';
-  const { data } = useLoaderData<typeof loader>();
+  const { data, search } = useLoaderData<typeof loader>();
+
+  const navigation = useNavigation();
 
   return (
     <html lang="en">
@@ -58,16 +70,22 @@ const Root = () => {
       <body>
         <div id="root">
           <div className={`page ${theme}`} data-testid="page-container">
-            {/* <Header /> */}
+            <Header search={search} />
             <main className="main">
               <div
                 className="container main__container"
                 data-testid="main-container"
               >
-                <div className="main__left">
-                  <BooksList data={data}/>
-                  {/* <Pagination /> */}
-                </div>
+                <>
+                  {navigation.state === 'loading' ? (
+                    <Loader />
+                  ) : (
+                    <div className="main__left">
+                      <BooksList data={data} />
+                      <Pagination data={data}/>
+                    </div>
+                  )}
+                </>
                 <div className="main__right">
                   <Outlet />
                 </div>

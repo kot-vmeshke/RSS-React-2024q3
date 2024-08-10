@@ -1,10 +1,8 @@
-import { FC, useContext } from 'react';
-import { FlyingList, Header, Main } from './components';
+import { FC } from 'react';
 import React from 'react';
-// import { ThemeContext } from '../../context/ThemeContext';
+import { FlyingList, Header, Main } from './components';
 
 const SearchPage: FC = () => {
-  //const { theme } = useContext(ThemeContext);
   const theme = 'light';
 
   return (
