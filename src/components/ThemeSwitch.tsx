@@ -1,12 +1,14 @@
 import './ThemeSwitch.css';
 import { ChangeEvent, FC, useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+// import { ThemeContext } from '../../context/ThemeContext';
 
 const ThemeSwitch: FC = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  // const { theme, setTheme } = useContext(ThemeContext);
+  const theme = 'light';
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTheme(e.target.value);
+    //setTheme(e.target.value);
+    console.log(e.target.value);
     localStorage.setItem('book-theme', e.target.value);
   };
 
