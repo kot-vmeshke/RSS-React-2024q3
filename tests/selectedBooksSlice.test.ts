@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { describe, expect, it } from 'vitest';
-import selectedBooksReduser, {
+import selectedBooksReducer, {
   addBookToSelected,
   removeAllBooksFromSelected,
   removeBookFromSelected,
@@ -51,14 +51,14 @@ const initialState: Book[] = [];
 
 describe('SelectedBooksSlice', () => {
   it('Book should be added to store', () => {
-    const state = selectedBooksReduser(initialState, addBookToSelected(book));
+    const state = selectedBooksReducer(initialState, addBookToSelected(book));
     expect(state[0].id).toEqual(book.id);
   });
 
   it('Book should be removed from store', () => {
     const fullState = [book];
 
-    const state = selectedBooksReduser(
+    const state = selectedBooksReducer(
       fullState,
       removeBookFromSelected(book.id)
     );
@@ -69,7 +69,7 @@ describe('SelectedBooksSlice', () => {
   it('All books was removed', () => {
     const fullState = [book];
 
-    const state = selectedBooksReduser(fullState, removeAllBooksFromSelected());
+    const state = selectedBooksReducer(fullState, removeAllBooksFromSelected());
 
     expect(state.length).toBe(0);
   });
