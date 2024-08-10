@@ -1,12 +1,12 @@
-import './FlyingList.scss';
-import { Book, Person } from '../../types';
+import './FlyingList.css';
 import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   removeAllBooksFromSelected,
   removeBookFromSelected,
 } from '../../store/selectedBooksSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { Book, Person } from '../../types';
 
 const FlyingList: FC = () => {
   const [url, setUrl] = useState<string>('');

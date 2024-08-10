@@ -1,15 +1,15 @@
-import './CheckButton.scss';
+import './CheckButton.css';
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { apiSlice } from '../../store/apiSlice';
 import {
   addBookToSelected,
   removeBookFromSelected,
 } from '../../store/selectedBooksSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { Book } from '../../types';
-import { FC } from 'react';
 import { RootState } from '../../store/store';
-import { apiSlice } from '../../store/apiSlice';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { useSearchParams } from 'react-router-dom';
+import { Book } from '../../types';
 
 interface CheckButtonProps {
   bookId: number;

@@ -1,7 +1,7 @@
-import './Main.scss';
-import { BooksList } from '../BooksList';
+import './Main.css';
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
+import { BooksList } from '../BooksList';
 import { Pagination } from '../Pagination';
 
 const Main: FC = () => {

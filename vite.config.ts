@@ -1,15 +1,16 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
 import { vitePlugin as remix } from '@remix-run/dev';
-import { resolve } from 'path';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), remix()],
-  resolve: {
-    alias: [{ find: '@', replacement: resolve(__dirname, './src/') }],
-  },
+  plugins: [
+    react(),
+    remix({
+      ignoredRouteFiles: ['**/*.css'],
+    }),
+  ],
   test: {
     globals: true,
     environment: 'jsdom',

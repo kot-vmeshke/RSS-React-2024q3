@@ -10,9 +10,8 @@ You can see the application [deployed here](https://book-search-rss-react-2024q3
 This project uses: 
 * Typescript
 * Vite
-* React
-* Redux
-* Vitest, React Testing Libarary
+* Remix
+* Vitest, React Testing Library
 * ESLint, Prettier
 
 ## Installation

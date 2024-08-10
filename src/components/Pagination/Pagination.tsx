@@ -1,12 +1,12 @@
-import './Pagination.scss';
+import './Pagination.css';
 import { FC } from 'react';
-import { PaginationProps } from '../../types';
-import { RootState } from '../../store/store';
-import { apiSlice } from '../../store/apiSlice';
-import arrowNext from '../../assets/arrow-circle-broken-right.svg';
-import arrowPrev from '../../assets/arrow-circle-broken-left.svg';
-import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
+import arrowPrev from '../../assets/arrow-circle-broken-left.svg';
+import arrowNext from '../../assets/arrow-circle-broken-right.svg';
+import { apiSlice } from '../../store/apiSlice';
+import { RootState } from '../../store/store';
+import { PaginationProps } from '../../types';
 
 const Pagination: FC<PaginationProps> = () => {
   const [searchParams, setSearchParams] = useSearchParams();

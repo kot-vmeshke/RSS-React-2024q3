@@ -1,6 +1,6 @@
-import './ErrorPage.scss';
-import { ThemeContext } from '../../context/ThemeContext';
+import './ErrorPage.css';
 import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const ErrorPage = () => {
   const { theme } = useContext(ThemeContext);

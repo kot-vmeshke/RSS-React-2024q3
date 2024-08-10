@@ -25,3 +25,8 @@ dist-ssr
 
 #Vitest
 coverage
+
+#Remix
+.cache
+build
+public/build

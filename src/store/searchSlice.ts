@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Search {
   searchString: string;
@@ -7,7 +7,7 @@ export interface Search {
 const searchSlice = createSlice({
   name: 'search',
   initialState: {
-    searchString: localStorage.getItem('books-search') || '',
+    searchString: '',
   },
   reducers: {
     updateSearchString(state, action: PayloadAction<string>) {

@@ -48,3 +48,10 @@ export interface PaginationProps {
   updatePageNumber?: (page: number) => void;
   allPages?: number;
 }
+
+export interface Data {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Book[];
+}

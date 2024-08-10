@@ -1,9 +1,8 @@
-import './App.scss';
-import { DetailsBookCard, ErrorBoundary } from '@/components';
-import { ErrorPage, SearchPage } from '@/pages';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { ThemeContext } from '@/context/ThemeContext';
 import { useState } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { DetailsBookCard, ErrorBoundary } from './components';
+import { ThemeContext } from './context/ThemeContext';
+import { ErrorPage, SearchPage } from './pages';
 
 const router = createBrowserRouter([
   {

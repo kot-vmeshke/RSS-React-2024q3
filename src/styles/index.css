@@ -11,10 +11,9 @@
   --color-bg-medium: #4d4c4c;
   --color-bg-light: #1f1f1f;
   --color-text: #ffffff;
-
-  img {
-    filter: invert(100%);
-  }
+}
+.dark img {
+  filter: invert(100%);
 }
 
 * {
@@ -53,15 +52,12 @@ a:is(.hover) {
   color: var(--color-text);
   flex-shrink: 0;
   cursor: pointer;
-
-  &_bordered {
-    background: transparent;
-  }
 }
-input {
-  &:autofill,
-  &:-webkit-autofill {
-    box-shadow: 0 0 0px 1000px var(--color-bg-light) inset !important;
-    background: transparent !important;
-  }
+.main-button_bordered {
+  background: transparent;
+}
+input:autofill,
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px var(--color-bg-light) inset !important;
+  background: transparent !important;
 }

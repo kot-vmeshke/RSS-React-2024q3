@@ -1,4 +1,4 @@
-import './ThemeSwitch.scss';
+import './ThemeSwitch.css';
 import { ChangeEvent, FC, useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 

@@ -1,4 +1,4 @@
-import './ErrorBoundary.scss';
+import './ErrorBoundary.css';
 import { Component, ReactNode } from 'react';
 
 interface ErrorBoundaryProps {

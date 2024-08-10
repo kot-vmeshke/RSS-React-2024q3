@@ -6,6 +6,7 @@
   justify-content: center;
   color: var(--color-text);
 }
+
 .loader {
   width: fit-content;
   font-weight: 400;
@@ -13,11 +14,12 @@
   padding-bottom: 8px;
   background: linear-gradient(currentColor 0 0) 0 100%/0% 1px no-repeat;
   animation: loading 2s linear infinite;
-
-  &::after {
-    content: 'Loading...';
-  }
 }
+
+.loader::after {
+  content: 'Loading...';
+}
+
 @keyframes loading {
   to {
     background-size: 100% 1px;
