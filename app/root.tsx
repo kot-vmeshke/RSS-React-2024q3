@@ -11,6 +11,7 @@ import {
 } from '@remix-run/react';
 import React from 'react';
 
+import { Provider } from 'react-redux';
 import styles from './shared.css?url';
 import {
   BooksList,
@@ -19,6 +20,8 @@ import {
   Loader,
   Pagination
 } from '../src/components';
+import { useAppSelector } from '../src/hooks/redux';
+import { store } from '../src/store/store';
 import { Data } from '../src/types';
 
 export const links: LinksFunction = () => {
@@ -47,7 +50,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 const Root = () => {
-  const theme = 'light';
+  const { theme } = useAppSelector((state) => state.theme);
   const { data, search } = useLoaderData<typeof loader>();
 
   const navigation = useNavigation();
@@ -101,4 +104,10 @@ const Root = () => {
   );
 };
 
-export default Root;
+export default function App() {
+  return (
+    <Provider store={store}>
+      <Root />
+    </Provider>
+  );
+}

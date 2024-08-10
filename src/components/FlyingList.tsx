@@ -3,6 +3,8 @@ import { Book, Person } from '../types';
 
 const FlyingList: FC = () => {
   const [url, setUrl] = useState<string>('');
+  // eslint-disable-next-line react-compiler/react-compiler
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const selectedBooks: Book[] = [];
 
   const handleDeselectAllClick = () => {
