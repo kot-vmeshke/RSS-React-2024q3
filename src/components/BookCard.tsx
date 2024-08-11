@@ -15,7 +15,9 @@ const BookCard: FC<Book> = (props) => {
     <li className="book-wrap">
       <div className="book">
         <CheckButton book={props} />
-        <span className="book__author">{authorsNames}</span>
+        <span className="book__author" data-testid="book-author">
+          {authorsNames}
+        </span>
         <Link to={href} className="book__name" data-testid="book">
           {title}
         </Link>

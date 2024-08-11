@@ -1,17 +1,30 @@
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
-import type { AppStore, RootState } from './store/store';
-import { setupStore } from './store/store';
+import selectedBooksReducer from '../../src/store/selectedBooksSlice';
+import type { AppStore, RootState } from '../../src/store/store';
+import themeReducer from '../../src/store/themeSlice';
+
+const rootReducer = combineReducers({
+  theme: themeReducer,
+  selectedBooks: selectedBooksReducer,
+});
+
+export const setupStore = (preloadedState?: Partial<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+};
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<RootState>;
   store?: AppStore;
 }
 
-export function renderWithProviderAndRouter(
+export function renderWithProvider(
   ui: React.ReactElement,
   extendedRenderOptions: ExtendedRenderOptions = {}
 ) {
@@ -23,7 +36,7 @@ export function renderWithProviderAndRouter(
 
   const Wrapper = ({ children }: PropsWithChildren) => (
     <Provider store={store}>
-      <MemoryRouter>{children}</MemoryRouter>
+      {children}
     </Provider>
   );
 

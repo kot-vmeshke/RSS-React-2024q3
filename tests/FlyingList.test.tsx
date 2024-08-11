@@ -1,133 +1,94 @@
-// import '@testing-library/jest-dom';
-// import { describe, expect, it } from 'vitest';
-// import { fireEvent, screen, waitFor } from '@testing-library/react';
-// import { Book } from '../src/types';
-// import { FlyingList } from '../src/components';
-// import { removeAllBooksFromSelected } from '../src/store/selectedBooksSlice';
-// import { renderWithProviderAndRouter } from '../src/utils';
-// import { store } from '../src/store/store';
+import '@testing-library/jest-dom';
+import { json } from '@remix-run/node';
+import { createRemixStub } from '@remix-run/testing';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { describe, expect, it } from 'vitest';
+import { book, books, data } from './utils/constants';
+import { renderWithProvider } from './utils/mockStore';
+import { FlyingList } from '../src/components';
+import { removeAllBooksFromSelected, removeBookFromSelected } from '../src/store/selectedBooksSlice';
+import { store } from '../src/store/store';
 
-// const book: Book = {
-//   id: 1513,
-//   title: 'Romeo and Juliet',
-//   authors: [
-//     {
-//       name: 'Shakespeare, William',
-//       birth_year: 1564,
-//       death_year: 1616,
-//     },
-//   ],
-//   translators: [],
-//   subjects: [
-//     'Conflict of generations -- Drama',
-//     'Juliet (Fictitious character) -- Drama',
-//     'Romeo (Fictitious character) -- Drama',
-//     'Tragedies',
-//     'Vendetta -- Drama',
-//     'Verona (Italy) -- Drama',
-//     'Youth -- Drama',
-//   ],
-//   bookshelves: [],
-//   languages: ['en'],
-//   copyright: false,
-//   media_type: 'Text',
-//   formats: {
-//     'text/html': 'https://www.gutenberg.org/ebooks/1513.html.images',
-//     'application/epub+zip':
-//       'https://www.gutenberg.org/ebooks/1513.epub3.images',
-//     'application/x-mobipocket-ebook':
-//       'https://www.gutenberg.org/ebooks/1513.kf8.images',
-//     'application/rdf+xml': 'https://www.gutenberg.org/ebooks/1513.rdf',
-//     'image/jpeg':
-//       'https://www.gutenberg.org/cache/epub/1513/pg1513.cover.medium.jpg',
-//     'text/plain; charset=us-ascii':
-//       'https://www.gutenberg.org/ebooks/1513.txt.utf-8',
-//     'application/octet-stream':
-//       'https://www.gutenberg.org/cache/epub/1513/pg1513-h.zip',
-//   },
-//   download_count: 77782,
-// };
+describe('FlyingList', () => {
+  it('All unselect buttons in component work correct', async () => {
+    const dispatch = vi.fn();
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <FlyingList />,
+        loader() {
+          return json({ data, search: '' });
+        },
+      },
+    ]);
 
-// vi.mock('react-redux', async (importOriginal) => {
-//   const actual = await importOriginal();
-//   return {
-//     ...(actual as object),
-//     useSelector: vi.fn().mockReturnValue([
-//       {
-//         id: 1513,
-//         title: 'Romeo and Juliet',
-//         authors: [
-//           {
-//             name: 'Shakespeare, William',
-//             birth_year: 1564,
-//             death_year: 1616,
-//           },
-//         ],
-//         translators: [],
-//         subjects: [
-//           'Conflict of generations -- Drama',
-//           'Juliet (Fictitious character) -- Drama',
-//           'Romeo (Fictitious character) -- Drama',
-//           'Tragedies',
-//           'Vendetta -- Drama',
-//           'Verona (Italy) -- Drama',
-//           'Youth -- Drama',
-//         ],
-//         bookshelves: [],
-//         languages: ['en'],
-//         copyright: false,
-//         media_type: 'Text',
-//         formats: {
-//           'text/html': 'https://www.gutenberg.org/ebooks/1513.html.images',
-//           'application/epub+zip':
-//             'https://www.gutenberg.org/ebooks/1513.epub3.images',
-//           'application/x-mobipocket-ebook':
-//             'https://www.gutenberg.org/ebooks/1513.kf8.images',
-//           'application/rdf+xml': 'https://www.gutenberg.org/ebooks/1513.rdf',
-//           'image/jpeg':
-//             'https://www.gutenberg.org/cache/epub/1513/pg1513.cover.medium.jpg',
-//           'text/plain; charset=us-ascii':
-//             'https://www.gutenberg.org/ebooks/1513.txt.utf-8',
-//           'application/octet-stream':
-//             'https://www.gutenberg.org/cache/epub/1513/pg1513-h.zip',
-//         },
-//         download_count: 77782,
-//       },
-//     ]),
-//   };
-// });
+    renderWithProvider(<RemixStub />, {
+      preloadedState: {
+        selectedBooks: books,
+      },
+    });
 
-// describe('FlyingList', () => {
-//   global.URL.createObjectURL = vi.fn();
+    const btnDownload = await screen.findByText('Download');
+    expect(btnDownload).toBeInTheDocument();
 
-//   it('Remove all saved books on click "Unselect All"', () => {
-//     renderWithProviderAndRouter(<FlyingList />);
+    fireEvent.click(screen.getByTestId(`unselect-${books[0].id}`));
+    waitFor(() => {
+      expect(dispatch).toBeCalledWith(removeBookFromSelected(books[0].id));
+    });
 
-//     waitFor(() => {
-//       fireEvent.click(screen.getByTestId('unselect-all'));
-//       expect(store.dispatch).toBeCalledWith(removeAllBooksFromSelected());
-//     });
-//   });
+    fireEvent.click(screen.getByTestId('unselect-all'));
 
-//   it('Unselect button has right text', () => {
-//     renderWithProviderAndRouter(<FlyingList />);
+    waitFor(() => {
+      expect(dispatch).toBeCalledWith(removeAllBooksFromSelected());
+    });
+  });
 
-//     waitFor(() => {
-//       expect(
-//         screen.getByTestId('unselect-all').textContent?.includes('All')
-//       ).toBeFalsy();
-//     });
-//   });
+  it('Unselect button has right text', () => {
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <FlyingList />,
+        loader() {
+          return json({ data, search: '' });
+        },
+      },
+    ]);
 
-//   it('getCSV to be called if selected books exist', () => {
-//     const getCSV = vi.fn();
+    render(
+      <Provider store={store}>
+        <RemixStub />
+      </Provider>
+    );
 
-//     renderWithProviderAndRouter(<FlyingList />);
+    waitFor(() => {
+      expect(
+        screen.getByTestId('unselect-all').textContent?.includes('All')
+      ).toBeFalsy();
+    });
+  });
 
-//     waitFor(() => {
-//       expect(getCSV).toBeCalledWith(book);
-//     });
-//   });
-// });
+  it('getCSV to be called if selected books exist', () => {
+    const getCSV = vi.fn();
 
-test.todo('Some test');
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <FlyingList />,
+        loader() {
+          return json({ data, search: '' });
+        },
+      },
+    ]);
+
+    render(
+      <Provider store={store}>
+        <RemixStub />
+      </Provider>
+    );
+
+    waitFor(() => {
+      expect(getCSV).toBeCalledWith(book);
+    });
+  });
+});

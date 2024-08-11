@@ -1,34 +1,61 @@
-// import '@testing-library/jest-dom';
-// import { describe, expect, it } from 'vitest';
-// import { fireEvent, screen, waitFor } from '@testing-library/react';
-// import { SearchBar } from '../src/components';
-// import { renderWithProviderAndRouter } from '../src/utils';
+import '@testing-library/jest-dom';
+import { json } from '@remix-run/node';
+import { createRemixStub } from '@remix-run/testing';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { describe, expect, it } from 'vitest';
+import { SearchBar } from '../src/components';
+import { store } from '../src/store/store';
 
-// describe('SearchBar', () => {
-//   it('Clicking the Search button saves the entered value to the local storage', () => {
-//     renderWithProviderAndRouter(<SearchBar />);
+describe('SearchBar', () => {
+  it('Clicking the Search button sends form', async () => {
+    const submit = vi.fn();
 
-//     const input = screen.getByRole('textbox');
-//     const testValue = 'test value';
-//     fireEvent.change(input, { target: { value: testValue } });
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <SearchBar search={''} />,
+        loader() {
+          return json({ message: 'hello' });
+        },
+      },
+    ]);
 
-//     fireEvent.click(screen.getByRole('button'));
+    render(
+      <Provider store={store}>
+        <RemixStub />
+      </Provider>
+    );
 
-//     expect(localStorage.getItem('books-search')).toBe(testValue);
-//   });
+    const input = await screen.findByRole('textbox');
+    const testValue = 'test value';
+    fireEvent.change(input, { target: { value: testValue } });
 
-//   it('Component retrieves the value from the local storage upon mounting', () => {
-//     const testValue = 'test value';
-//     localStorage.setItem('books-search', testValue);
+    fireEvent.click(screen.getByRole('button'));
 
-//     renderWithProviderAndRouter(<SearchBar />);
+    waitFor(() => {
+      expect(submit).toHaveBeenCalled();
+    });
+  });
 
-//     const input = screen.getByRole('textbox') as HTMLInputElement;
+  it('Component renders valid value', async () => {
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <SearchBar search={'test'} />,
+        loader() {
+          return json({ message: 'hello' });
+        },
+      },
+    ]);
 
-//     waitFor(() => {
-//       expect(input.value).toBe(testValue);
-//     });
-//   });
-// });
+    render(
+      <Provider store={store}>
+        <RemixStub />
+      </Provider>
+    );
 
-test.todo('Some test');
+    const input = (await screen.findByRole('textbox')) as HTMLInputElement;
+    expect(input.value).toBe('test');
+  });
+});

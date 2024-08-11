@@ -1,94 +1,80 @@
-// import { BookCard, DetailsBookCard } from '../src/components';
-// import { MemoryRouter, Route, Routes } from 'react-router-dom';
-// import { describe, expect, it } from 'vitest';
-// import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-// import { Book } from '../src/types';
-// import { Provider } from 'react-redux';
-// import { renderWithProviderAndRouter } from '../src/utils';
-// import { store } from '../src/store/store';
+import { json } from '@remix-run/node';
+import { createRemixStub } from '@remix-run/testing';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { describe, expect, it } from 'vitest';
+import { book } from './utils/constants';
+import { BookCard, DetailsBookCard } from '../src/components';
+import { store } from '../src/store/store';
 
-// const book: Book = {
-//   id: 1,
-//   title: 'The Declaration of Independence of the United States of America',
-//   authors: [
-//     {
-//       name: 'Jefferson, Thomas',
-//       birth_year: 1743,
-//       death_year: 1826,
-//     },
-//   ],
-//   translators: [],
-//   subjects: [
-//     'United States -- History -- Revolution, 1775-1783 -- Sources',
-//     'United States. Declaration of Independence',
-//   ],
-//   bookshelves: ['American Revolutionary War', 'Politics', 'United States Law'],
-//   languages: ['en'],
-//   copyright: false,
-//   media_type: 'Text',
-//   formats: {
-//     'text/html': 'https://www.gutenberg.org/ebooks/1.html.images',
-//     'application/epub+zip': 'https://www.gutenberg.org/ebooks/1.epub3.images',
-//     'application/x-mobipocket-ebook':
-//       'https://www.gutenberg.org/ebooks/1.kf8.images',
-//     'application/rdf+xml': 'https://www.gutenberg.org/ebooks/1.rdf',
-//     'image/jpeg': 'https://www.gutenberg.org/cache/epub/1/pg1.cover.medium.jpg',
-//     'application/octet-stream':
-//       'https://www.gutenberg.org/cache/epub/1/pg1-h.zip',
-//     'text/plain; charset=us-ascii':
-//       'https://www.gutenberg.org/ebooks/1.txt.utf-8',
-//   },
-//   download_count: 8839,
-// };
+describe('DetailsBookCard', () => {
+  it('Component renders data', async () => {
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <BookCard {...book} />,
+        loader() {
+          return json({ message: 'hello' });
+        },
+      },
+      {
+        path: '/:bookId',
+        Component: () => <DetailsBookCard data={book} />,
+        loader() {
+          return json({ message: 'hello' });
+        },
+      },
+    ]);
+    render(
+      <Provider store={store}>
+        <RemixStub />
+      </Provider>
+    );
 
-// vi.mock('react-router-dom', async (importOriginal) => {
-//   const actual = await importOriginal();
-//   return {
-//     ...(actual as object),
-//     useParams: vi.fn().mockReturnValue({ bookId: 1 }),
-//   };
-// });
+    await waitFor(async () => {
+      fireEvent.click(screen.getByTestId('book'));
 
-// describe('DetailsBookCard', () => {
-//   it('A loading indicator is displayed while fetching data', () => {
-//     renderWithProviderAndRouter(<DetailsBookCard />);
+      const text = await waitFor(
+        () => screen.getByRole('heading', { level: 3 }).textContent
+      );
+      expect(text).toBe(book.title);
+    });
+  });
 
-//     expect(screen.getByTestId('loader')).toBeInTheDocument();
-//   });
+  it('Clicking the close button hides the component', async () => {
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <BookCard {...book} />,
+        loader() {
+          return json({ message: 'hello' });
+        },
+      },
+      {
+        path: '/:bookId',
+        Component: () => <DetailsBookCard data={book} />,
+        loader() {
+          return json({ message: 'hello' });
+        },
+      },
+    ]);
+    render(
+      <Provider store={store}>
+        <RemixStub />
+      </Provider>
+    );
 
-//   it('Detailed card component correctly displays the detailed card data', async () => {
-//     renderWithProviderAndRouter(<DetailsBookCard />);
+    waitFor(async () => {
+      fireEvent.click(screen.getByTestId('book'));
 
-//     await waitFor(() => {
-//       expect(screen.getByRole('heading', { level: 3 }).textContent).toBe(
-//         book.title
-//       );
-//     });
-//   });
+      const detailsElement = await waitFor(() => screen.getByTestId('details'));
+      expect(detailsElement).toBeInTheDocument();
 
-//   it('Clicking the close button hides the component', async () => {
-//     render(
-//       <Provider store={store}>
-//         <MemoryRouter initialEntries={['/']}>
-//           <Routes>
-//             <Route path="/" element={<BookCard {...book} />} />
-//             <Route path="/book/:id" element={<DetailsBookCard />} />
-//           </Routes>
-//         </MemoryRouter>
-//       </Provider>
-//     );
+      fireEvent.click(screen.getByTestId('close-btn'));
 
-//     fireEvent.click(screen.getByTestId('book'));
-
-//     const detailsElement = await waitFor(() => screen.getByTestId('details'));
-//     expect(detailsElement).toBeInTheDocument();
-
-//     fireEvent.click(screen.getByTestId('close-btn'));
-
-//     await waitFor(() => {
-//       expect(screen.queryByTestId('details')).toBeNull();
-//     });
-//   });
-// });
-
-test.todo('Some test');
+      await waitFor(() => {
+        expect(screen.queryByTestId('details')).toBeNull();
+      });
+    });
+  });
+});

@@ -8,12 +8,14 @@ import {
   ScrollRestoration,
   useLoaderData,
   useNavigation,
+  useRouteError,
 } from '@remix-run/react';
 
 import { Provider } from 'react-redux';
 import styles from './shared.css?url';
 import {
   BooksList,
+  ErrorPage,
   FlyingList,
   Header,
   Loader,
@@ -48,7 +50,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({ data, search });
 };
 
-const Root = () => {
+export const Root = () => {
   const { theme } = useAppSelector((state) => state.theme);
   const { data, search } = useLoaderData<typeof loader>();
 
@@ -70,7 +72,7 @@ const Root = () => {
         <Links />
       </head>
       <body>
-        <div id="root">
+        <div id="root" data-testid="root">
           <div className={`page ${theme}`} data-testid="page-container">
             <Header search={search} />
             <main className="main">
@@ -103,7 +105,26 @@ const Root = () => {
   );
 };
 
+export function ErrorBoundary() {
+  const error = useRouteError();
+  console.error(error);
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <ErrorPage />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
 export default function App() {
+
   return (
     <Provider store={store}>
       <Root />

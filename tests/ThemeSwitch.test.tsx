@@ -1,41 +1,57 @@
-// import '@testing-library/jest-dom';
-// import { describe, expect, it } from 'vitest';
-// import { fireEvent, render, screen } from '@testing-library/react';
-// import App from '../src/App';
-// import { Provider } from 'react-redux';
-// import { ThemeSwitch } from '../src/components';
-// import { store } from '../src/store/store';
+import '@testing-library/jest-dom';
+import { json } from '@remix-run/node';
+import { createRemixStub } from '@remix-run/testing';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { describe, expect, it } from 'vitest';
+import { ThemeSwitch } from '../src/components';
+import { store } from '../src/store/store';
+import themeReducer, { setTheme } from '../src/store/themeSlice';
 
-// describe('ThemeSwitch', () => {
-//   it('The theme name is saved in the localStorage', () => {
-//     render(<ThemeSwitch />);
+describe('ThemeSwitch', () => {
+  it('Theme is changing', async () => {
+    const dispatch = vi.fn();
 
-//     fireEvent.click(screen.getByTestId('dark-button'));
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <ThemeSwitch />,
+        loader() {
+          return json({ message: 'hello' });
+        },
+      },
+    ]);
 
-//     const themeName = localStorage.getItem('book-theme');
+    render(
+      <Provider store={store}>
+        <RemixStub />
+      </Provider>
+    );
 
-//     expect(themeName).toBe('dark');
-//   });
+    const darkBtn = await screen.findByTestId('dark-button');
+    fireEvent.click(darkBtn);
 
-//   it('Theme is changing', () => {
-//     render(
-//       <Provider store={store}>
-//         <App />
-//       </Provider>
-//     );
+    waitFor(() => {
+      expect(dispatch).toHaveBeenCalledWith(setTheme('dark'));
+    });
 
-//     fireEvent.click(screen.getByTestId('dark-button'));
-//     const isThemeDark = screen
-//       .getByTestId('page-container')
-//       .classList.contains('dark');
-//     expect(isThemeDark).toBe(true);
+    const lightBtn = await screen.findByTestId('light-button');
+    fireEvent.click(lightBtn);
 
-//     fireEvent.click(screen.getByTestId('light-button'));
-//     const isThemeLight = screen
-//       .getByTestId('page-container')
-//       .classList.contains('light');
-//     expect(isThemeLight).toBe(true);
-//   });
-// });
+    waitFor(() => {
+      expect(dispatch).toHaveBeenCalledWith(setTheme('light'));
+    });
 
-test.todo('Some test');
+  });
+});
+
+describe('ThemeSlice', () => {
+  it('Theme should be changed in store', () => {
+    const initialState = {
+      theme: 'dark',
+    };
+    const state = themeReducer(initialState, setTheme('light'));
+
+    expect(state.theme).toBe('light');
+  });
+});

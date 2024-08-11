@@ -57,6 +57,7 @@ const FlyingList: FC = () => {
           <li key={item.id}>
             {item.title}
             <button
+              data-testid={`unselect-${item.id}`}
               onClick={() => {
                 dispatch(removeBookFromSelected(item.id));
               }}

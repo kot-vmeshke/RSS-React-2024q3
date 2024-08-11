@@ -1,163 +1,78 @@
-// import '@testing-library/jest-dom';
-// import { RootState, store } from '../src/store/store';
-// import { describe, expect, it } from 'vitest';
-// import { fireEvent, screen, waitFor } from '@testing-library/react';
-// import { Book } from '../src/types';
-// import { CheckButton } from '../src/components';
-// import { apiSlice } from '../src/store/apiSlice';
-// import { removeBookFromSelected } from '../src/store/selectedBooksSlice';
-// import { renderWithProviderAndRouter } from '../src/utils';
-// import { useSelector } from 'react-redux';
+import '@testing-library/jest-dom';
+import { json } from '@remix-run/node';
+import { createRemixStub } from '@remix-run/testing';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { describe, expect, it } from 'vitest';
+import { book, books, data } from './utils/constants';
+import { renderWithProvider } from './utils/mockStore';
+import { CheckButton } from '../src/components';
+import { useAppSelector } from '../src/hooks/redux';
+import {
+  addBookToSelected,
+  removeBookFromSelected,
+} from '../src/store/selectedBooksSlice';
+import { store } from '../src/store/store';
+import { Book } from '../src/types';
 
-// const bookId = 1513;
-// const books: Book[] = [
-//   {
-//     id: 1513,
-//     title: 'Romeo and Juliet',
-//     authors: [
-//       {
-//         name: 'Shakespeare, William',
-//         birth_year: 1564,
-//         death_year: 1616,
-//       },
-//     ],
-//     translators: [],
-//     subjects: [
-//       'Conflict of generations -- Drama',
-//       'Juliet (Fictitious character) -- Drama',
-//       'Romeo (Fictitious character) -- Drama',
-//       'Tragedies',
-//       'Vendetta -- Drama',
-//       'Verona (Italy) -- Drama',
-//       'Youth -- Drama',
-//     ],
-//     bookshelves: [],
-//     languages: ['en'],
-//     copyright: false,
-//     media_type: 'Text',
-//     formats: {
-//       'text/html': 'https://www.gutenberg.org/ebooks/1513.html.images',
-//       'application/epub+zip':
-//         'https://www.gutenberg.org/ebooks/1513.epub3.images',
-//       'application/x-mobipocket-ebook':
-//         'https://www.gutenberg.org/ebooks/1513.kf8.images',
-//       'application/rdf+xml': 'https://www.gutenberg.org/ebooks/1513.rdf',
-//       'image/jpeg':
-//         'https://www.gutenberg.org/cache/epub/1513/pg1513.cover.medium.jpg',
-//       'text/plain; charset=us-ascii':
-//         'https://www.gutenberg.org/ebooks/1513.txt.utf-8',
-//       'application/octet-stream':
-//         'https://www.gutenberg.org/cache/epub/1513/pg1513-h.zip',
-//     },
-//     download_count: 77782,
-//   },
-//   {
-//     id: 2701,
-//     title: 'Moby Dick; Or, The Whale',
-//     authors: [
-//       {
-//         name: 'Melville, Herman',
-//         birth_year: 1819,
-//         death_year: 1891,
-//       },
-//     ],
-//     translators: [],
-//     subjects: [
-//       'Adventure stories',
-//       'Ahab, Captain (Fictitious character) -- Fiction',
-//       'Mentally ill -- Fiction',
-//       'Psychological fiction',
-//       'Sea stories',
-//       'Ship captains -- Fiction',
-//       'Whales -- Fiction',
-//       'Whaling -- Fiction',
-//       'Whaling ships -- Fiction',
-//     ],
-//     bookshelves: ['Best Books Ever Listings'],
-//     languages: ['en'],
-//     copyright: false,
-//     media_type: 'Text',
-//     formats: {
-//       'text/html': 'https://www.gutenberg.org/ebooks/2701.html.images',
-//       'text/html; charset=utf-8':
-//         'https://www.gutenberg.org/files/2701/2701-h/2701-h.htm',
-//       'application/epub+zip':
-//         'https://www.gutenberg.org/ebooks/2701.epub3.images',
-//       'application/x-mobipocket-ebook':
-//         'https://www.gutenberg.org/ebooks/2701.kf8.images',
-//       'text/plain; charset=utf-8':
-//         'https://www.gutenberg.org/files/2701/2701-0.txt',
-//       'application/rdf+xml': 'https://www.gutenberg.org/ebooks/2701.rdf',
-//       'image/jpeg':
-//         'https://www.gutenberg.org/cache/epub/2701/pg2701.cover.medium.jpg',
-//       'application/octet-stream':
-//         'https://www.gutenberg.org/cache/epub/2701/pg2701-h.zip',
-//       'text/plain; charset=us-ascii':
-//         'https://www.gutenberg.org/ebooks/2701.txt.utf-8',
-//     },
-//     download_count: 71888,
-//   },
-// ];
+describe('CheckButton', () => {
+  it('Click on checkbox saves item to store and remove from store', () => {
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <CheckButton book={book} />,
+        loader() {
+          return json({ message: 'hello' });
+        },
+      },
+    ]);
+    render(
+      <Provider store={store}>
+        <RemixStub />
+      </Provider>
+    );
 
-// vi.mock('react-router-dom', async (importOriginal) => {
-//   const actual = await importOriginal();
-//   return {
-//     ...(actual as object),
-//     useSearchParams: vi.fn().mockReturnValue([
-//       {
-//         get: () => '1',
-//         set: vi.fn(),
-//       },
-//       vi.fn(),
-//     ]),
-//   };
-// });
+    waitFor(() => {
+      const checkbox = screen.getAllByTestId('checkbox')[0] as HTMLInputElement;
+      fireEvent.click(checkbox);
 
-// vi.mock('../src/hooks/useLocalStorage', () => ({
-//   useLocalStorage: () => ['', vi.fn()],
-// }));
+      expect(store.dispatch).toHaveBeenCalledWith(addBookToSelected(book));
 
-// describe('CheckButton', () => {
-//   it('Click on checkbox saves item to store and remove from store', async () => {
-//     apiSlice.useGetBooksQuery = vi
-//       .fn()
-//       .mockReturnValue({ data: { results: books } });
+      const selectedBooks: Book[] = useAppSelector(
+        (state) => state.selectedBooks
+      );
 
-//     renderWithProviderAndRouter(<CheckButton bookId={bookId} />);
+      const isInStore = Boolean(
+        selectedBooks.find((item) => item.id === book.id)
+      );
+      expect(isInStore).toBe(true);
 
-//     waitFor(() => {
-//       const checkbox = screen.getByTestId('checkbox') as HTMLInputElement;
-//       fireEvent.click(checkbox);
+      fireEvent.click(checkbox);
 
-//       expect(store.dispatch).toHaveBeenCalled();
+      expect(store.dispatch).toHaveBeenCalledWith(
+        removeBookFromSelected(book.id)
+      );
+    });
+  });
 
-//       const selectedBooks: Book[] = useSelector(
-//         (state: RootState) => state.selectedBooks
-//       );
+  it('If book selected, component shows checked icon', async () => {
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: () => <CheckButton book={book} />,
+        loader() {
+          return json({ data, search: '' });
+        },
+      },
+    ]);
 
-//       const isInStore = Boolean(
-//         selectedBooks.find((item) => item.id === bookId)
-//       );
-//       expect(isInStore).toBe(true);
+    renderWithProvider(<RemixStub />, {
+      preloadedState: {
+        selectedBooks: books,
+      },
+    });
 
-//       fireEvent.click(checkbox);
-
-//       expect(store.dispatch).toHaveBeenCalledWith(
-//         removeBookFromSelected(bookId)
-//       );
-//     });
-//   });
-
-//   it('If book selected, component shows checked icon', () => {
-//     renderWithProviderAndRouter(<CheckButton bookId={bookId} />);
-
-//     waitFor(() => {
-//       expect(screen.getByTestId('checked-icon')).toBeFalsy();
-//       fireEvent.click(screen.getByRole('label'));
-
-//       expect(screen.getByTestId('checked-icon')).toBeInTheDocument();
-//     });
-//   });
-// });
-
-test.todo('Some test');
+    const icon = await screen.findByTestId('checked-icon');
+    expect(icon).toBeInTheDocument();
+  });
+});

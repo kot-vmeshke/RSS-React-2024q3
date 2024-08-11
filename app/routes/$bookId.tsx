@@ -1,6 +1,6 @@
 import { json, LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
-import { useLoaderData, useNavigation } from '@remix-run/react';
-import { DetailsBookCard, Loader } from '../../src/components';
+import { useLoaderData } from '@remix-run/react';
+import { DetailsBookCard } from '../../src/components';
 import { Book } from '../../src/types';
 
 export const links: LinksFunction = () => {
@@ -23,17 +23,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 const OneBookPage = () => {
   const { data } = useLoaderData<typeof loader>();
 
-  const navigation = useNavigation();
-
-  return (
-    <>
-      {navigation.state === 'loading' ? (
-        <Loader />
-      ) : (
-        <DetailsBookCard data={data} />
-      )}
-    </>
-  );
+  return <DetailsBookCard data={data} />;
 };
 
 export default OneBookPage;

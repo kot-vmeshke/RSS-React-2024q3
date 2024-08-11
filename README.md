@@ -24,4 +24,4 @@ To run the project, use
 ```
 npm run dev
 ```
-The project will be served on port [5173](http://localhost:5173/).
+The project will be served on port [3000](http://localhost:3000/).

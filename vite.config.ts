@@ -7,10 +7,11 @@ import { coverageConfigDefaults } from 'vitest/config';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
-    remix({
-      ignoredRouteFiles: ['**/*.css'],
-    }),
+    process.env.VITEST
+      ? react()
+      : remix({
+          ignoredRouteFiles: ['**/*.css'],
+        }),
   ],
   test: {
     globals: true,

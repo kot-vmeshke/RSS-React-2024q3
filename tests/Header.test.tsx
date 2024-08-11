@@ -1,15 +1,38 @@
-// import '@testing-library/jest-dom';
-// import { describe, expect, it } from 'vitest';
-// import { Header } from '../src/components';
-// import { renderWithProviderAndRouter } from '../src/utils';
-// import { screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { createRemixStub } from '@remix-run/testing';
+import { render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { describe, expect, it } from 'vitest';
+import { loader, Root } from '../app/root';
+import { store } from '../src/store/store';
 
-// describe('Header', () => {
-//   it('Header is rendering', () => {
-//     renderWithProviderAndRouter(<Header />);
-//     const appTitle = screen.getByText(/Search books/i);
-//     expect(appTitle).toBeInTheDocument();
-//   });
-// });
+vi.mock('@remix-run/react', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...(actual as object),
+    useSubmit: vi.fn(),
+  };
+});
 
-test.todo('Some test');
+describe('Header', () => {
+  it('Header is rendering', () => {
+    const RemixStub = createRemixStub([
+      {
+        path: '/',
+        Component: Root,
+        loader,
+      },
+    ]);
+
+    render(
+      <Provider store={store}>
+        <RemixStub />
+      </Provider>
+    );
+
+    waitFor(() => {
+      const appTitle = screen.getByText(/Search books/i);
+      expect(appTitle).toBeInTheDocument();
+    });
+  });
+});
