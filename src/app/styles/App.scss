@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, Arial, Arial, Helvetica, sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+svg {
+  display: block;
+}
+main {
+  flex: 1 1 100%;
+}
+a,
+a:is(:hover, :focus) {
+  text-decoration: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1104px;
+  margin: 0 auto;
+  padding: 40px;
+}

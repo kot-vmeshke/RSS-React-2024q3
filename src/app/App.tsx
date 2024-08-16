@@ -1,7 +1,9 @@
-import "./App.scss";
+import { AppRouter } from "@/app/routers";
+
+import "@/app/styles/App.scss";
 
 function App() {
-  return <h1>Hello, Forms!</h1>;
+  return <AppRouter />;
 }
 
 export { App };
