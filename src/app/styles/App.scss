@@ -21,6 +21,13 @@ a,
 a:is(:hover, :focus) {
   text-decoration: none;
 }
+input {
+  &:autofill,
+  &:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    background: transparent !important;
+  }
+}
 
 .container {
   width: 100%;
