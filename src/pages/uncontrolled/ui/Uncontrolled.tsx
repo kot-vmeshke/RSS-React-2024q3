@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch } from "@/shared/store";
+import { useAppDispatch, useAppSelector } from "@/shared/store";
+import { Eye, EyeOff } from "@/shared/ui/icons";
 
 import { addToSubmitHistory } from "../model";
 
@@ -10,6 +11,8 @@ import "./Uncontrolled.scss";
 const Uncontrolled = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const navigate = useNavigate();
+  const countries = useAppSelector((state) => state.countries);
+  const [isVisible, setIsVisible] = useState(false);
 
   const form = useRef<HTMLFormElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -28,6 +31,10 @@ const Uncontrolled = () => {
     } else {
       setPreview(null);
     }
+  };
+
+  const handleVisiblePassword = () => {
+    setIsVisible(!isVisible);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,6 +70,7 @@ const Uncontrolled = () => {
   return (
     <main className="control">
       <div className="container control__container">
+        <h1 className="control__title">Uncontrolled Form</h1>
         <form
           action=""
           className="control__form"
@@ -92,16 +100,27 @@ const Uncontrolled = () => {
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input
-              type="password"
+              type={isVisible ? "text" : "password"}
               placeholder="*****"
               name="password"
               id="password"
             />
+            <button onClick={handleVisiblePassword} type="button">
+              {isVisible ? <Eye /> : <EyeOff />}
+            </button>
             <span className="input-error">Something went wrong...</span>
           </div>
           <div className="input-wrapper">
-            <label htmlFor="passwordConfirm">Confirm password</label>
-            <input type="password" placeholder="*****" id="passwordConfirm" />
+            <label htmlFor="password-confirm">Confirm password</label>
+            <input
+              type={isVisible ? "text" : "password"}
+              placeholder="*****"
+              name="passwordConfirm"
+              id="password-confirm"
+            />
+            <button onClick={handleVisiblePassword} type="button">
+              {isVisible ? <Eye /> : <EyeOff />}
+            </button>
             <span className="input-error">Something went wrong...</span>
           </div>
 
@@ -126,11 +145,20 @@ const Uncontrolled = () => {
 
           <div className="input-wrapper">
             <label htmlFor="country">Country</label>
-            <input type="text" placeholder="USA" name="country" id="country" />
-            <div className="list">
-              <div className="list__option">Poland</div>
-              <div className="list__option">Ukraine</div>
-            </div>
+            <input
+              type="text"
+              placeholder="USA"
+              name="country"
+              id="country"
+              list="countries"
+            />
+            <datalist className="list" id="countries">
+              {countries.map((country) => (
+                <option className="list__option" value={country} key={country}>
+                  {country}
+                </option>
+              ))}
+            </datalist>
             <span className="input-error">Something went wrong...</span>
           </div>
 
