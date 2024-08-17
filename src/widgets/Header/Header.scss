@@ -6,6 +6,13 @@
   padding: 30px;
   background: #dfdfdf;
 
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
   &__title {
     font-weight: 500;
     font-size: 28px;

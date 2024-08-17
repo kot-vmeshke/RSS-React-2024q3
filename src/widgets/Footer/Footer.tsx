@@ -5,10 +5,12 @@ import "./Footer.scss";
 const Footer = () => {
   return (
     <footer className="footer">
-      <a href="https://github.com/kot-vmeshke" target="_blank">
-        <GitIcon />
-      </a>
-      <span>© 2024</span>
+      <div className="container footer__container">
+        <a href="https://github.com/kot-vmeshke" target="_blank">
+          <GitIcon />
+        </a>
+        <span>© 2024</span>
+      </div>
     </footer>
   );
 };
