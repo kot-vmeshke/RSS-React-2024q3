@@ -1,2 +1,2 @@
-import formReducer, { addToSubmitHistory } from "./formSlice";
-export { formReducer, addToSubmitHistory };
+import formReducer, { addLastUpdated, addToSubmitHistory } from "./formSlice";
+export { formReducer, addToSubmitHistory, addLastUpdated };

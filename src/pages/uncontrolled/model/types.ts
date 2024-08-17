@@ -7,4 +7,5 @@ export interface formDataType {
   file: string;
   age: number;
   terms: boolean;
+  id: string;
 }

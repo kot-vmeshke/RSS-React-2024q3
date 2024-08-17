@@ -2,18 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { formDataType } from "./types";
 
-const initialState: formDataType[] = [];
+const initialState: { forms: formDataType[]; lastUpdated: string } = {
+  forms: [],
+  lastUpdated: "",
+};
 
 export const formSlice = createSlice({
   name: "forms",
   initialState,
   reducers: {
     addToSubmitHistory: (state, action) => {
-      state.unshift(action.payload);
+      state.forms.unshift(action.payload);
+    },
+    addLastUpdated: (state, action) => {
+      state.lastUpdated = action.payload;
     },
   },
 });
 
-export const { addToSubmitHistory } = formSlice.actions;
+export const { addToSubmitHistory, addLastUpdated } = formSlice.actions;
 
 export default formSlice.reducer;

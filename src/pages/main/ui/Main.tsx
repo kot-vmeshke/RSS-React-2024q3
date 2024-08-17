@@ -1,30 +1,36 @@
 import { useEffect, useRef } from "react";
 
+import { addLastUpdated } from "@/pages/uncontrolled/model";
 import { formDataType } from "@/pages/uncontrolled/model/types";
-import { useAppSelector } from "@/shared/store";
+import { useAppDispatch, useAppSelector } from "@/shared/store";
 
 import "./Main.scss";
 
 const Main = () => {
-  const formsResults = useAppSelector((state) => state.forms);
+  const formsResults = useAppSelector((state) => state.forms.forms);
+  const lastUpdated = useAppSelector((state) => state.forms.lastUpdated);
+  const dispatch = useAppDispatch();
 
-  const lastAddedRef = useRef<HTMLDivElement | null>(null);
+  const lastUpdatedRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setTimeout(() => {
-      lastAddedRef.current?.classList.remove("highlighted");
+      lastUpdatedRef.current?.classList.remove("highlighted");
+      dispatch(addLastUpdated(""));
     }, 1000);
+    // eslint-disable-next-line react-compiler/react-compiler
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <main className="main">
       <div className="container main__container">
         {formsResults.length ? (
-          formsResults.map((item: formDataType, index: number) => (
+          formsResults.map((item: formDataType) => (
             <div
-              className={`main__item ${index === 0 ? "highlighted" : ""}`}
+              className={`main__item ${item.id === lastUpdated ? "highlighted" : ""}`}
               key={item.name}
-              ref={index === 0 ? lastAddedRef : null}
+              ref={item.id === lastUpdated ? lastUpdatedRef : null}
             >
               <div className="main__item-img">
                 <img src={item.file} alt="" />

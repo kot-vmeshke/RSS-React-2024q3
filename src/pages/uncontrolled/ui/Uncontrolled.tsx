@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { nanoid } from "nanoid";
 
 import { useAppDispatch, useAppSelector } from "@/shared/store";
 import { Eye, EyeOff } from "@/shared/ui/icons";
 
-import { addToSubmitHistory } from "../model";
+import { addLastUpdated, addToSubmitHistory } from "../model";
 
 import "./Uncontrolled.scss";
 
@@ -52,12 +53,15 @@ const Uncontrolled = () => {
           const base64String = reader.result as string;
           formData.set("file", base64String);
 
-          const object: Record<string, FormDataEntryValue> = {};
+          const object: Record<string, FormDataEntryValue> = {
+            id: nanoid(),
+          };
           for (const pair of formData.entries()) {
             console.log(pair[0], pair[1]);
             object[pair[0]] = pair[1];
           }
 
+          dispatch(addLastUpdated(object.id));
           dispatch(addToSubmitHistory(object));
           navigate("/");
         };
