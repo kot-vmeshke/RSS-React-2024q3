@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "@/shared/store";
 
@@ -8,6 +9,7 @@ import "./Uncontrolled.scss";
 
 const Uncontrolled = () => {
   const [preview, setPreview] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const form = useRef<HTMLFormElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -50,6 +52,7 @@ const Uncontrolled = () => {
           }
 
           dispatch(addToSubmitHistory(object));
+          navigate("/");
         };
 
         reader.readAsDataURL(file);
@@ -67,28 +70,38 @@ const Uncontrolled = () => {
           ref={form}
         >
           <div className="input-wrapper">
-            <label htmlFor="">Name</label>
-            <input type="text" placeholder="John" name="name" />
+            <label htmlFor="name">Name</label>
+            <input type="text" placeholder="John" name="name" id="name" />
             <span className="input-error">Something went wrong...</span>
           </div>
           <div className="input-wrapper">
-            <label htmlFor="">Age</label>
-            <input type="number" placeholder="25" name="age" />
+            <label htmlFor="age">Age</label>
+            <input type="number" placeholder="25" name="age" id="age" />
             <span className="input-error">Something went wrong...</span>
           </div>
           <div className="input-wrapper">
-            <label htmlFor="">Email</label>
-            <input type="email" placeholder="john@gmail.com" name="email" />
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              placeholder="john@gmail.com"
+              name="email"
+              id="email"
+            />
             <span className="input-error">Something went wrong...</span>
           </div>
           <div className="input-wrapper">
-            <label htmlFor="">Password</label>
-            <input type="password" placeholder="*****" name="password" />
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              placeholder="*****"
+              name="password"
+              id="password"
+            />
             <span className="input-error">Something went wrong...</span>
           </div>
           <div className="input-wrapper">
-            <label htmlFor="">Confirm password</label>
-            <input type="password" placeholder="*****" name="passwordConfirm" />
+            <label htmlFor="passwordConfirm">Confirm password</label>
+            <input type="password" placeholder="*****" id="passwordConfirm" />
             <span className="input-error">Something went wrong...</span>
           </div>
 
@@ -112,8 +125,8 @@ const Uncontrolled = () => {
           </div>
 
           <div className="input-wrapper">
-            <label htmlFor="">Country</label>
-            <input type="text" placeholder="USA" name="country" />
+            <label htmlFor="country">Country</label>
+            <input type="text" placeholder="USA" name="country" id="country" />
             <div className="list">
               <div className="list__option">Poland</div>
               <div className="list__option">Ukraine</div>
