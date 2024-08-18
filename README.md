@@ -13,6 +13,9 @@ This project uses:
 - Typescript
 - Vite
 - React
+- Redux
+- React Hook Form
+- Yup
 - ESLint, Prettier
 
 ## Installation
