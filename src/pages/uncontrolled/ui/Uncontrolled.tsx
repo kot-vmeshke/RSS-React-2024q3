@@ -58,7 +58,7 @@ const Uncontrolled = () => {
     setIsVisible(!isVisible);
   };
 
-  const handlePasswordStraight = () => {
+  const handlePasswordStrength = () => {
     if (passwordInput.current) {
       const pass = passwordInput.current.value;
       const isLength = pass.length >= 8;
@@ -174,9 +174,9 @@ const Uncontrolled = () => {
           <div
             className={`input-wrapper ${errors.password.length ? "has-error" : ""}`}
           >
-            <div className="password-straight-wrapper">
+            <div className="password-strength-wrapper">
               <span
-                className="password-straight"
+                className="password-strength"
                 style={{ width: `${indicatorWidth}%` }}
               ></span>
             </div>
@@ -187,7 +187,7 @@ const Uncontrolled = () => {
               name="password"
               id="password"
               ref={passwordInput}
-              onInput={handlePasswordStraight}
+              onInput={handlePasswordStrength}
             />
             <button onClick={handleVisiblePassword} type="button">
               {isVisible ? <Eye /> : <EyeOff />}

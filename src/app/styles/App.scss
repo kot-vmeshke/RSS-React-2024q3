@@ -358,14 +358,14 @@ input {
   }
 }
 
-.password-straight-wrapper {
+.password-strength-wrapper {
   position: absolute;
   inset: 0;
   border-radius: 7px;
   overflow: hidden;
   z-index: -1;
 }
-.password-straight {
+.password-strength {
   position: absolute;
   inset: 0 auto auto 0;
   width: 0%;

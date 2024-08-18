@@ -69,7 +69,7 @@ const Controlled = () => {
     setIsVisible(!isVisible);
   };
 
-  const handlePasswordStraight = (
+  const handlePasswordStrength = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const pass = event.target.value;
@@ -135,9 +135,9 @@ const Controlled = () => {
           <div
             className={`input-wrapper ${errors.password ? "has-error" : ""}`}
           >
-            <div className="password-straight-wrapper">
+            <div className="password-strength-wrapper">
               <span
-                className="password-straight"
+                className="password-strength"
                 style={{ width: `${indicatorWidth}%` }}
               ></span>
             </div>
@@ -147,7 +147,7 @@ const Controlled = () => {
               placeholder="*****"
               id="password"
               {...register("password")}
-              onInput={handlePasswordStraight}
+              onInput={handlePasswordStrength}
             />
             <button onClick={handleVisiblePassword} type="button">
               {isVisible ? <Eye /> : <EyeOff />}
