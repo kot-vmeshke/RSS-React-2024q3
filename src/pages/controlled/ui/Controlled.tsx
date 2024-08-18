@@ -122,6 +122,7 @@ const Controlled = () => {
             />
             <span className="input-error">{errors.age?.message}</span>
           </div>
+
           <div className={`input-wrapper ${errors.email ? "has-error" : ""}`}>
             <label htmlFor="email">Email</label>
             <input
@@ -132,6 +133,7 @@ const Controlled = () => {
             />
             <span className="input-error">{errors.email?.message}</span>
           </div>
+
           <div
             className={`input-wrapper ${errors.password ? "has-error" : ""}`}
           >

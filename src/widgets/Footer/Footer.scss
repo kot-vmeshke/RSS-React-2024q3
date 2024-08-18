@@ -1,8 +1,8 @@
 .footer {
   margin-top: auto;
   padding: 20px 30px;
-  background: #484848;
-  color: #ffffff;
+  background: var(--color-dark-m);
+  color: var(--color-light-xl);
 
   &__container {
     display: flex;

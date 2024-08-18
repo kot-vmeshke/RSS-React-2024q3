@@ -4,7 +4,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 30px;
     padding: 50px;
-    color: #83898c;
+    color: var(--color-dark-s);
     text-align: center;
   }
 
@@ -16,12 +16,12 @@
     gap: 20px;
     padding: 20px;
     border-radius: 16px;
-    border: 1px solid #cccccc;
+    border: 1px solid var(--color-light-m);
     transition: all 0.5s;
 
     &.highlighted {
-      border: 1px solid #444444;
-      background: #f1f1f1;
+      border: 1px solid var(--color-success);
+      background: var(--color-highlight);
     }
 
     &-img {
@@ -43,14 +43,14 @@
       font-weight: 500;
       font-size: 24px;
       text-align: left;
-      color: #000000;
+      color: var(--color-dark-xl);
     }
 
     &-text {
       font-weight: 300;
       font-size: 16px;
       text-align: left;
-      color: #000000;
+      color: var(--color-dark-xl);
 
       b {
         font-weight: 500;

@@ -4,7 +4,7 @@
   justify-content: space-between;
   gap: 20px;
   padding: 30px;
-  background: #dfdfdf;
+  background: var(--color-light-l);
 
   &__container {
     display: flex;
@@ -30,7 +30,7 @@
     position: relative;
     font-weight: 500;
     font-size: 16px;
-    color: #000000;
+    color: var(--color-dark-xl);
     &::after {
       content: "";
       position: absolute;
@@ -38,7 +38,7 @@
       left: -2px;
       width: 0;
       height: 1px;
-      background: #000000;
+      background: var(--color-dark-xl);
       transition: width 0.5s;
     }
 
