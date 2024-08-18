@@ -16,6 +16,7 @@ import "./Controlled.scss";
 const Controlled = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [indicatorWidth, setIndicatorWidth] = useState(0);
   const countries = useAppSelector((state) => state.countries);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -64,6 +65,30 @@ const Controlled = () => {
     setIsVisible(!isVisible);
   };
 
+  const handlePasswordStraight = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const pass = event.target.value;
+
+    const isLength = pass.length >= 8;
+    const hasUppercaseLetter = /[A-Z]/g.test(pass);
+    const hasLowerLetter = /[a-z]/g.test(pass);
+    const hasNumber = /[0-9]/g.test(pass);
+    const hasCharacter = /[!@#$%^&*]/g.test(pass);
+
+    const conditions = [
+      isLength,
+      hasUppercaseLetter,
+      hasLowerLetter,
+      hasNumber,
+      hasCharacter,
+    ];
+
+    const width = conditions.filter(Boolean).length * 20;
+
+    setIndicatorWidth(width);
+  };
+
   return (
     <main className="control">
       <div className="container control__container">
@@ -106,12 +131,19 @@ const Controlled = () => {
           <div
             className={`input-wrapper ${errors.password ? "has-error" : ""}`}
           >
+            <div className="password-straight-wrapper">
+              <span
+                className="password-straight"
+                style={{ width: `${indicatorWidth}%` }}
+              ></span>
+            </div>
             <label htmlFor="password">Password</label>
             <input
               type={isVisible ? "text" : "password"}
               placeholder="*****"
               id="password"
               {...register("password")}
+              onInput={handlePasswordStraight}
             />
             <button onClick={handleVisiblePassword} type="button">
               {isVisible ? <Eye /> : <EyeOff />}
