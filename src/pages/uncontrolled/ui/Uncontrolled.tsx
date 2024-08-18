@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { ValidationError } from "yup";
 
+import { addLastUpdated, addToSubmitHistory } from "@/features/submitHistory";
 import { useAppDispatch, useAppSelector } from "@/shared/store";
 import { Eye, EyeOff } from "@/shared/ui/icons";
 
-import { addLastUpdated, addToSubmitHistory, userSchema } from "../model";
+import { userSchema } from "../model";
 
 interface ErrorsObject {
   [key: string]: string;

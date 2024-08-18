@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
+import { formReducer } from "@/features/submitHistory";
 import { countriesReducer } from "@/pages/controlled/model";
-import { formReducer } from "@/pages/uncontrolled/model";
 
 export const store = configureStore({
   reducer: {

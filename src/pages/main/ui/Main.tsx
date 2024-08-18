@@ -1,7 +1,10 @@
 import { useEffect, useRef } from "react";
 
-import { addLastUpdated } from "@/pages/uncontrolled/model";
-import { formDataType } from "@/pages/uncontrolled/model/types";
+import {
+  addLastUpdated,
+  formDataType,
+  SubmitCard,
+} from "@/features/submitHistory";
 import { useAppDispatch, useAppSelector } from "@/shared/store";
 
 import "./Main.scss";
@@ -15,7 +18,9 @@ const Main = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      lastUpdatedRef.current?.classList.remove("highlighted");
+      lastUpdatedRef.current
+        ?.querySelector(".main__item")
+        ?.classList.remove("highlighted");
       dispatch(addLastUpdated(""));
     }, 1000);
     // eslint-disable-next-line react-compiler/react-compiler
@@ -27,33 +32,12 @@ const Main = () => {
       <div className="container main__container">
         {formsResults.length ? (
           formsResults.map((item: formDataType) => (
-            <div
-              className={`main__item ${item.id === lastUpdated ? "highlighted" : ""}`}
-              key={item.name}
+            <span
+              key={item.id}
               ref={item.id === lastUpdated ? lastUpdatedRef : null}
             >
-              <div className="main__item-img">
-                <img src={item.file} alt="" />
-              </div>
-              <div className="main__item-data">
-                <h3 className="main__item-name">{item.name}</h3>
-                <p className="main__item-text">
-                  <b>Age:</b> {item.age}
-                </p>
-                <p className="main__item-text">
-                  <b>Country:</b> {item.country}
-                </p>
-                <p className="main__item-text">
-                  <b>Gender:</b> {item.gender}
-                </p>
-                <p className="main__item-text">
-                  <b>Email:</b> {item.email}
-                </p>
-                <p className="main__item-text">
-                  <b>Password:</b> {item.password}
-                </p>
-              </div>
-            </div>
+              <SubmitCard {...item} />
+            </span>
           ))
         ) : (
           <span style={{ gridColumn: "span 2" }}>

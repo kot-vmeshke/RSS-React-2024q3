@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { nanoid } from "nanoid";
 
-import { addLastUpdated, addToSubmitHistory } from "@/pages/uncontrolled/model";
+import { addLastUpdated, addToSubmitHistory } from "@/features/submitHistory";
 import { useAppDispatch, useAppSelector } from "@/shared/store";
 import { Eye, EyeOff } from "@/shared/ui/icons";
 
