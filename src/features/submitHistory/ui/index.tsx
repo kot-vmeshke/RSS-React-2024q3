@@ -1,0 +1,1 @@
+export { SubmitCard } from "./submitCard";

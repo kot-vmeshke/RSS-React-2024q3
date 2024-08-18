@@ -1,0 +1,17 @@
+.footer {
+  margin-top: auto;
+  padding: 20px 30px;
+  background: var(--color-dark-m);
+  color: var(--color-light-xl);
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  a {
+    color: inherit;
+  }
+}
