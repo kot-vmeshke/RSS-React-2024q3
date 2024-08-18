@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { countries } from "./constants";
+import { countries } from "../../../features/countriesAutocomplete/model/constants";
 
 const initialState = countries;
 

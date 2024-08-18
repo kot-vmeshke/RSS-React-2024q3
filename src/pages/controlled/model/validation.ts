@@ -1,6 +1,6 @@
 import { boolean, InferType, mixed, number, object, ref, string } from "yup";
 
-import { countries } from "./constants";
+import { countries } from "@/features/countriesAutocomplete";
 
 const MAX_FILE_SIZE = 2097152;
 
