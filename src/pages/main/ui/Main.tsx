@@ -57,7 +57,7 @@ const Main = () => {
           ))
         ) : (
           <span style={{ gridColumn: "span 2" }}>
-            There is no saved results eat, please go to one of forms (use
+            There are no saved results eat, please go to one of forms (use
             navigation in header)
           </span>
         )}

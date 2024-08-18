@@ -11,12 +11,11 @@ import { Eye, EyeOff } from "@/shared/ui/icons";
 import type { FormData } from "../model";
 import { userSchema } from "../model";
 
-import "./Controlled.scss";
-
 const Controlled = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [indicatorWidth, setIndicatorWidth] = useState(0);
+  const [isSuccess, setIsSuccess] = useState(false);
   const countries = useAppSelector((state) => state.countries);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -41,7 +40,12 @@ const Controlled = () => {
 
       dispatch(addLastUpdated(data.id));
       dispatch(addToSubmitHistory(data));
-      navigate("/");
+
+      setIsSuccess(true);
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     };
 
     reader.readAsDataURL(file);
@@ -256,7 +260,7 @@ const Controlled = () => {
           </div>
 
           <button
-            className="send"
+            className={`send ${isSuccess ? "success" : ""}`}
             type="submit"
             disabled={Boolean(Object.keys(errors).length)}
           >

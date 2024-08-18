@@ -1,2 +1,11 @@
 import formReducer, { addLastUpdated, addToSubmitHistory } from "./formSlice";
-export { formReducer, addToSubmitHistory, addLastUpdated };
+import type { TFormData } from "./validation";
+import { userSchema } from "./validation";
+
+export {
+  formReducer,
+  addToSubmitHistory,
+  addLastUpdated,
+  TFormData,
+  userSchema,
+};
