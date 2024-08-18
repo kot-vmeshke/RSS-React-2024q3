@@ -295,6 +295,11 @@
   color: #fff;
   background: var(--black-3);
   cursor: pointer;
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 .preview {

@@ -1,82 +1,49 @@
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { boolean, mixed, number, object, string } from "yup";
+import { nanoid } from "nanoid";
 
-import { useAppSelector } from "@/shared/store";
+import { addLastUpdated, addToSubmitHistory } from "@/pages/uncontrolled/model";
+import { useAppDispatch, useAppSelector } from "@/shared/store";
 import { Eye, EyeOff } from "@/shared/ui/icons";
 
-import { countries } from "../model/constants";
+import type { FormData } from "../model";
+import { userSchema } from "../model";
 
 import "./Controlled.scss";
-
-const MAX_FILE_SIZE = 2097152;
-
-const validFileExtensions: { [key: string]: string[] } = {
-  image: ["jpg", "png", "jpeg"],
-};
-
-function isValidFileType(fileName: string, fileType: string) {
-  const extension = fileName.split(".").pop();
-  console.log({ fileName, fileType });
-  return (
-    extension !== undefined &&
-    validFileExtensions[fileType]?.indexOf(extension) > -1
-  );
-}
-
-const userSchema = object({
-  name: string()
-    .matches(/^[A-Z]/, "Name must start with capital letter")
-    .required(),
-  age: number().required().positive().integer().typeError("Age is required"),
-  email: string()
-    .email()
-    .matches(
-      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-      "Enter valid email",
-    )
-    .required(),
-  gender: string()
-    .oneOf(["male", "female", "other"], "Choose your gender")
-    .required(),
-  country: string().oneOf(countries, "the country must be real").required(),
-  terms: boolean()
-    .oneOf([true], "You must accept the terms and conditions")
-    .required(),
-  file: mixed()
-    .test("is-valid-type", "Not a valid image type", (value) => {
-      if (!value || !(value instanceof FileList) || value.length === 0) {
-        return false;
-      }
-      return isValidFileType(value[0].name.toLowerCase(), "image");
-    })
-    .test("is-valid-size", "Max allowed size is 2MB", (value) => {
-      if (!value || !(value instanceof FileList) || value.length === 0) {
-        return false;
-      }
-      return value[0].size <= MAX_FILE_SIZE;
-    }),
-});
 
 const Controlled = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const countries = useAppSelector((state) => state.countries);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-  } = useForm({
+  } = useForm<FormData>({
     mode: "onChange",
     resolver: yupResolver(userSchema),
   });
 
-  const onSubmit: SubmitHandler = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit: SubmitHandler<FormData> = (data: FieldValues) => {
+    const file = data.file[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64String = reader.result as string;
+      data.file = base64String;
+      data.id = nanoid();
+
+      dispatch(addLastUpdated(data.id));
+      dispatch(addToSubmitHistory(data));
+      navigate("/");
+    };
+
+    reader.readAsDataURL(file);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,7 +103,9 @@ const Controlled = () => {
             />
             <span className="input-error">{errors.email?.message}</span>
           </div>
-          <div className="input-wrapper">
+          <div
+            className={`input-wrapper ${errors.password ? "has-error" : ""}`}
+          >
             <label htmlFor="password">Password</label>
             <input
               type={isVisible ? "text" : "password"}
@@ -147,20 +116,24 @@ const Controlled = () => {
             <button onClick={handleVisiblePassword} type="button">
               {isVisible ? <Eye /> : <EyeOff />}
             </button>
-            <span className="input-error">Something went wrong...</span>
+            <span className="input-error">{errors.password?.message}.</span>
           </div>
-          <div className="input-wrapper">
+          <div
+            className={`input-wrapper ${errors.passwordConfirm ? "has-error" : ""}`}
+          >
             <label htmlFor="password-confirm">Confirm password</label>
             <input
               type={isVisible ? "text" : "password"}
               placeholder="*****"
-              name="passwordConfirm"
               id="password-confirm"
+              {...register("passwordConfirm")}
             />
             <button onClick={handleVisiblePassword} type="button">
               {isVisible ? <Eye /> : <EyeOff />}
             </button>
-            <span className="input-error">Something went wrong...</span>
+            <span className="input-error">
+              {errors.passwordConfirm?.message}
+            </span>
           </div>
 
           <div className={`radio-wrapper ${errors.gender ? "has-error" : ""}`}>
@@ -250,7 +223,11 @@ const Controlled = () => {
             <span className="input-error">{errors.terms?.message}.</span>
           </div>
 
-          <button className="send" type="submit">
+          <button
+            className="send"
+            type="submit"
+            disabled={Boolean(Object.keys(errors).length)}
+          >
             Send
           </button>
         </form>
